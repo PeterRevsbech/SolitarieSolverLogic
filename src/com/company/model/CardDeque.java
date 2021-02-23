@@ -14,7 +14,6 @@ public class CardDeque {
             }
         }
         shuffle();
-        System.out.println(cardsList.toString());
     }
 
     public void shuffle(){
@@ -29,6 +28,10 @@ public class CardDeque {
             cardsList.set(a,card2);
             cardsList.set(b,card1);
         }
+    }
+
+    public Card draw(){
+        return cardsList.remove(0);
     }
 
     public List<Card> getCardsList() {

@@ -1,4 +1,6 @@
 package com.company.model;
 
-public class StockPile {
+public class StockPile extends Pile{
+
+
 }

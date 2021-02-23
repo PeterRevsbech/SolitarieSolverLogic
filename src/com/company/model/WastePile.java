@@ -1,4 +1,5 @@
 package com.company.model;
 
-public class WastePile {
+public class WastePile extends Pile{
+
 }

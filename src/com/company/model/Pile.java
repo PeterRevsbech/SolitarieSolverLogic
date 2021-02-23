@@ -8,6 +8,10 @@ public class Pile {
     private List<Card> cards;
     private boolean fanned;
 
+    public Pile(){
+        this.cards = new ArrayList<>();
+        this.fanned = false;
+    }
 
     public List<Card> getChildren(Card card){
         int index = cards.indexOf(card);
@@ -35,6 +39,10 @@ public class Pile {
         }
     }
 
+    public void addCard(Card card){
+        cards.add(card);
+    }
+
 
     public boolean isEmpty(){
         return cards.isEmpty();
@@ -55,5 +63,13 @@ public class Pile {
 
     public void setFanned(boolean fanned) {
         this.fanned = fanned;
+    }
+
+    @Override
+    public String toString() {
+        return "Pile{" +
+                "cards=" + cards.toString() +
+                ", fanned=" + fanned +
+                '}';
     }
 }
