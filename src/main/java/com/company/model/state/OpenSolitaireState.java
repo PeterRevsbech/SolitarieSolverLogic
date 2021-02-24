@@ -1,6 +1,8 @@
-package com.company.model;
+package com.company.model.state;
 
-public class SolitaireState {
+import com.company.model.*;
+
+public class OpenSolitaireState implements ISolitaireState{
 
     private WastePile wastePile;
     private StockPile stockPile;
@@ -8,8 +10,8 @@ public class SolitaireState {
     private Foundation foundation;
 
 
-    public static SolitaireState newGame(){
-        SolitaireState state = new SolitaireState();
+    public static OpenSolitaireState newGame(){
+        OpenSolitaireState state = new OpenSolitaireState();
         CardDeque deque = new CardDeque();
 
         //Initialize Tableau
@@ -63,8 +65,22 @@ public class SolitaireState {
         return tableau;
     }
 
+
+
+    @Override
+    public boolean isStockEmpty() {
+        return stockPile.isEmpty();
+    }
+
     public void setTableau(Tableau tableau) {
         this.tableau = tableau;
+    }
+
+    @Override
+    public Card getWasteTop() {
+        if(wastePile.getCards().size() > 0 ){
+            return wastePile.getCards().get(wastePile.getCards().size()-1);
+        }else return null;
     }
 
     public Foundation getFoundation() {
