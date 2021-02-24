@@ -80,67 +80,25 @@ public class SolitaireState {
     public String toString() {
         String result = "";
         result += "\n";
-        result += "\nSTOCKPILE: "+stockPile.toString().replace("[","").replace("]","")+"\n";
-        result += "\nWASTE: "+wastePile.toString()+"\n";
-        result += "\nFOUNDATION: " + foundation.toString().replace("[[","[").replace("]]","]")+"\n";
-        result += "\nTABLEAU: " + tableau.toString().replace("[[","[").replace("]]","]")+"\n";
+        result += "\nSTOCKPILE: " + stockPile.toString().replace("[", "").replace("]", "") + "\n";
+        result += "\nWASTE: " + wastePile.toString() + "\n";
+        result += "\nFOUNDATION: " + foundation.toString().replace("[[", "[").replace("]]", "]") + "\n";
+        result += "\nTABLEAU: " + tableau.toString().replace("[[", "[").replace("]]", "]") + "\n";
 
 
         String[][] tableauMatrix = new String[7][7];
+
+        int counter = 0;
         for (int i = 0; i < 7; i++) {
-            if (!tableau.getPiles()[i].getCard(0).isFaceUp()) {
-                tableauMatrix[0][i] = "*";
-            } else {
-                tableauMatrix[0][i] = tableau.getPiles()[i].getCard(0).toString();
+            for (int j = counter; j < 7; j++) {
+                if (!tableau.getPiles()[j].getCard(i).isFaceUp()) {
+                    tableauMatrix[i][j] = "*";
+                } else {
+                    tableauMatrix[i][j] = tableau.getPiles()[j].getCard(i).toString();
+                }
             }
+            counter++;
         }
-
-        for (int i = 1; i < 7; i++) {
-            if (!tableau.getPiles()[i].getCard(1).isFaceUp()) {
-                tableauMatrix[1][i] = "*";
-            } else {
-                tableauMatrix[1][i] = tableau.getPiles()[i].getCard(1).toString();
-            }
-        }
-
-        for (int i = 2; i < 7; i++) {
-            if (!tableau.getPiles()[i].getCard(2).isFaceUp()) {
-                tableauMatrix[2][i] = "*";
-            } else {
-                tableauMatrix[2][i] = tableau.getPiles()[i].getCard(2).toString();
-            }
-        }
-
-        for (int i = 3; i < 7; i++) {
-            if (!tableau.getPiles()[i].getCard(3).isFaceUp()) {
-                tableauMatrix[3][i] = "*";
-            } else {
-                tableauMatrix[3][i] = tableau.getPiles()[i].getCard(3).toString();
-            }
-        }
-
-        for (int i = 4; i < 7; i++) {
-            if (!tableau.getPiles()[i].getCard(4).isFaceUp()) {
-                tableauMatrix[4][i] = "*";
-            } else {
-                tableauMatrix[4][i] = tableau.getPiles()[i].getCard(4).toString();
-            }
-        }
-
-        for (int i = 5; i < 7; i++) {
-            if (!tableau.getPiles()[i].getCard(5).isFaceUp()) {
-                tableauMatrix[5][i] = "*";
-            } else {
-                tableauMatrix[5][i] = tableau.getPiles()[i].getCard(5).toString();
-            }
-        }
-
-        if (!tableau.getPiles()[6].getCard(6).isFaceUp()) {
-            tableauMatrix[6][6] = "*";
-        } else {
-            tableauMatrix[6][6] = tableau.getPiles()[6].getCard(6).toString();
-        }
-
 
         String[][] StockFoundMatrix = new String[2][9];
         StockFoundMatrix[0][0] = "STOCK";
