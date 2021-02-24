@@ -78,6 +78,8 @@ public class SolitaireState {
     }
 
     public String toString() {
+
+        //When testing a string with no hidden information might come in handy
         String result = "";
         result += "\n";
         result += "\nSTOCKPILE: " + stockPile.toString().replace("[", "").replace("]", "") + "\n";
@@ -85,9 +87,14 @@ public class SolitaireState {
         result += "\nFOUNDATION: " + foundation.toString().replace("[[", "[").replace("]]", "]") + "\n";
         result += "\nTABLEAU: " + tableau.toString().replace("[[", "[").replace("]]", "]") + "\n";
 
+        PrintStockWasteFoundPiles();
+        PrintTableauPiles();
+        return result;
+    }
 
+    private void PrintTableauPiles() {
+        //Generates the tableau matrix, hidden cards are made into *'s
         String[][] tableauMatrix = new String[7][7];
-
         int counter = 0;
         for (int i = 0; i < 7; i++) {
             for (int j = counter; j < 7; j++) {
@@ -100,21 +107,50 @@ public class SolitaireState {
             counter++;
         }
 
-        String[][] StockFoundMatrix = new String[2][9];
+        //Prints the tableu
+        System.out.println("\n-------------------TABLEAU-------------------");
+        for (int row = 0; row < tableauMatrix.length; row++) {
+            for (int col = 0; col < tableauMatrix[row].length; col++) {
+                if (tableauMatrix[row][col] == null) {
+                    tableauMatrix[row][col] = "";
+                }
+                System.out.printf("%6s", tableauMatrix[row][col]);
+            }
+            System.out.println();
+        }
+        System.out.println("---------------------------------------------");
+    }
+
+    private void PrintStockWasteFoundPiles() {
+        System.out.println("---------------------------------------------");
+        //Stockpile and foundation matrix
+        String[][] StockFoundMatrix = new String[3][9];
+
+        //Stockpile heading and the top stockpilecard
         StockFoundMatrix[0][0] = "STOCK";
         StockFoundMatrix[1][0] = stockPile.getCard(stockPile.getCards().size() - 1).toString();
 
-        //TODO mangler wastepile logik, bunken skal initialiseres som "tom", så vi undgår OOB error når spillet bygges
-        StockFoundMatrix[0][2] = "WASTE";
-        StockFoundMatrix[1][2] = "empty"; //wastePile.getCard(wastePile.getCards().size()-1).toString();
+        StockFoundMatrix[0][1] = "|";
+        StockFoundMatrix[1][1] = "|";
 
+        //Wastepile heading and the top waste pile card(needs implementation)
+        //TODO mangler wastepile logik, bunken skal initialiseres som "tom", så vi undgår OOB error når spillet bygges
+        StockFoundMatrix[0][3] = "WASTE";
+        StockFoundMatrix[1][3] = "empty"; //wastePile.getCard(wastePile.getCards().size()-1).toString();
+
+        StockFoundMatrix[0][4] = "|";
+        StockFoundMatrix[1][4] = "|";
+
+        //Foundation heading and the 4 foundation piles
         //TODO mangler foundation pile logik, bunken skal initialiseres som "tom", så vi undgår OOB error når spillet bygges
-        StockFoundMatrix[0][4] = "FOUNDATION";
-        StockFoundMatrix[1][3] = "-";
-        StockFoundMatrix[1][4] = "-";
+        StockFoundMatrix[0][6] = "  FOUNDATION";
         StockFoundMatrix[1][5] = "-";
         StockFoundMatrix[1][6] = "-";
+        StockFoundMatrix[1][7] = "-";
+        StockFoundMatrix[1][8] = "-";
 
+        StockFoundMatrix[2][0] = "---------------------------------------------";
+        //Loop for printing the stockpile and foundation piles
         for (int row = 0; row < StockFoundMatrix.length; row++) {
             for (int col = 0; col < StockFoundMatrix[row].length; col++) {
                 if (StockFoundMatrix[row][col] == null) {
@@ -124,18 +160,5 @@ public class SolitaireState {
             }
             System.out.println();
         }
-
-        System.out.println("\n-----------TABLEAU-----------");
-        for (int row = 0; row < tableauMatrix.length; row++) {
-            for (int col = 0; col < tableauMatrix[row].length; col++) {
-                if (tableauMatrix[row][col] == null) {
-                    tableauMatrix[row][col] = " ";
-                }
-                System.out.printf("%4s", tableauMatrix[row][col]);
-            }
-            System.out.println();
-        }
-        System.out.println("-----------------------------");
-        return result;
     }
 }
