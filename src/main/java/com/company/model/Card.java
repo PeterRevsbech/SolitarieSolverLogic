@@ -45,6 +45,20 @@ public class Card {
 
     @Override
     public String toString() {
+        if (value == 11) {
+            return "J"+suit.toString().charAt(0);
+        }
+        if (value == 12) {
+            return "Q"+suit.toString().charAt(0);
+        }
+        if (value == 13) {
+            return "K"+suit.toString().charAt(0);
+        }
+        //TODO find ud af om vi er enige om at es har værdien 1
+        if (value == 1) {
+            return "A" + suit.toString().charAt(0);
+        } else {
         return value + "" + suit.toString().charAt(0);
+        }
     }
 }
