@@ -2,6 +2,7 @@ package com.company.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Pile {
 
@@ -43,7 +44,6 @@ public class Pile {
         cards.add(card);
     }
 
-
     public boolean isEmpty(){
         return cards.isEmpty();
     }
@@ -51,6 +51,10 @@ public class Pile {
 
     public List<Card> getCards() {
         return cards;
+    }
+
+    public Card getCard(int index) {
+        return cards.get(index);
     }
 
     public void setCards(List<Card> cards) {
@@ -67,9 +71,6 @@ public class Pile {
 
     @Override
     public String toString() {
-        return "Pile{" +
-                "cards=" + cards.toString() +
-                ", fanned=" + fanned +
-                '}';
+        return cards.toString();
     }
 }

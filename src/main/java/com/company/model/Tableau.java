@@ -17,14 +17,16 @@ public class Tableau {
         return piles;
     }
 
+    public Pile getPile(int index) {
+        return piles[index];
+    }
+
     public void setPiles(Pile[] piles) {
         this.piles = piles;
     }
 
     @Override
     public String toString() {
-        return "Tableau{" +
-                "piles=" + Arrays.toString(piles) +
-                '}';
+        return Arrays.toString(piles);
     }
 }
