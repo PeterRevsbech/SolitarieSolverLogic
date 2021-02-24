@@ -6,7 +6,7 @@ public class Foundation {
 
     private Pile[] piles = new Pile[4];
 
-    public Foundation(){
+    public Foundation() {
         for (int i = 0; i < 4; i++) {
             piles[i] = new Pile();
         }
@@ -22,8 +22,6 @@ public class Foundation {
 
     @Override
     public String toString() {
-        return "Foundation{" +
-                "piles=" + Arrays.toString(piles) +
-                '}';
+        return Arrays.toString(piles);
     }
 }

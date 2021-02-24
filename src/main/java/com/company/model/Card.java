@@ -15,7 +15,7 @@ public class Card {
         this.faceUp = false;
     }
 
-    public boolean isBlack(){
+    public boolean isBlack() {
         return (this.suit == Suit.Clubs || this.suit == Suit.Spades);
     }
 
@@ -45,11 +45,6 @@ public class Card {
 
     @Override
     public String toString() {
-        //TODO make nice
-        return "Card{" +
-                "suit=" + suit +
-                ", value=" + value +
-                ", faceUp=" + faceUp +
-                '}' + '\n';
+        return value + "" + suit.toString().charAt(0);
     }
 }
