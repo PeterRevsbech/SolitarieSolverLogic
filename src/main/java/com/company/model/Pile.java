@@ -1,13 +1,15 @@
 package com.company.model;
 
+import com.company.model.exceptions.CardNotFoundException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Pile {
 
-    private List<Card> cards;
-    private boolean fanned;
+    protected List<Card> cards;
+    protected boolean fanned;
 
     public Pile(){
         this.cards = new ArrayList<>();
@@ -39,6 +41,35 @@ public class Pile {
             cards.add(card);
         }
     }
+
+    public Card removeTopCard() throws CardNotFoundException {
+        Card card = getTopCard();
+
+        if (card == null){
+            throw new CardNotFoundException("Tried to remove top card from empty pile");
+        }
+
+        cards.remove(card);
+
+        return card;
+
+    }
+
+    //Returns null if no cards in pile
+    public Card getTopCard() {
+        if (cards.isEmpty()){
+            return null;
+        }
+
+        return cards.get(cards.size()-1);
+    }
+
+
+
+    public boolean removeCard(Card card){
+        return cards.remove(card);
+    }
+
 
     public void addCard(Card card){
         cards.add(card);

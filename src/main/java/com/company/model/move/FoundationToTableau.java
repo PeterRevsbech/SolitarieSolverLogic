@@ -1,4 +1,4 @@
 package com.company.model.move;
 
-public class FoundationToTableau {
+public class FoundationToTableau extends MoveType{
 }

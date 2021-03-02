@@ -2,7 +2,7 @@ package com.company.model.state;
 
 import com.company.model.*;
 
-public interface ISolitaireState {
+public interface ISolitaireState extends Cloneable {
 
     public Card getWasteTop();
     public WastePile getWastePile();
@@ -11,5 +11,6 @@ public interface ISolitaireState {
     public Tableau getTableau();
     public boolean isStockEmpty();
     public String toString();
+    public ISolitaireState clone();
 
 }

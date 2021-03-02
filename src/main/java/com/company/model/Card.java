@@ -54,11 +54,15 @@ public class Card {
         if (value == 13) {
             return "K"+suit.toString().charAt(0);
         }
-        //TODO find ud af om vi er enige om at es har værdien 1
         if (value == 1) {
             return "A" + suit.toString().charAt(0);
         } else {
         return value + "" + suit.toString().charAt(0);
         }
+    }
+
+
+    public boolean equals(Card card){
+        return (this.suit == card.suit) && (this.value == card.value);
     }
 }

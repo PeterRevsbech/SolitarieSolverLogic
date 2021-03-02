@@ -1,5 +1,5 @@
 package com.company.model.move;
 
-public class StockMove {
+public class StockMove extends MoveType{
 
 }

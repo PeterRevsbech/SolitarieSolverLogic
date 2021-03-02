@@ -1,5 +1,7 @@
 package com.company.model;
 
+import com.company.model.exceptions.CardNotFoundException;
+
 import java.util.Arrays;
 
 public class Tableau {
@@ -28,5 +30,27 @@ public class Tableau {
     @Override
     public String toString() {
         return Arrays.toString(piles);
+    }
+
+    //Return the one of the seven piles that contains card
+    //If none of them do - throw an error
+    public Pile getPileContainingCard(Card card) throws CardNotFoundException {
+        for (Pile pile:piles) {
+            if (pile.cards.contains(card)){
+                return pile;
+            }
+        }
+        throw new CardNotFoundException(String.format("Card %s not found in tableuPile",card.toString()));
+    }
+
+
+    public int getMaxTableauLength(){
+        int max =0;
+        for (Pile pile:piles) {
+            if (pile.getCards().size() > max){
+                max = pile.getCards().size();
+            }
+        }
+        return max;
     }
 }

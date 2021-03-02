@@ -1,4 +1,4 @@
 package com.company.model.move;
 
-public class WasteToTableau {
+public class WasteToTableau extends MoveType{
 }

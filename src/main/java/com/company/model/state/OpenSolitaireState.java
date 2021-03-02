@@ -2,7 +2,7 @@ package com.company.model.state;
 
 import com.company.model.*;
 
-public class OpenSolitaireState implements ISolitaireState{
+public class OpenSolitaireState implements ISolitaireState, Cloneable{
 
     private WastePile wastePile;
     private StockPile stockPile;
@@ -106,13 +106,27 @@ public class OpenSolitaireState implements ISolitaireState{
         return result;
     }
 
+    @Override
+    public ISolitaireState clone() {
+        try {
+            return (ISolitaireState) super.clone();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     private void PrintTableauPiles() {
         //Generates the tableau matrix, hidden cards are made into *'s
-        String[][] tableauMatrix = new String[7][7];
+        int tabLen = tableau.getMaxTableauLength();
+        String[][] tableauMatrix = new String[7][tabLen];
         int counter = 0;
-        for (int i = 0; i < 7; i++) {
-            for (int j = counter; j < 7; j++) {
-                if (!tableau.getPiles()[j].getCard(i).isFaceUp()) {
+        for (int i = 0; i < tabLen; i++) {
+            for (int j = 0; j < 7; j++) {
+                int pileLen = tableau.getPiles()[j].getCards().size();
+                if (pileLen< i+1){ //If there is no card at this place
+                    tableauMatrix[i][j] = " ";
+                } else if (!tableau.getPiles()[j].getCard(i).isFaceUp()) {
                     tableauMatrix[i][j] = "*";
                 } else {
                     tableauMatrix[i][j] = tableau.getPiles()[j].getCard(i).toString();
@@ -142,7 +156,7 @@ public class OpenSolitaireState implements ISolitaireState{
 
         //Stockpile heading and the top stockpilecard
         StockFoundMatrix[0][0] = "STOCK";
-        StockFoundMatrix[1][0] = stockPile.getCard(stockPile.getCards().size() - 1).toString();
+        StockFoundMatrix[1][0] = stockPile.getCards().size()+" cd";
 
         StockFoundMatrix[0][1] = "|";
         StockFoundMatrix[1][1] = "|";
@@ -150,7 +164,11 @@ public class OpenSolitaireState implements ISolitaireState{
         //Wastepile heading and the top waste pile card(needs implementation)
         //TODO mangler wastepile logik, bunken skal initialiseres som "tom", så vi undgår OOB error når spillet bygges
         StockFoundMatrix[0][3] = "WASTE";
-        StockFoundMatrix[1][3] = "empty"; //wastePile.getCard(wastePile.getCards().size()-1).toString();
+        if (wastePile.isEmpty()){
+            StockFoundMatrix[1][3] = "empty";
+        } else{
+            StockFoundMatrix[1][3] = wastePile.getCard(wastePile.getCards().size()-1).toString(); //;
+        }
 
         StockFoundMatrix[0][4] = "|";
         StockFoundMatrix[1][4] = "|";
@@ -175,4 +193,6 @@ public class OpenSolitaireState implements ISolitaireState{
             System.out.println();
         }
     }
+
+
 }
