@@ -48,10 +48,45 @@ public class Solitaire {
         } else if (moveType instanceof TableauToFoundation) {
             tableauToFoundation(state, move);
         } else if (moveType instanceof TableauToTableau) {
+            tableauToTableau(state, move);
+        } else if (moveType instanceof FoundationToTableau) {
+            foundationToTableau(state, move);
+        }
+
+        // evaluates if the game is won or lost
+        evaluateGameWon(state);
+        evaluateGameLost();
 
 
         //return new state
         return state;
+    }
+
+    private void foundationToTableau(ISolitaireState state, SpecificMove move) throws SolitarieException {
+        Card parentCard = move.getFromParent();
+        Card toChild = move.getToChild();
+        // find the corresponding pile in foundation
+        Pile foundationPile = state.getFoundation().getFoundationPileFromCard(parentCard);
+        if(foundationPile == null){
+            throw new InvalidMoveException("tried to move a card from the foundationpiles, but the corresponding pile wasn't found, maybe they are all empty");
+        }
+
+        // if toChild is null and fromParent is a king then we want to move to an empty tableaupile
+        if (toChild == null && parentCard.equals(13)) {
+            Pile emptyPile = state.getTableau().getFirstEmptyPile();
+            emptyPile.addCard(parentCard);
+            foundationPile.removeTopCard();
+        }
+
+        // toChild is not null we want to add the card to an existing pile
+        Pile tableauPile = state.getTableau().getPileContainingCard(toChild);
+        if (tableauPile != null) {
+            foundationPile.removeTopCard(); // only remove the card from the foundation if it has somewhere to go in the tableau
+            tableauPile.addCard(parentCard);
+
+        } else {
+            throw new InvalidMoveException("couldnt find the card" + toChild + "in the tableau");
+        }
     }
 
     private void tableauToTableau(ISolitaireState state, SpecificMove move) throws SolitarieException {
