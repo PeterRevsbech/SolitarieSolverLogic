@@ -46,13 +46,7 @@ public class Solitaire {
         } else if (moveType instanceof WasteToFoundation) {
             wasteToFoundation(state);
         } else if (moveType instanceof TableauToFoundation) {
-            //Draw card from tableau
-
-            
-            //Find correct pile in foundation
-            
-            //put card in pile
-            
+            tableauToFoundation(state, move);
         } else if (moveType instanceof TableauToTableau) {
             //TODO
         } else if (moveType instanceof FoundationToTableau) {
@@ -66,6 +60,24 @@ public class Solitaire {
 
         //return new state
         return state;
+    }
+
+    private void tableauToFoundation(ISolitaireState state, SpecificMove move) throws SolitarieException {
+        Card card = move.getFromParent();
+
+        //Draw card from tableau
+        Pile tableuPile = state.getTableau().getPileContainingCard(card);
+
+        //Draw the card and check if it is on top of pile
+        if (!tableuPile.removeTopCard().equals(card)){
+            throw new SolitarieException(String.format("Thried to draw %s from tableu to foundation, but it was not the top card.",card.toString()));
+        }
+
+        //Find correct pile in foundation
+        Pile foundationPile = state.getFoundation().getFoundationPileFromCard(card);
+
+        //put in pile
+        foundationPile.addCard(card);
     }
 
     private void stockMove(ISolitaireState state) throws CardNotFoundException {
