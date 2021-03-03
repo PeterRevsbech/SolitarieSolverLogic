@@ -46,7 +46,7 @@ public class Main {
         pgs.initOpenSolitareState(states.get(0));
         pgs.printCurrentState();
 
-        solitaire.makeNextMove();
+/*        solitaire.makeNextMove();
         pgs.initOpenSolitareState(states.get(1));
         pgs.printCurrentState();
 
@@ -60,6 +60,6 @@ public class Main {
 
         solitaire.makeNextMove();
         pgs.initOpenSolitareState(states.get(4));
-        pgs.printCurrentState();
+        pgs.printCurrentState();*/
     }
 }
