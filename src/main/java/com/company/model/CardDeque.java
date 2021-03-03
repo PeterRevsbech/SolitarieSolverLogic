@@ -37,10 +37,6 @@ public class CardDeque {
         return cardsList.remove(0);
     }
 
-    public Card drawSpecific(int index) {
-        return cardsList.remove(index);
-    }
-
     public List<Card> getCardsList() {
         return cardsList;
     }
