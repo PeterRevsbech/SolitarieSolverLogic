@@ -91,7 +91,7 @@ public class Solitaire {
         }
 
         // evaluates if the game is won or lost
-        evaluateGameWon();
+        evaluateGameWon(state);
         evaluateGameLost();
 
 
@@ -162,8 +162,16 @@ public class Solitaire {
         //If no NEW cards have been added to foundation...
     }
 
-    private void evaluateGameWon() {
-        //TODO 4 kings in foundation
+    private void evaluateGameWon(ISolitaireState state) {
+        //TODO implemententer eventuelt en løkke der tjekker om alt på tableau er faceup, da spillet er "winable" hvis dette er tilfældet.
+
+        for (int i = 0; i < 3; i++) {
+            if (state.getFoundation().getPiles()[i].getTopCard().getValue() == 13) {
+                gameWon = true;
+            } else if (state.getFoundation().getPiles()[i].getTopCard().getValue() != 13) {
+                gameWon = false;
+            }
+        }
     }
 
     public boolean makeNextMove() {
