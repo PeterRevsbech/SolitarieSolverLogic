@@ -2,6 +2,7 @@ package com.company;
 
 import com.company.model.SpecificMove;
 import com.company.model.exceptions.SolitarieException;
+import com.company.model.move.FoundationToTableau;
 import com.company.model.move.StockMove;
 import com.company.model.state.ClosedSolitaireState;
 import com.company.model.state.ISolitaireState;
@@ -26,6 +27,7 @@ public class Main {
         //Create a test move
         SpecificMove stockMove = new SpecificMove();
         stockMove.setMoveType(new StockMove());
+
 
         //Execute the move
         for (int i = 0; i < 100; i++) {
