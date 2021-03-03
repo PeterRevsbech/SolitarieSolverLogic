@@ -48,7 +48,18 @@ public class Solitaire {
         } else if (moveType instanceof TableauToFoundation) {
             tableauToFoundation(state, move);
         } else if (moveType instanceof TableauToTableau) {
-            //TODO
+            //If move.toChild is null, it means move to an empty pile
+
+            //Find fromPile in tableau
+            Pile fromPile = state.getTableau().getPileContainingCard(move.getFromParent());
+
+            //Find toPile in tableau
+            Pile toPile = state.getTableau().getPileContainingCard(move.getToChild());
+
+
+            //Assure that from and topile are not the same
+
+            //Move cards
         } else if (moveType instanceof FoundationToTableau) {
             //TODO
         }
