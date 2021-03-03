@@ -67,7 +67,7 @@ public class Solitaire {
         Card toChild = move.getToChild();
         // find the corresponding pile in foundation
         Pile foundationPile = state.getFoundation().getFoundationPileFromCard(parentCard);
-        if(foundationPile == null){
+        if (foundationPile == null) {
             throw new InvalidMoveException("tried to move a card from the foundationpiles, but the corresponding pile wasn't found, maybe they are all empty");
         }
 
@@ -191,9 +191,8 @@ public class Solitaire {
         //If no NEW cards have been added to foundation...
     }
 
+    //Method that checks if the 4 tops cards in the foundation piles are kings, if so, the game is won
     private void evaluateGameWon(ISolitaireState state) {
-        //TODO implemententer eventuelt en løkke der tjekker om alt på tableau er faceup, da spillet er "winable" hvis dette er tilfældet.
-
         for (int i = 0; i < 3; i++) {
             if (!state.getFoundation().getPiles()[i].isEmpty() && state.getFoundation().getPiles()[i].getTopCard().getValue() == 13) {
                 gameWon = true;
@@ -203,13 +202,16 @@ public class Solitaire {
         }
     }
 
-/*    private void isWinable(ISolitaireState state) {
-        for (Card c : state.g) {
-
+    //Method that checks if every card on the tableau is faceup, if they are, the game is winable.
+    private boolean isWinable(ISolitaireState state) {
+        boolean isWinable = false;
+        for (int i = 0; i < 6; i++) {
+            for (Card c : state.getTableau().getPile(i).getCards()) {
+                isWinable = c.isFaceUp();
+            }
         }
-
-
-    }*/
+        return isWinable;
+    }
 
     public boolean makeNextMove() {
         // get latest state, call solver to find next move
