@@ -7,7 +7,7 @@ import com.company.strategy.Strategy;
 
 public class SolitaireSolver {
 
-    private Strategy strategy;
+    private Strategy strategy = new Strategy();
 
     // determine best move
     public SpecificMove bestPossibleMove (Solitaire game){

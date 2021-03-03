@@ -12,10 +12,14 @@ public class Strategy {
 
     public Strategy(){
         prioritizedMoveTypes = new ArrayList<>();
-        prioritizedMoveTypes.add(new TableauToTableau());
+        //Very primitive first strategy
         prioritizedMoveTypes.add(new TableauToFoundation());
-        prioritizedMoveTypes.add(new FoundationToTableau());
+        prioritizedMoveTypes.add(new TableauToTableau());
+        prioritizedMoveTypes.add(new WasteToFoundation());
         prioritizedMoveTypes.add(new StockMove());
+        prioritizedMoveTypes.add(new WasteToTableau());
+        prioritizedMoveTypes.add(new FoundationToTableau());
+
 
     }
 

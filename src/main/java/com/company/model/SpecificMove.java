@@ -4,6 +4,19 @@ import com.company.model.move.MoveType;
 
 public class SpecificMove {
 
+    public SpecificMove(){
+    }
+
+    public SpecificMove(MoveType moveType){
+        this.moveType = moveType;
+    }
+
+    public SpecificMove(MoveType moveType, Card fromParent, Card toChild) {
+        this.moveType = moveType;
+        this.fromParent = fromParent;
+        this.toChild = toChild;
+    }
+
     private MoveType moveType;
     private Card fromParent;
     private Card toChild;

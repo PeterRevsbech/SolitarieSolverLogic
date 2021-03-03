@@ -7,6 +7,7 @@ import com.company.model.move.StockMove;
 import com.company.model.state.ClosedSolitaireState;
 import com.company.model.state.ISolitaireState;
 import com.company.model.state.OpenSolitaireState;
+import com.company.strategy.Strategy;
 import com.company.utils.PrintGameState;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class Main {
         //pgs.printCurrentState();
 
         //Create a test move
+        /*
         SpecificMove stockMove = new SpecificMove();
         stockMove.setMoveType(new StockMove());
 
@@ -37,5 +39,12 @@ public class Main {
             pgs.initOpenSolitareState(states.get(i));
             pgs.printCurrentState();
         }
+
+         */
+
+        solitaire.makeNextMove();
+
+
+
     }
 }

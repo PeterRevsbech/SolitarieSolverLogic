@@ -65,4 +65,19 @@ public class Foundation {
         }
         return pile;
     }
+
+    public boolean cardMatchesFoundation(Card card){
+        for (Pile pile:piles) {
+            if (pile.getTopCard() != null){
+                //Check that suit mathces
+                if(pile.getTopCard().getSuit()==card.getSuit()){
+                    //Check that value is 1 higher
+                    if (pile.getTopCard().getValue()==card.getValue()-1){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 }

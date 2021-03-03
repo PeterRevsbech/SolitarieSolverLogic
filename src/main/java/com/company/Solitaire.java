@@ -128,6 +128,7 @@ public class Solitaire {
         toPile.addCards(movedCards);
     }
 
+    //Does not use toChild
     private void tableauToFoundation(ISolitaireState state, SpecificMove move) throws SolitarieException {
         Card card = move.getFromParent();
 
@@ -222,7 +223,6 @@ public class Solitaire {
             return true;
         }
 
-
         // call the method makeMove, add the state to list of states
         try {
             ISolitaireState nextState = makeMove(currentState, nextMove);
@@ -278,4 +278,5 @@ public class Solitaire {
     public ISolitaireState getLastState(){
         return states.get(states.size()-1);
     }
+
 }
