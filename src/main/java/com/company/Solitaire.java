@@ -3,6 +3,8 @@ package com.company;
 import com.company.model.Card;
 import com.company.model.Pile;
 import com.company.model.SpecificMove;
+import com.company.model.exceptions.CardNotFoundException;
+import com.company.model.exceptions.InvalidMoveException;
 import com.company.model.exceptions.SolitarieException;
 import com.company.model.move.*;
 import com.company.model.state.ISolitaireState;
@@ -29,40 +31,21 @@ public class Solitaire {
     }
 
     public ISolitaireState makeMove(ISolitaireState state, SpecificMove move) throws SolitarieException {
+        //fromParent is irellevant, since we draw from waste
+        //If top of wastepile is an ace - toChild should be null
+
         // make a copy of the current state and use that
         state = state.clone();
 
         //change state according to move
         MoveType moveType = move.getMoveType();
         if (moveType instanceof StockMove){
-            Card topCard;
-            if (state.getStockPile().getTopCard()==null){ // if stock is empty
-                //Take all cards from waste in reverse order
-                List<Card> newStockPile = state.getWastePile().takeTurnedPile();
-                //Put them in stock
-                state.getStockPile().setCards(newStockPile);
-            } else {
-                topCard = state.getStockPile().removeTopCard();
-                topCard.setFaceUp(true);
-                state.getWastePile().addCard(topCard);
-            }
+            stockMove(state);
         } else if (moveType instanceof WasteToTableau) {
-            //Draw from waste
-            Card card = state.getWastePile().draw();
-
-            //Find correct tableu-pile
-            Pile tableuPile = state.getTableau().getPileContainingCard(move.getToChild());
-
-            //Check that card is top in tableuPile
-            if (!tableuPile.getTopCard().equals(move.getToChild())){
-                throw new SolitarieException("Tried to move to card, that was not top of pile.");
-            }
-
-            //Add to pile
-            tableuPile.addCard(card);
+            wasteToTableu(state, move);
 
         } else if (moveType instanceof WasteToFoundation) {
-            //TODO
+            wasteToFoundation(state);
         } else if (moveType instanceof TableauToFoundation) {
             //TODO
         } else if (moveType instanceof TableauToTableau) {
@@ -78,6 +61,81 @@ public class Solitaire {
 
         //return new state
         return state;
+    }
+
+    private void stockMove(ISolitaireState state) throws CardNotFoundException {
+        Card topCard;
+        if (state.getStockPile().getTopCard()==null){ // if stock is empty
+            //Take all cards from waste in reverse order
+            List<Card> newStockPile = state.getWastePile().takeTurnedPile();
+            //Put them in stock
+            state.getStockPile().setCards(newStockPile);
+        } else {
+            topCard = state.getStockPile().removeTopCard();
+            topCard.setFaceUp(true);
+            state.getWastePile().addCard(topCard);
+        }
+    }
+
+    private void wasteToTableu(ISolitaireState state, SpecificMove move) throws SolitarieException {
+        //Draw from waste
+        Card card = state.getWastePile().draw();
+
+        //Find correct tableu-pile
+        Pile tableuPile = state.getTableau().getPileContainingCard(move.getToChild());
+
+        //Check that card is top in tableuPile
+        if (!tableuPile.getTopCard().equals(move.getToChild())){
+            throw new SolitarieException("Tried to move to card, that was not top of pile.");
+        }
+
+        //Add to pile
+        tableuPile.addCard(card);
+    }
+
+    private void wasteToFoundation(ISolitaireState state) throws SolitarieException {
+        //Draw card from waste
+        Card card = state.getWastePile().draw();
+
+        Pile pile = null;
+        //Find corresponding foundation-pile
+        if (card.getValue() == 1){
+            //Find first vacant pile from left and put it there
+            for (int i = 0; i < 4; i++) {
+                //Find first empty pile
+                pile = state.getFoundation().getPiles()[i];
+                if (pile.isEmpty()){
+                    break;
+                } else if (i==3){
+                    //If we found no empty pile - throw an exception
+                    throw new SolitarieException(String.format("Tried to put %s in foundation, but there was no empty pile.",card.toString()));
+                }
+            }
+
+            //BUT check that no other card of same suit in foundation
+        } else{ //If card is not ace
+            //Find corresponding pile
+            for (int i = 0; i < 4; i++) {
+                //Find first empty pile
+                pile = state.getFoundation().getPiles()[i];
+
+                if (pile.getTopCard().getSuit()==card.getSuit()){
+                    break;
+                } else if (i==3){
+                    //If we found no empty pile - throw an exception
+                    throw new SolitarieException(String.format("Tried to put %s in foundation, but no other cards of same suit were present",card.toString()));
+                }
+            }
+
+            //Check if child is not there
+            if (pile.getTopCard().getValue() != card.getValue()-1){
+                throw new InvalidMoveException(String.format("Tried to put %s in foundation, but no other cards of same suit were present",card.toString()));
+            }
+
+        }
+
+        //Put in pile
+        pile.addCard(card);
     }
 
     private void evaluateGameLost() {
