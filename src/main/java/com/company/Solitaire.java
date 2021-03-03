@@ -65,7 +65,7 @@ public class Solitaire {
             //TODO
         } else if (moveType instanceof TableauToFoundation) {
             //TODO
-        } else if (moveType instanceof TableauToTableau) {
+        } else if (moveType instanceof TableauToTableau) { //MADS
             //TODO
         } else if (moveType instanceof FoundationToTableau) {
             //TODO
