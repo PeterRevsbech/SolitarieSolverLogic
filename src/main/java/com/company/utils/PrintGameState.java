@@ -135,11 +135,27 @@ public class PrintGameState {
         //Foundation heading and the 4 foundation piles
         //TODO mangler foundation pile logik, bunken skal initialiseres som "tom", så vi undgår OOB error når spillet bygges
         StockFoundMatrix[0][6] = "  FOUNDATION";
-        StockFoundMatrix[1][5] = "-";
-        StockFoundMatrix[1][6] = "-";
-        StockFoundMatrix[1][7] = "-";
-        StockFoundMatrix[1][8] = "-";
 
+        if (foundation.getPiles()[0].isEmpty()) {
+            StockFoundMatrix[1][5] = "-";
+        } else {
+            StockFoundMatrix[1][5] = foundation.getPiles()[0].getTopCard().toString();
+        }
+        if (foundation.getPiles()[1].isEmpty()) {
+            StockFoundMatrix[1][6] = "-";
+        } else {
+            StockFoundMatrix[1][6] = foundation.getPiles()[1].getTopCard().toString();
+        }
+        if (foundation.getPiles()[2].isEmpty()) {
+            StockFoundMatrix[1][7] = "-";
+        } else {
+            StockFoundMatrix[1][7] = foundation.getPiles()[2].getTopCard().toString();
+        }
+        if (foundation.getPiles()[3].isEmpty()) {
+            StockFoundMatrix[1][8] = "-";
+        } else {
+            StockFoundMatrix[1][8] = foundation.getPiles()[3].getTopCard().toString();
+        }
         StockFoundMatrix[2][0] = "---------------------------------------------";
         return StockFoundMatrix;
     }

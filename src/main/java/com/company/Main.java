@@ -41,8 +41,12 @@ public class Main {
         }
 
          */
-
+        pgs.initOpenSolitareState(states.get(0));
+        pgs.printCurrentState();
         solitaire.makeNextMove();
+
+        pgs.initOpenSolitareState(states.get(1));
+        pgs.printCurrentState();
 
 
 
