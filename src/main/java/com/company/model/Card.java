@@ -15,6 +15,12 @@ public class Card {
         this.faceUp = false;
     }
 
+    public Card(Suit suit, int value, boolean faceUp) {
+        this.suit = suit;
+        this.value = value;
+        this.faceUp = faceUp;
+    }
+
     public boolean isBlack() {
         return (this.suit == Suit.Clubs || this.suit == Suit.Spades);
     }

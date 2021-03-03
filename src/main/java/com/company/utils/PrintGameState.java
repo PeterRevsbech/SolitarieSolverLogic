@@ -79,7 +79,7 @@ public class PrintGameState {
 
     private String[][] buildTableauMatrix() {
         int tabLen = tableau.getMaxTableauLength();
-        String[][] tableauMatrix = new String[7][tabLen];
+        String[][] tableauMatrix = new String[7][tabLen+1]; //TODO har tilføjet +1 til tabLen, for at undgå mærkelig OOB error
         for (int i = 0; i < tabLen; i++) {
             for (int j = 0; j < 7; j++) {
                 int pileLen = tableau.getPiles()[j].getCards().size();

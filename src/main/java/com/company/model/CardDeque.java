@@ -7,13 +7,16 @@ public class CardDeque {
 
     private List<Card> cardsList = new ArrayList<>();
 
-    public CardDeque() {
+    public CardDeque(boolean isShuffled) {
         for (Card.Suit suit : Card.Suit.values()) {
             for (int i = 1; i <= 13; i++) {
                 cardsList.add(new Card(suit, i));
             }
         }
-        shuffle();
+
+        if (isShuffled) {
+            shuffle();
+        }
     }
 
     public void shuffle() {
@@ -32,6 +35,10 @@ public class CardDeque {
 
     public Card draw() {
         return cardsList.remove(0);
+    }
+
+    public Card drawSpecific(int index) {
+        return cardsList.remove(index);
     }
 
     public List<Card> getCardsList() {

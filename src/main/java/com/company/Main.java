@@ -17,7 +17,9 @@ public class Main {
     public static void main(String[] args) throws SolitarieException {
         //Create a test game
         Solitaire solitaire = new Solitaire();
-        solitaire.initGame();
+        solitaire.initGame(false); //Use this to have a winnable game (testing purposes)
+        //solitaire.initGame(true);
+
         List<ISolitaireState> states = solitaire.getStates();
 
         PrintGameState pgs = new PrintGameState();
@@ -43,12 +45,21 @@ public class Main {
          */
         pgs.initOpenSolitareState(states.get(0));
         pgs.printCurrentState();
-        solitaire.makeNextMove();
 
+        solitaire.makeNextMove();
         pgs.initOpenSolitareState(states.get(1));
         pgs.printCurrentState();
 
+        solitaire.makeNextMove();
+        pgs.initOpenSolitareState(states.get(2));
+        pgs.printCurrentState();
 
+        solitaire.makeNextMove();
+        pgs.initOpenSolitareState(states.get(3));
+        pgs.printCurrentState();
 
+        solitaire.makeNextMove();
+        pgs.initOpenSolitareState(states.get(4));
+        pgs.printCurrentState();
     }
 }

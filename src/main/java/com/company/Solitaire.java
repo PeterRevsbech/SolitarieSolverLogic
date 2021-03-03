@@ -22,9 +22,9 @@ public class Solitaire {
     private boolean stockIsKnown;
 
 
-    public void initGame() {
+    public void initGame(boolean isShuffled) {
         states = new ArrayList<>();
-        states.add(OpenSolitaireState.newGame());
+        states.add(OpenSolitaireState.newGame(isShuffled));
         gameWon = false;
         gameLost = false;
         stockIsKnown = false;
