@@ -217,6 +217,11 @@ public class Solitaire {
         // get latest state, call solver to find next move
         ISolitaireState currentState = states.get(states.size() - 1);
         SpecificMove nextMove = solver.bestPossibleMove(this);
+        if (nextMove==null){
+            gameLost=true;
+            return true;
+        }
+
 
         // call the method makeMove, add the state to list of states
         try {
@@ -268,5 +273,9 @@ public class Solitaire {
 
     public void setStockIsKnown(boolean stockIsKnown) {
         this.stockIsKnown = stockIsKnown;
+    }
+
+    public ISolitaireState getLastState(){
+        return states.get(states.size()-1);
     }
 }
