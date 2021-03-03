@@ -43,11 +43,16 @@ public class Solitaire {
             stockMove(state);
         } else if (moveType instanceof WasteToTableau) {
             wasteToTableu(state, move);
-
         } else if (moveType instanceof WasteToFoundation) {
             wasteToFoundation(state);
         } else if (moveType instanceof TableauToFoundation) {
-            //TODO
+            //Draw card from tableau
+
+            
+            //Find correct pile in foundation
+            
+            //put card in pile
+            
         } else if (moveType instanceof TableauToTableau) {
             //TODO
         } else if (moveType instanceof FoundationToTableau) {
@@ -97,42 +102,7 @@ public class Solitaire {
         //Draw card from waste
         Card card = state.getWastePile().draw();
 
-        Pile pile = null;
-        //Find corresponding foundation-pile
-        if (card.getValue() == 1){
-            //Find first vacant pile from left and put it there
-            for (int i = 0; i < 4; i++) {
-                //Find first empty pile
-                pile = state.getFoundation().getPiles()[i];
-                if (pile.isEmpty()){
-                    break;
-                } else if (i==3){
-                    //If we found no empty pile - throw an exception
-                    throw new SolitarieException(String.format("Tried to put %s in foundation, but there was no empty pile.",card.toString()));
-                }
-            }
-
-            //BUT check that no other card of same suit in foundation
-        } else{ //If card is not ace
-            //Find corresponding pile
-            for (int i = 0; i < 4; i++) {
-                //Find first empty pile
-                pile = state.getFoundation().getPiles()[i];
-
-                if (pile.getTopCard().getSuit()==card.getSuit()){
-                    break;
-                } else if (i==3){
-                    //If we found no empty pile - throw an exception
-                    throw new SolitarieException(String.format("Tried to put %s in foundation, but no other cards of same suit were present",card.toString()));
-                }
-            }
-
-            //Check if child is not there
-            if (pile.getTopCard().getValue() != card.getValue()-1){
-                throw new InvalidMoveException(String.format("Tried to put %s in foundation, but no other cards of same suit were present",card.toString()));
-            }
-
-        }
+        Pile pile = state.getFoundation().getFoundationPileFromCard(card);
 
         //Put in pile
         pile.addCard(card);
