@@ -28,13 +28,10 @@ public class Main {
         SpecificMove stockMove = new SpecificMove();
         stockMove.setMoveType(new StockMove());
 
-        SpecificMove foundationToTableau = new SpecificMove();
-        stockMove.setMoveType(new FoundationToTableau());
 
         //Execute the move
         for (int i = 0; i < 100; i++) {
             states.add(solitaire.makeMove(states.get(i), stockMove));
-           // states.add(solitaire.makeMove(states.get(i), foundationToTableau));
             //Print new state
             //pgs.initClosedSolitareState(states.get(i));
             pgs.initOpenSolitareState(states.get(i));
