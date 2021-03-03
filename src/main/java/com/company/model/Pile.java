@@ -4,24 +4,23 @@ import com.company.model.exceptions.CardNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Pile {
 
     protected List<Card> cards;
     protected boolean fanned;
 
-    public Pile(){
+    public Pile() {
         this.cards = new ArrayList<>();
         this.fanned = false;
     }
 
-    public List<Card> getChildren(Card card){
+    public List<Card> getChildren(Card card) {
         int index = cards.indexOf(card);
         return getChildren(index);
     }
 
-    public List<Card> getChildren(int i){
+    public List<Card> getChildren(int i) {
         List<Card> result = new ArrayList<>();
         for (int j = i; j < cards.size(); j++) {
             result.add(cards.get(j));
@@ -30,14 +29,14 @@ public class Pile {
         return result;
     }
 
-    public void removeCards(List<Card> cardsToRemove){
-        for (Card card: cardsToRemove) {
+    public void removeCards(List<Card> cardsToRemove) {
+        for (Card card : cardsToRemove) {
             cards.remove(card);
         }
     }
 
-    public void addCards(List<Card> cardsToAdd){
-        for (Card card: cardsToAdd) {
+    public void addCards(List<Card> cardsToAdd) {
+        for (Card card : cardsToAdd) {
             cards.add(card);
         }
     }
@@ -45,40 +44,35 @@ public class Pile {
     public Card removeTopCard() throws CardNotFoundException {
         Card card = getTopCard();
 
-        if (card == null){
+        if (card == null) {
             throw new CardNotFoundException("Tried to remove top card from empty pile");
         }
 
         cards.remove(card);
 
         return card;
-
     }
 
     //Returns null if no cards in pile
     public Card getTopCard() {
-        if (cards.isEmpty()){
+        if (cards.isEmpty()) {
             return null;
         }
 
-        return cards.get(cards.size()-1);
+        return cards.get(cards.size() - 1);
     }
 
-
-
-    public boolean removeCard(Card card){
+    public boolean removeCard(Card card) {
         return cards.remove(card);
     }
 
-
-    public void addCard(Card card){
+    public void addCard(Card card) {
         cards.add(card);
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return cards.isEmpty();
     }
-
 
     public List<Card> getCards() {
         return cards;

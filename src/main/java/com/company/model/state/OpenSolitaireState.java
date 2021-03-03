@@ -3,7 +3,7 @@ package com.company.model.state;
 import com.company.model.*;
 import com.company.utils.PrintGameState;
 
-public class OpenSolitaireState implements ISolitaireState, Cloneable{
+public class OpenSolitaireState implements ISolitaireState, Cloneable {
 
     private WastePile wastePile;
     private StockPile stockPile;
@@ -11,7 +11,7 @@ public class OpenSolitaireState implements ISolitaireState, Cloneable{
     private Foundation foundation;
 
 
-    public static OpenSolitaireState newGame(){
+    public static OpenSolitaireState newGame() {
         OpenSolitaireState state = new OpenSolitaireState();
         CardDeque deque = new CardDeque();
 
@@ -41,9 +41,7 @@ public class OpenSolitaireState implements ISolitaireState, Cloneable{
         while (!deque.getCardsList().isEmpty()) {
             state.getStockPile().addCard(deque.draw());
         }
-
         return state;
-
     }
 
     public WastePile getWastePile() {
@@ -77,9 +75,9 @@ public class OpenSolitaireState implements ISolitaireState, Cloneable{
 
     @Override
     public Card getWasteTop() {
-        if(wastePile.getCards().size() > 0 ){
-            return wastePile.getCards().get(wastePile.getCards().size()-1);
-        }else return null;
+        if (wastePile.getCards().size() > 0) {
+            return wastePile.getCards().get(wastePile.getCards().size() - 1);
+        } else return null;
     }
 
     public Foundation getFoundation() {
@@ -94,7 +92,7 @@ public class OpenSolitaireState implements ISolitaireState, Cloneable{
     public ISolitaireState clone() {
         try {
             return (ISolitaireState) super.clone();
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;

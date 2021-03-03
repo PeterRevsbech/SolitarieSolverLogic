@@ -46,23 +46,22 @@ public class Card {
     @Override
     public String toString() {
         if (value == 11) {
-            return "J"+suit.toString().charAt(0);
+            return "J" + suit.toString().charAt(0);
         }
         if (value == 12) {
-            return "Q"+suit.toString().charAt(0);
+            return "Q" + suit.toString().charAt(0);
         }
         if (value == 13) {
-            return "K"+suit.toString().charAt(0);
+            return "K" + suit.toString().charAt(0);
         }
         if (value == 1) {
             return "A" + suit.toString().charAt(0);
         } else {
-        return value + "" + suit.toString().charAt(0);
+            return value + "" + suit.toString().charAt(0);
         }
     }
 
-
-    public boolean equals(Card card){
+    public boolean equals(Card card) {
         return (this.suit == card.suit) && (this.value == card.value);
     }
 }

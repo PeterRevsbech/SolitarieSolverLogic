@@ -2,8 +2,7 @@ package com.company.model.state;
 
 import com.company.model.*;
 
-public class ClosedSolitaireState implements ISolitaireState{
-
+public class ClosedSolitaireState implements ISolitaireState {
 
     @Override
     public Card getWasteTop() {
@@ -36,7 +35,7 @@ public class ClosedSolitaireState implements ISolitaireState{
     }
 
     @Override
-    public ISolitaireState clone(){
+    public ISolitaireState clone() {
         return this.clone();
     }
 }

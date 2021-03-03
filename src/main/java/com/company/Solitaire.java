@@ -22,7 +22,7 @@ public class Solitaire {
     private boolean stockIsKnown;
 
 
-    public void initGame(){
+    public void initGame() {
         states = new ArrayList<>();
         states.add(OpenSolitaireState.newGame());
         gameWon = false;
@@ -39,7 +39,7 @@ public class Solitaire {
 
         //change state according to move
         MoveType moveType = move.getMoveType();
-        if (moveType instanceof StockMove){
+        if (moveType instanceof StockMove) {
             stockMove(state);
         } else if (moveType instanceof WasteToTableau) {
             wasteToTableu(state, move);
@@ -69,8 +69,8 @@ public class Solitaire {
         Pile tableuPile = state.getTableau().getPileContainingCard(card);
 
         //Draw the card and check if it is on top of pile
-        if (!tableuPile.removeTopCard().equals(card)){
-            throw new SolitarieException(String.format("Thried to draw %s from tableu to foundation, but it was not the top card.",card.toString()));
+        if (!tableuPile.removeTopCard().equals(card)) {
+            throw new SolitarieException(String.format("Thried to draw %s from tableu to foundation, but it was not the top card.", card.toString()));
         }
 
         //Find correct pile in foundation
@@ -82,7 +82,7 @@ public class Solitaire {
 
     private void stockMove(ISolitaireState state) throws CardNotFoundException {
         Card topCard;
-        if (state.getStockPile().getTopCard()==null){ // if stock is empty
+        if (state.getStockPile().getTopCard() == null) { // if stock is empty
             //Take all cards from waste in reverse order
             List<Card> newStockPile = state.getWastePile().takeTurnedPile();
             //Put them in stock
@@ -102,7 +102,7 @@ public class Solitaire {
         Pile tableuPile = state.getTableau().getPileContainingCard(move.getToChild());
 
         //Check that card is top in tableuPile
-        if (!tableuPile.getTopCard().equals(move.getToChild())){
+        if (!tableuPile.getTopCard().equals(move.getToChild())) {
             throw new SolitarieException("Tried to move to card, that was not top of pile.");
         }
 
@@ -129,16 +129,16 @@ public class Solitaire {
         //TODO 4 kings in foundation
     }
 
-    public boolean makeNextMove(){
+    public boolean makeNextMove() {
         // get latest state, call solver to find next move
-        ISolitaireState currentState = states.get(states.size()-1);
+        ISolitaireState currentState = states.get(states.size() - 1);
         SpecificMove nextMove = solver.bestPossibleMove(this);
 
         // call the method makeMove, add the state to list of states
         try {
-            ISolitaireState nextState = makeMove(currentState,nextMove);
+            ISolitaireState nextState = makeMove(currentState, nextMove);
             states.add(nextState);
-        } catch (SolitarieException e){
+        } catch (SolitarieException e) {
             e.printStackTrace();
         }
 

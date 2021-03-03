@@ -8,8 +8,8 @@ public class Tableau {
 
     private Pile[] piles = new Pile[7];
 
-    public Tableau(){
-        for (int i = 0; i <7 ; i++) {
+    public Tableau() {
+        for (int i = 0; i < 7; i++) {
             piles[i] = new Pile();
             piles[i].setFanned(true);
         }
@@ -35,19 +35,18 @@ public class Tableau {
     //Return the one of the seven piles that contains card
     //If none of them do - throw an error
     public Pile getPileContainingCard(Card card) throws CardNotFoundException {
-        for (Pile pile:piles) {
-            if (pile.cards.contains(card)){
+        for (Pile pile : piles) {
+            if (pile.cards.contains(card)) {
                 return pile;
             }
         }
-        throw new CardNotFoundException(String.format("Card %s not found in tableuPile",card.toString()));
+        throw new CardNotFoundException(String.format("Card %s not found in tableuPile", card.toString()));
     }
 
-
-    public int getMaxTableauLength(){
-        int max =0;
-        for (Pile pile:piles) {
-            if (pile.getCards().size() > max){
+    public int getMaxTableauLength() {
+        int max = 0;
+        for (Pile pile : piles) {
+            if (pile.getCards().size() > max) {
                 max = pile.getCards().size();
             }
         }
