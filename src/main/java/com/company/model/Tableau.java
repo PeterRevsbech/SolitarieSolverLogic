@@ -53,4 +53,15 @@ public class Tableau {
         }
         return max;
     }
+
+    public Pile getFirstEmptyPile(){
+        //Returns first empty pile or null if no empty pile present
+        for (int i = 0; i < 7; i++) {
+            if (piles[i].isEmpty()){
+                return piles[i];
+            }
+        }
+
+        return null;
+    }
 }
