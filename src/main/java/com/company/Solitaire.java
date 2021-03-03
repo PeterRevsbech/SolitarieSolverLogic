@@ -139,13 +139,12 @@ public class Solitaire {
     private void evaluateGameWon(ISolitaireState state) {
         //TODO implemententer eventuelt en løkke der tjekker om alt på tableau er faceup, da spillet er "winable" hvis dette er tilfældet.
 
-        int foundationTopCardVal1 = state.getFoundation().getPiles()[0].getTopCard().getValue();
-        int foundationTopCardVal2 = state.getFoundation().getPiles()[1].getTopCard().getValue();
-        int foundationTopCardVal3 = state.getFoundation().getPiles()[2].getTopCard().getValue();
-        int foundationTopCardVal4 = state.getFoundation().getPiles()[3].getTopCard().getValue();
-
-        if ((foundationTopCardVal1 == 13) && (foundationTopCardVal2 == 13) && (foundationTopCardVal3 == 13) && (foundationTopCardVal4 == 13)) {
-            gameWon = true;
+        for (int i = 0; i < 3; i++) {
+            if (state.getFoundation().getPiles()[i].getTopCard().getValue() == 13) {
+                gameWon = true;
+            } else if (state.getFoundation().getPiles()[i].getTopCard().getValue() != 13) {
+                gameWon = false;
+            }
         }
     }
 
