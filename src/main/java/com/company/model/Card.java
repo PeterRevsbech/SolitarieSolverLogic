@@ -21,6 +21,11 @@ public class Card {
         this.faceUp = faceUp;
     }
 
+    public static final int KING = 13;
+    public static final int QUEEN = 12;
+    public static final int JACK = 11;
+    public static final int ACE = 1;
+
     public boolean isBlack() {
         return (this.suit == Suit.Clubs || this.suit == Suit.Spades);
     }
@@ -69,5 +74,12 @@ public class Card {
 
     public boolean equals(Card card) {
         return (this.suit == card.suit) && (this.value == card.value);
+    }
+
+    //Returns true if "this" can be placed on top of bottomCard in the tableau
+    public boolean isTableauCompatibleOn(Card bottomCard){
+        boolean suitMatches = bottomCard.isBlack() != this.isBlack();
+        boolean valueMatches = this.getValue() == bottomCard.getValue() - 1;
+        return suitMatches && valueMatches;
     }
 }

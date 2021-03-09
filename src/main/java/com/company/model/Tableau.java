@@ -63,4 +63,28 @@ public class Tableau {
 
         return null;
     }
+
+    //Finds a pile, where fromCard can be moved to, if there is any - otherwise returns null
+    //If fromPile is not null, means card was moved from this pile, and cannot be move TO this pile
+    public Pile getCompatiblePile(Card fromCard, Pile fromPile){
+        for (Pile pile:piles) {
+            //Must not be fromPile
+            if (!pile.equals(fromPile)) {
+                //If the pile is empty - only king can be placed
+                if (pile.isEmpty()){
+                    if (fromCard.getValue() == Card.KING){
+                        return pile;
+                    }
+                }
+
+                //Otherwise if fromCard can be placed on top of top card in pile
+                else if (fromCard.isTableauCompatibleOn(pile.getTopCard())){
+                    return pile;
+                }
+
+            }
+        }
+        return null;
+    }
+
 }

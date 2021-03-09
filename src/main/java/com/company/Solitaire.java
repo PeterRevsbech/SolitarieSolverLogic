@@ -177,6 +177,7 @@ public class Solitaire {
         tableuPile.addCard(card);
     }
 
+    //NOTE: doesnt actually use fromParent or toChild
     private void wasteToFoundation(ISolitaireState state) throws SolitarieException {
         //Draw card from waste
         Card card = state.getWastePile().draw();

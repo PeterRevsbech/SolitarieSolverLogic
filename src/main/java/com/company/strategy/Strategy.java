@@ -20,7 +20,6 @@ public class Strategy {
         prioritizedMoveTypes.add(new WasteToTableau());
         prioritizedMoveTypes.add(new FoundationToTableau());
 
-
     }
 
     public List<MoveType> getPrioritizedMoveTypes() {

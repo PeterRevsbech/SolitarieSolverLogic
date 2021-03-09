@@ -31,7 +31,7 @@ public class Foundation {
     public Pile getFoundationPileFromCard(Card card) throws SolitarieException {
         Pile pile = null;
         //Find corresponding foundation-pile
-        if (card.getValue() == 1) {
+        if (card.getValue() == Card.ACE) {
             //Find first vacant pile from left and put it there
             for (int i = 0; i < 4; i++) {
                 //Find first empty pile
@@ -47,7 +47,6 @@ public class Foundation {
         } else { //If card is not ace
             //Find corresponding pile
             for (int i = 0; i < 4; i++) {
-                //Find first empty pile
                 pile = piles[i];
 
                 if (pile.getTopCard().getSuit() == card.getSuit()) {

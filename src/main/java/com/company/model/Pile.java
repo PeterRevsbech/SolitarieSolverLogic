@@ -98,4 +98,18 @@ public class Pile {
     public String toString() {
         return cards.toString();
     }
+    
+    public boolean equals(Pile pile){
+        if (pile.getCards().size() != this.getCards().size()){
+            return false;
+        }
+        //For each card
+        for (int i = 0; i < pile.getCards().size(); i++) {
+            //If cards are different - return false
+            if (!pile.getCards().get(i).equals(this.cards.get(i))){
+                return false;
+            }
+        }
+        return true;
+    }
 }
