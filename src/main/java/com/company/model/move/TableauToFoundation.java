@@ -14,15 +14,17 @@ public class TableauToFoundation extends MoveType {
 
         for (Pile pile : state.getTableau().getPiles()) {
             Card card = pile.getTopCard();
-            if (card.getValue()==1){ //If card is ace
-                move.setFromParent(card);
-                return move;
-
-            } else{ //If card is not ace - check if it fits in foundation
-                //Ask foundation, if it can recieve this card
-                if(state.getFoundation().cardMatchesFoundation(card)){
+            if (card != null){
+                if (card.getValue()==1){ //If card is ace
                     move.setFromParent(card);
                     return move;
+
+                } else{ //If card is not ace - check if it fits in foundation
+                    //Ask foundation, if it can recieve this card
+                    if(state.getFoundation().cardMatchesFoundation(card)){
+                        move.setFromParent(card);
+                        return move;
+                    }
                 }
             }
         }

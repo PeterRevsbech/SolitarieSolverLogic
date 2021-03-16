@@ -57,37 +57,37 @@ public class OpenSolitaireState implements ISolitaireState, Cloneable {
         Pile pile2 = state.getTableau().getPiles()[1];
         Pile pile1 = state.getTableau().getPiles()[0];
 
-        pile7.addCard(new Card(Card.Suit.Clubs, 8, true));
-        pile7.addCard(new Card(Card.Suit.Clubs, 9, true));
-        pile7.addCard(new Card(Card.Suit.Clubs, 10, true));
-        pile7.addCard(new Card(Card.Suit.Clubs, 11, true));
-        pile7.addCard(new Card(Card.Suit.Clubs, 12, true));
-        pile7.addCard(new Card(Card.Suit.Clubs, 13, true));
+        pile7.addCard(new Card(Card.Suit.Clubs, 8, false));
+        pile7.addCard(new Card(Card.Suit.Clubs, 9, false));
+        pile7.addCard(new Card(Card.Suit.Clubs, 10, false));
+        pile7.addCard(new Card(Card.Suit.Clubs, 11, false));
+        pile7.addCard(new Card(Card.Suit.Clubs, 12, false));
+        pile7.addCard(new Card(Card.Suit.Clubs, 13, false));
         pile7.addCard(new Card(Card.Suit.Clubs, 1, true));
 
-        pile6.addCard(new Card(Card.Suit.Spades, 9, true));
-        pile6.addCard(new Card(Card.Suit.Spades, 10, true));
-        pile6.addCard(new Card(Card.Suit.Spades, 11, true));
-        pile6.addCard(new Card(Card.Suit.Spades, 12, true));
-        pile6.addCard(new Card(Card.Suit.Spades, 13, true));
+        pile6.addCard(new Card(Card.Suit.Spades, 9, false));
+        pile6.addCard(new Card(Card.Suit.Spades, 10, false));
+        pile6.addCard(new Card(Card.Suit.Spades, 11, false));
+        pile6.addCard(new Card(Card.Suit.Spades, 12, false));
+        pile6.addCard(new Card(Card.Suit.Spades, 13, false));
         pile6.addCard(new Card(Card.Suit.Spades, 1, true));
 
-        pile5.addCard(new Card(Card.Suit.Hearts, 10, true));
-        pile5.addCard(new Card(Card.Suit.Hearts, 11, true));
-        pile5.addCard(new Card(Card.Suit.Hearts, 12, true));
-        pile5.addCard(new Card(Card.Suit.Hearts, 13, true));
+        pile5.addCard(new Card(Card.Suit.Hearts, 10, false));
+        pile5.addCard(new Card(Card.Suit.Hearts, 11, false));
+        pile5.addCard(new Card(Card.Suit.Hearts, 12, false));
+        pile5.addCard(new Card(Card.Suit.Hearts, 13, false));
         pile5.addCard(new Card(Card.Suit.Hearts, 1, true));
 
-        pile4.addCard(new Card(Card.Suit.Diamonds, 11, true));
-        pile4.addCard(new Card(Card.Suit.Diamonds, 12, true));
-        pile4.addCard(new Card(Card.Suit.Diamonds, 13, true));
+        pile4.addCard(new Card(Card.Suit.Diamonds, 11, false));
+        pile4.addCard(new Card(Card.Suit.Diamonds, 12, false));
+        pile4.addCard(new Card(Card.Suit.Diamonds, 13, false));
         pile4.addCard(new Card(Card.Suit.Diamonds, 1, true));
 
-        pile3.addCard(new Card(Card.Suit.Diamonds, 10, true));
-        pile3.addCard(new Card(Card.Suit.Diamonds, 9, true));
+        pile3.addCard(new Card(Card.Suit.Diamonds, 10, false));
+        pile3.addCard(new Card(Card.Suit.Diamonds, 9, false));
         pile3.addCard(new Card(Card.Suit.Diamonds, 8, true));
 
-        pile2.addCard(new Card(Card.Suit.Diamonds, 7, true));
+        pile2.addCard(new Card(Card.Suit.Diamonds, 7, false));
         pile2.addCard(new Card(Card.Suit.Diamonds, 6, true));
 
         pile1.addCard(new Card(Card.Suit.Diamonds, 5, true));

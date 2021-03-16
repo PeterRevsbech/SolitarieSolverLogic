@@ -30,6 +30,12 @@ public class Solitaire {
         stockIsKnown = false;
     }
 
+    public void play(){
+        while (!makeNextMove()){
+
+        }
+    }
+
     public ISolitaireState makeMove(ISolitaireState state, SpecificMove move) throws SolitarieException {
         //fromParent is irellevant, since we draw from waste
         //If top of wastepile is an ace - toChild should be null
@@ -125,6 +131,12 @@ public class Solitaire {
         //Move cards
         List<Card> movedCards = fromPile.getChildren(move.getFromParent());
         fromPile.removeCards(movedCards);
+
+        //Set next card faceUp in fromPile
+        if (!fromPile.isEmpty()){
+            fromPile.getTopCard().setFaceUp(true);
+        }
+
         toPile.addCards(movedCards);
     }
 
@@ -138,6 +150,11 @@ public class Solitaire {
         //Draw the card and check if it is on top of pile
         if (!tableuPile.removeTopCard().equals(card)) {
             throw new SolitarieException(String.format("Thried to draw %s from tableu to foundation, but it was not the top card.", card.toString()));
+        }
+
+        //Set next card to faceUp
+        if (!tableuPile.isEmpty()){
+            tableuPile.getTopCard().setFaceUp(true);
         }
 
         //Find correct pile in foundation
