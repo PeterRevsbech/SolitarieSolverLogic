@@ -24,7 +24,7 @@ public class TableauToTableau extends MoveType{
                     //Check if we can move this card somewhere else in tableau
                     Pile compatiblePile = tableau.getCompatiblePile(card,pile);
                     if (compatiblePile != null){
-                        move.setToChild(compatiblePile.getTopCard());
+                        move.setToCard(compatiblePile.getTopCard());
                         move.setFromParent(card);
                         return move;
                     }

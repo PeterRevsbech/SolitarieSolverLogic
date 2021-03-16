@@ -64,7 +64,7 @@ public class Solitaire {
 
     private void foundationToTableau(ISolitaireState state, SpecificMove move) throws SolitarieException {
         Card parentCard = move.getFromParent();
-        Card toChild = move.getToChild();
+        Card toChild = move.getToCard();
         // find the corresponding pile in foundation
         Pile foundationPile = state.getFoundation().getFoundationPileFromCard(parentCard);
         if (foundationPile == null) {
@@ -94,7 +94,7 @@ public class Solitaire {
         Pile fromPile = state.getTableau().getPileContainingCard(move.getFromParent());
         Pile toPile;
 
-        if (move.getToChild() == null) {//If moving til empty pile
+        if (move.getToCard() == null) {//If moving til empty pile
             //If move.toChild is null, it means move to an empty pile
 
             //Assure that card being moved is a king
@@ -109,7 +109,7 @@ public class Solitaire {
 
         } else {
             //Find toPile in tableau
-            toPile = state.getTableau().getPileContainingCard(move.getToChild());
+            toPile = state.getTableau().getPileContainingCard(move.getToCard());
 
             //Assure that from and toPile are not the same
             if (toPile == fromPile) {
@@ -117,8 +117,8 @@ public class Solitaire {
             }
 
             //Assure that toChild is actually top if its pile
-            if (!toPile.getTopCard().equals(move.getToChild())) {
-                throw new SolitarieException(String.format("Trying to move %s onto %s, but toCard was not top of it card as it was is", move.getFromParent().toString(), move.getToChild()));
+            if (!toPile.getTopCard().equals(move.getToCard())) {
+                throw new SolitarieException(String.format("Trying to move %s onto %s, but toCard was not top of it card as it was is", move.getFromParent().toString(), move.getToCard()));
             }
         }
 
@@ -164,13 +164,22 @@ public class Solitaire {
     private void wasteToTableu(ISolitaireState state, SpecificMove move) throws SolitarieException {
         //Draw from waste
         Card card = state.getWastePile().draw();
+        Pile tableuPile;
+        if (move.getToCard() != null){ // If we are not moving a king to an empty pile
+            //Find correct tableu-pile
+            tableuPile = state.getTableau().getPileContainingCard(move.getToCard());
 
-        //Find correct tableu-pile
-        Pile tableuPile = state.getTableau().getPileContainingCard(move.getToChild());
+            //Check that card is top in tableuPile
+            if (!tableuPile.getTopCard().equals(move.getToCard())) {
+                throw new SolitarieException("Tried to move to card, that was not top of pile.");
+            }
+        } else {
+            //IF we are moving a king to next empty pile
+            if (move.getFromParent().getValue() != Card.KING) {
+                throw new SolitarieException("Tried to move to card that is not king from waste to empty pile in tableau.");
+            }
 
-        //Check that card is top in tableuPile
-        if (!tableuPile.getTopCard().equals(move.getToChild())) {
-            throw new SolitarieException("Tried to move to card, that was not top of pile.");
+            tableuPile = state.getTableau().getFirstEmptyPile();
         }
 
         //Add to pile
