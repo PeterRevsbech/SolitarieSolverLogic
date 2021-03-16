@@ -49,7 +49,8 @@ public class Foundation {
             for (int i = 0; i < 4; i++) {
                 pile = piles[i];
 
-                if (pile.getTopCard().getSuit() == card.getSuit()) {
+
+                if (!pile.isEmpty() && pile.getTopCard().getSuit() == card.getSuit()) {
                     break;
                 } else if (i == 3) {
                     //If we found no empty pile - throw an exception

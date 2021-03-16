@@ -14,7 +14,7 @@ public class TableauToFoundationReveal extends TableauToFoundation {
         for (Pile pile : state.getTableau().getPiles()) {
             Card card = pile.getTopCard();
 
-            // krav: Kan komme i foundation og der skal være et facedown kort under.
+            // Must fit in foundation and must be face down
 
             if (card != null && pile.isPossibleReveal(card)){
                 if (card.getValue()==Card.ACE){ //If card is ace
