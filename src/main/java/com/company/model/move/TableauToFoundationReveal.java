@@ -5,16 +5,18 @@ import com.company.model.Pile;
 import com.company.model.SpecificMove;
 import com.company.model.state.ISolitaireState;
 
-public class TableauToFoundation extends MoveType {
-    @Override
+public class TableauToFoundationReveal extends TableauToFoundation {
     public SpecificMove getMove(ISolitaireState state) {
         //Only needs to specify fromParent - toChild is implicit
 
-        SpecificMove move = new SpecificMove(new TableauToFoundation());
+        SpecificMove move = new SpecificMove(new TableauToFoundationReveal());
 
         for (Pile pile : state.getTableau().getPiles()) {
             Card card = pile.getTopCard();
-            if (card != null){
+
+            // krav: Kan komme i foundation og der skal være et facedown kort under.
+
+            if (card != null && pile.isPossibleReveal(card)){
                 if (card.getValue()==Card.ACE){ //If card is ace
                     move.setFromParent(card);
                     return move;
@@ -30,7 +32,6 @@ public class TableauToFoundation extends MoveType {
         }
         return null;
     }
-
 
 
 }

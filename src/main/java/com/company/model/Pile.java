@@ -74,6 +74,30 @@ public class Pile {
         return cards.isEmpty();
     }
 
+    public int getIndexOfCard (Card card){ //Given a card, this method finds the index of that card.
+
+        for (int i = 0; i < cards.size(); i++) {
+
+            if (cards.get(i).equals(card))
+                return i;
+
+        }
+        return -1;
+    }
+
+    public boolean isPossibleReveal(Card card) { //Returns a boolean depending on if the given card can reveal.
+
+        int cardIndex = getIndexOfCard(card);
+
+        if(cardIndex == 0)
+            return false;
+
+        if (cards.get(cardIndex-1).isFaceUp())
+            return false;
+
+        return true;
+    }
+
     public List<Card> getCards() {
         return cards;
     }
