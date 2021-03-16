@@ -35,4 +35,9 @@ public class TableauToTableau extends MoveType{
         //If it was not possible, return null
         return null;
     }
+
+    @Override
+    public String toString() {
+        return "TableauToTableau";
+    }
 }

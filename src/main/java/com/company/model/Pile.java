@@ -53,6 +53,16 @@ public class Pile {
         return card;
     }
 
+    //Returns the north most face up card or null if pile is empty
+    public Card getFirstFaceUpCard(){
+        for (int i = 0; i < cards.size(); i++) {
+            if(cards.get(i).isFaceUp()){
+                return cards.get(i);
+            }
+        }
+        return null;
+    }
+
     //Returns null if no cards in pile
     public Card getTopCard() {
         if (cards.isEmpty()) {

@@ -33,5 +33,8 @@ public class TableauToFoundationReveal extends TableauToFoundation {
         return null;
     }
 
-
+    @Override
+    public String toString() {
+        return "TableauToFoundationReveal";
+    }
 }

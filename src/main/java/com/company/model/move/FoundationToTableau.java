@@ -33,4 +33,9 @@ public class FoundationToTableau extends MoveType{
 
         return null;
     }
+
+    @Override
+    public String toString() {
+        return "FoundationToTableau";
+    }
 }

@@ -45,6 +45,10 @@ public class Solitaire {
 
         //change state according to move
         MoveType moveType = move.getMoveType();
+        if(true){
+            //For debugging
+            System.out.println(moveType.toString());
+        }
         if (moveType instanceof StockMove) {
             stockMove(state);
         } else if (moveType instanceof WasteToTableau) {

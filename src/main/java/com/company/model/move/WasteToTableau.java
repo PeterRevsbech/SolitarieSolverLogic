@@ -27,7 +27,8 @@ public class WasteToTableau extends MoveType{
 
     }
 
-
-
-
+    @Override
+    public String toString() {
+        return "WasteToTableau";
+    }
 }

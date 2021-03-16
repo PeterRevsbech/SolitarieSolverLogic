@@ -15,4 +15,9 @@ public class StockMove extends MoveType{
             return move;
         }
     }
+
+    @Override
+    public String toString() {
+        return "StockMove";
+    }
 }

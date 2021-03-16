@@ -23,4 +23,9 @@ public class WasteToFoundation extends MoveType{
         //Else return null
         return null;
     }
+
+    @Override
+    public String toString() {
+        return "WasteToFoundation";
+    }
 }
