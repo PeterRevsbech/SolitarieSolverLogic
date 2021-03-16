@@ -131,6 +131,93 @@ public class OpenSolitaireState implements ISolitaireState, Cloneable {
         return state;
     }
 
+    public static OpenSolitaireState newCheatWinableGame1(OpenSolitaireState state) {
+
+        state.setTableau(new Tableau());
+
+        Pile pile7 = state.getTableau().getPiles()[6];
+        Pile pile6 = state.getTableau().getPiles()[5];
+        Pile pile5 = state.getTableau().getPiles()[4];
+        Pile pile4 = state.getTableau().getPiles()[3];
+        Pile pile3 = state.getTableau().getPiles()[2];
+        Pile pile2 = state.getTableau().getPiles()[1];
+        Pile pile1 = state.getTableau().getPiles()[0];
+
+        pile7.addCard(new Card(Card.Suit.Spades, 6, false));
+        pile7.addCard(new Card(Card.Suit.Spades, 8, false));
+        pile7.addCard(new Card(Card.Suit.Clubs, 9, false));
+        pile7.addCard(new Card(Card.Suit.Diamonds, 11, false));
+        pile7.addCard(new Card(Card.Suit.Diamonds, 6, false));
+        pile7.addCard(new Card(Card.Suit.Diamonds, 4, false));
+        pile7.addCard(new Card(Card.Suit.Spades, 1, true));
+
+        pile6.addCard(new Card(Card.Suit.Clubs, 4, false));
+        pile6.addCard(new Card(Card.Suit.Clubs, 12, false));
+        pile6.addCard(new Card(Card.Suit.Hearts, 1, false));
+        pile6.addCard(new Card(Card.Suit.Clubs, 1, false));
+        pile6.addCard(new Card(Card.Suit.Clubs, 13, false));
+        pile6.addCard(new Card(Card.Suit.Clubs, 3, true));
+
+        pile5.addCard(new Card(Card.Suit.Diamonds, 8, false));
+        pile5.addCard(new Card(Card.Suit.Hearts, 9, false));
+        pile5.addCard(new Card(Card.Suit.Spades, 3, false));
+        pile5.addCard(new Card(Card.Suit.Spades, 10, false));
+        pile5.addCard(new Card(Card.Suit.Clubs, 8, true));
+
+        pile4.addCard(new Card(Card.Suit.Hearts, 8, false));
+        pile4.addCard(new Card(Card.Suit.Hearts, 4, false));
+        pile4.addCard(new Card(Card.Suit.Spades, 7, false));
+        pile4.addCard(new Card(Card.Suit.Clubs, 10, true));
+
+        pile3.addCard(new Card(Card.Suit.Diamonds, 2, false));
+        pile3.addCard(new Card(Card.Suit.Hearts, 2, false));
+        pile3.addCard(new Card(Card.Suit.Spades, 11, true));
+
+        pile2.addCard(new Card(Card.Suit.Spades, 9, false));
+        pile2.addCard(new Card(Card.Suit.Clubs, 6, true));
+
+        pile1.addCard(new Card(Card.Suit.Diamonds, 13, true));
+
+        //Initialize Foundation
+        state.setFoundation(new Foundation());
+
+        //Initialize WastePile
+        state.setWastePile(new WastePile());
+
+        //Initialize StockPile
+        state.setStockPile(new StockPile());
+        state.getStockPile().addCard(new Card(Card.Suit.Diamonds, 1));
+        state.getStockPile().addCard(new Card(Card.Suit.Diamonds, 3));
+        state.getStockPile().addCard(new Card(Card.Suit.Diamonds, 5));
+        state.getStockPile().addCard(new Card(Card.Suit.Diamonds, 7));
+        state.getStockPile().addCard(new Card(Card.Suit.Diamonds, 9));
+        state.getStockPile().addCard(new Card(Card.Suit.Diamonds, 10));
+        state.getStockPile().addCard(new Card(Card.Suit.Diamonds, 12));
+
+        state.getStockPile().addCard(new Card(Card.Suit.Hearts, 3));
+        state.getStockPile().addCard(new Card(Card.Suit.Hearts, 5));
+        state.getStockPile().addCard(new Card(Card.Suit.Hearts, 6));
+        state.getStockPile().addCard(new Card(Card.Suit.Hearts, 7));
+        state.getStockPile().addCard(new Card(Card.Suit.Hearts, 10));
+        state.getStockPile().addCard(new Card(Card.Suit.Hearts, 11));
+        state.getStockPile().addCard(new Card(Card.Suit.Hearts, 12));
+        state.getStockPile().addCard(new Card(Card.Suit.Hearts, 13));
+
+        state.getStockPile().addCard(new Card(Card.Suit.Clubs, 2));
+        state.getStockPile().addCard(new Card(Card.Suit.Clubs, 5));
+        state.getStockPile().addCard(new Card(Card.Suit.Clubs, 7));
+        state.getStockPile().addCard(new Card(Card.Suit.Clubs, 11));
+
+        state.getStockPile().addCard(new Card(Card.Suit.Spades, 2));
+        state.getStockPile().addCard(new Card(Card.Suit.Spades, 4));
+        state.getStockPile().addCard(new Card(Card.Suit.Spades, 5));
+        state.getStockPile().addCard(new Card(Card.Suit.Spades, 12));
+        state.getStockPile().addCard(new Card(Card.Suit.Spades, 13));
+
+        return state;
+    }
+
+
     public WastePile getWastePile() {
         return wastePile;
     }
