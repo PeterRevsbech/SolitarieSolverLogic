@@ -17,8 +17,8 @@ public class Main {
     public static void main(String[] args) throws SolitarieException {
         //Create a test game
         Solitaire solitaire = new Solitaire();
-        //solitaire.initGame(false); //Use this to have a winnable game (testing purposes)
-        solitaire.initGame(true);
+        solitaire.initGame(false); //Use this to have a winnable game (testing purposes)
+        //solitaire.initGame(true);
 
         List<ISolitaireState> states = solitaire.getStates();
 
@@ -28,6 +28,7 @@ public class Main {
         pgs.printCurrentState();
 
         for (int i = 0; i < 200; i++) {
+            System.out.println(i);
             solitaire.makeNextMove();
             pgs.initOpenSolitareState(states.get(i+1));
             pgs.printCurrentState();

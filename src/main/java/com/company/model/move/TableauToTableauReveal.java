@@ -9,7 +9,7 @@ import com.company.model.state.ISolitaireState;
 public class TableauToTableauReveal extends TableauToTableau{
     public SpecificMove getMove(ISolitaireState state) {
 
-        SpecificMove move = new SpecificMove(new TableauToFoundationReveal());
+        SpecificMove move = new SpecificMove(new TableauToTableauReveal());
 
         Tableau tableau = state.getTableau();
 
@@ -39,7 +39,7 @@ public class TableauToTableauReveal extends TableauToTableau{
 
     @Override
     public String toString() {
-        return "FoundationToTableauReval";
+        return "TableauToTableauReveal";
     }
 }
 
