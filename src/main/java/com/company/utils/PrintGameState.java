@@ -79,11 +79,11 @@ public class PrintGameState {
 
     private String[][] buildTableauMatrix() {
         int tabLen = tableau.getMaxTableauLength();
-        String[][] tableauMatrix = new String[7][tabLen+1]; //TODO har tilføjet +1 til tabLen, for at undgå mærkelig OOB error
+        String[][] tableauMatrix = new String[tabLen][7]; //TODO har tilføjet +1 til tabLen, for at undgå mærkelig OOB error
         for (int i = 0; i < tabLen; i++) {
             for (int j = 0; j < 7; j++) {
                 int pileLen = tableau.getPiles()[j].getCards().size();
-                if (pileLen < i + 1) { //If there is no card at this place
+                if (i >= pileLen) { //If there is no card at this place
                     tableauMatrix[i][j] = " ";
                 } else if (!tableau.getPiles()[j].getCard(i).isFaceUp()) { //if the card is NOT face up
                     tableauMatrix[i][j] = "*";
