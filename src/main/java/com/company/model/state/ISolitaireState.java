@@ -2,6 +2,8 @@ package com.company.model.state;
 
 import com.company.model.*;
 
+import java.util.List;
+
 public interface ISolitaireState extends Cloneable {
 
     //Return null if waste is empty - otherwise returns top card
@@ -20,5 +22,9 @@ public interface ISolitaireState extends Cloneable {
     String toString();
 
     ISolitaireState clone();
+
+    List<Card> getKnownStockWaste();
+
+    void setKnownStockWaste(List<Card> stockWaste);
 
 }

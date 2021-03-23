@@ -69,7 +69,7 @@ public class Tableau {
     public Pile getCompatiblePile(Card fromCard, Pile fromPile){
         for (Pile pile:piles) {
             //Must not be fromPile
-            if (!pile.equals(fromPile)) {
+            if (fromPile != null && !pile.equals(fromPile)) {
                 //If the pile is empty - only king can be placed
                 if (pile.isEmpty()){
                     if (fromCard.getValue() == Card.KING){
