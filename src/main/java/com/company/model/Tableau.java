@@ -37,7 +37,7 @@ public class Tableau implements Serializable {
     //If none of them do - throw an error
     public Pile getPileContainingCard(Card card) throws CardNotFoundException {
         for (Pile pile : piles) {
-            if (pile.cards.contains(card)) {
+            if (pile.contains(card)) {
                 return pile;
             }
         }
@@ -86,6 +86,15 @@ public class Tableau implements Serializable {
             }
         }
         return null;
+    }
+
+
+    public Tableau clone(){
+        Tableau clone = new Tableau();
+        for (int i = 0; i < this.piles.length; i++) {
+            clone.piles[i] = this.piles[i].clone();
+        }
+        return clone;
     }
 
 }

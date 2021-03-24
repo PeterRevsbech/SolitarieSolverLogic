@@ -27,4 +27,16 @@ public class WastePile extends Pile implements Serializable {
         //Remove and return top card
         return cards.remove(cards.size() - 1);
     }
+
+
+    @Override
+    public WastePile clone() {
+        WastePile clone = new WastePile();
+        for (int i = 0; i < this.cards.size(); i++) {
+            clone.addCard(this.cards.get(i).clone());
+        }
+        return clone;
+    }
+
+
 }

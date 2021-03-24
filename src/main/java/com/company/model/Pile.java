@@ -17,7 +17,7 @@ public class Pile implements Serializable {
     }
 
     public List<Card> getChildren(Card card) {
-        int index = cards.indexOf(card);
+        int index = indexOf(card);
         return getChildren(index);
     }
 
@@ -147,4 +147,31 @@ public class Pile implements Serializable {
         }
         return true;
     }
+
+    public boolean contains(Card card){
+        for (Card pileCard:cards) {
+            if (pileCard.getSuit() == card.getSuit() && pileCard.getValue() == card.getValue() && pileCard.isFaceUp() == card.isFaceUp()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Pile clone(){
+        Pile clone = new Pile();
+        for (int i = 0; i < this.cards.size(); i++) {
+            clone.addCard(this.cards.get(i).clone());
+        }
+        return clone;
+    }
+
+    public int indexOf(Card card){
+        for (int i = 0; i < cards.size(); i++) {
+            if (card.equals(cards.get(i))){
+                return i;
+            }
+        }
+        return -1;
+    }
+
 }
