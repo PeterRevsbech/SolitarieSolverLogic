@@ -26,9 +26,9 @@ public class Main {
             solitaire.initGame(true);
 
             List<ISolitaireState> states = solitaire.getStates();
-            //PrintGameState pgs = new PrintGameState();
-            //pgs.initOpenSolitareState(states.get(0));
-            //pgs.printCurrentState();
+            PrintGameState pgs = new PrintGameState();
+            pgs.initOpenSolitareState(states.get(0));
+            pgs.printCurrentState();
 
 
 
@@ -37,8 +37,8 @@ public class Main {
                 System.out.println(i);
                 solitaire.makeNextMove();
 
-                //pgs.initOpenSolitareState(states.get(i+1));
-                //pgs.printCurrentState();
+                pgs.initOpenSolitareState(states.get(i+1));
+                pgs.printCurrentState();
 
             }
         }

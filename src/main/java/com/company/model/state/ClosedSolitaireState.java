@@ -129,4 +129,6 @@ public class ClosedSolitaireState implements ISolitaireState {
         }
         return obj;
     }
+
+
 }

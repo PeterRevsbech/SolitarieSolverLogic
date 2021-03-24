@@ -8,7 +8,7 @@ import com.company.model.Tableau;
 import com.company.model.exceptions.SolitarieException;
 import com.company.model.state.ISolitaireState;
 
-public class TableauToTableauReveal1 extends MoveType{
+public class TableauToTableauReveal1 extends TableauToTableau{
 
     public SpecificMove getMove(ISolitaireState state) {
 
@@ -30,7 +30,7 @@ public class TableauToTableauReveal1 extends MoveType{
 
                         //Find candidateMove
                         ISolitaireState cloneState = state.clone();
-                        SpecificMove candidateMove = new SpecificMove(new TableauToTableau());
+                        SpecificMove candidateMove = new SpecificMove(new TableauToTableauReveal1());
                         candidateMove.setFromParent(card);
                         candidateMove.setToCard(compatiblePile.getTopCard());
 
@@ -49,11 +49,16 @@ public class TableauToTableauReveal1 extends MoveType{
                             return candidateMove;
                         }
 
+
+                        //TODO fix this - should look for FoundationToTableauReveal
+                        /*
                         TableauToFoundationReveal tableauToFoundationReveal = new TableauToFoundationReveal();
                         nextMove = tableauToFoundationReveal.getMove(cloneState);
                         if (nextMove != null) {
                             return candidateMove;
                         }
+
+                         */
 
 
                     }

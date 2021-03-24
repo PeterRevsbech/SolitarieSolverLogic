@@ -14,11 +14,17 @@ public class Strategy {
         prioritizedMoveTypes = new ArrayList<>();
         //Very primitive first strategy
         prioritizedMoveTypes.add(new TableauToFoundationReveal());
+
+
         prioritizedMoveTypes.add(new TableauToTableauReveal());
         prioritizedMoveTypes.add(new WasteToTableauReveal1());
-        prioritizedMoveTypes.add(new TableauToFoundation());
-        prioritizedMoveTypes.add(new TableauToTableau());
+        prioritizedMoveTypes.add(new StockMoveReveal1());
+
         prioritizedMoveTypes.add(new WasteToFoundation());
+        prioritizedMoveTypes.add(new TableauToFoundation());
+
+        prioritizedMoveTypes.add(new TableauToTableau());
+
         prioritizedMoveTypes.add(new WasteToTableau());
         prioritizedMoveTypes.add(new StockMove());
 

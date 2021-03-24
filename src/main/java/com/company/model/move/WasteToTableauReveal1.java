@@ -15,8 +15,8 @@ public class WasteToTableauReveal1 extends WasteToTableau{
 
     @Override
     public SpecificMove getMove(ISolitaireState state) {
-        SpecificMove move = new SpecificMove(new WasteToTableauReveal1());
-        SpecificMove candidateMove = null;
+        SpecificMove candidateMove = new SpecificMove(new WasteToTableauReveal1());
+        SpecificMove nextMove = null;
         Card topCard = state.getWasteTop();
 
         //If topCard was moved to somewhere in tableau - would TableauToTableauReveal or TableauToFoundationReveal1 be possible
@@ -26,7 +26,7 @@ public class WasteToTableauReveal1 extends WasteToTableau{
             ISolitaireState cloneState = state.clone();
 
             //Move cloneTop onto compatible pile
-            candidateMove = new SpecificMove(new WasteToTableau());
+            candidateMove = new SpecificMove(new WasteToTableauReveal1());
             candidateMove.setFromParent(null); //Not needed, but indicates that fromparent is irellevant
             candidateMove.setToCard(pile.getTopCard());
 
@@ -37,22 +37,22 @@ public class WasteToTableauReveal1 extends WasteToTableau{
                 e.printStackTrace();
             }
 
-            //See if Reveal move possible
+            //See if Reveal nextMove possible
             //TableauToTabeleauReveal
             TableauToTableauReveal tableauToTableauReveal = new TableauToTableauReveal();
-            candidateMove = tableauToTableauReveal.getMove(cloneState);
-            if (candidateMove != null){
-                move.setToCard(pile.getTopCard());
-                return move;
+            nextMove = tableauToTableauReveal.getMove(cloneState);
+            if (nextMove != null){
+                candidateMove.setToCard(pile.getTopCard());
+                return candidateMove;
             }
 
             //See if reveal is possbile, with one tableauToTableauMove
-            TableauToTableauReveal1 tableauToTableauReveal1 = new TableauToTableauReveal1();
-            candidateMove = tableauToTableauReveal1.getMove(cloneState);
-            if (candidateMove != null){
-                move.setFromParent(null); //Moving from waste top - so null
-                move.setToCard(pile.getTopCard()); //Moving to top of the pile, that topCard was compatible with
-                return move;
+            TableauToFoundationReveal1 tableauToTableauReveal1 = new TableauToFoundationReveal1();
+            nextMove = tableauToTableauReveal1.getMove(cloneState);
+            if (nextMove != null){
+                candidateMove.setFromParent(null); //Moving from waste top - so null
+                candidateMove.setToCard(pile.getTopCard()); //Moving to top of the pile, that topCard was compatible with
+                return candidateMove;
             }
 
         }

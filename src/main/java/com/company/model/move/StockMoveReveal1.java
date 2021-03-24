@@ -4,22 +4,45 @@ import com.company.model.Card;
 import com.company.model.SpecificMove;
 import com.company.model.state.ISolitaireState;
 
-public class StockMoveReveal1 {
+import java.util.List;
 
-    //TODO This is when a number of stockmoves can be made, that make WasteToTableauReveal1 possible
-    // ==> find one card in stock, that it it were on top, would make WasteToTableauReveal1 possible ==> make stock move
+public class StockMoveReveal1 extends StockMove{
 
-    //Shall make it possible for TableauToTableuReveal or TableuaToFaundationReveal
+    // This is when a number of stockmoves can be made, that make WasteToTableauReveal1 possible
+    // ==> find one card in stock, that if it were on top, would make WasteToTableauReveal1 possible ==> make stock move
+
 
     public SpecificMove getMove(ISolitaireState state) {
-        if (state.isStockEmpty() && state.getWastePile().isEmpty()){ //if waste and stock is empty
-            return null;
-        } else {
+        SpecificMove move = new SpecificMove(new StockMoveReveal1());
 
-            SpecificMove move = new SpecificMove();
-            move.setMoveType(new StockMove());
-            return move;
+        if (!state.getKnownStockWaste().isEmpty()) { //If wasteStock is not empty
+            WasteToTableauReveal1 wasteToTableauReveal1 = new WasteToTableauReveal1();
+
+            //Get list of known stock waste cards
+            List<Card> knownStockWaste = state.getKnownStockWaste();
+            for (Card card:knownStockWaste) {
+                //Check if it were top of waste - could we make wasteToTableau
+
+                //Place card on top of waste
+                ISolitaireState cloneState = state.clone();
+
+                //Find the corresponding card in cloned cardDeck
+                for (int i = 0; i < knownStockWaste.size(); i++) {
+                    if (card.equals(knownStockWaste.get(i))){
+                        card = knownStockWaste.get(i);
+                    }
+                }
+
+                cloneState.swapStockTopCard(card);
+
+                //See if WasteToTableauReveal1 is possible
+                if (wasteToTableauReveal1.getMove(cloneState)!=null) {
+                    return move;
+                }
+            }
         }
+        return null;
+
     }
 
     @Override
