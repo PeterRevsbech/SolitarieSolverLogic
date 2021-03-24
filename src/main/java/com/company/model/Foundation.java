@@ -13,7 +13,7 @@ public class Foundation implements Serializable {
     public Foundation() {
         for (int i = 0; i < 4; i++) {
             piles[i] = new Pile();
-            piles[i].fanned=false;
+            piles[i].fanned = false;
         }
     }
 
@@ -68,13 +68,13 @@ public class Foundation implements Serializable {
         return pile;
     }
 
-    public boolean cardMatchesFoundation(Card card){
-        for (Pile pile:piles) {
-            if (pile.getTopCard() != null){
+    public boolean cardMatchesFoundation(Card card) {
+        for (Pile pile : piles) {
+            if (pile.getTopCard() != null) {
                 //Check that suit mathces
-                if(pile.getTopCard().getSuit()==card.getSuit()){
+                if (pile.getTopCard().getSuit() == card.getSuit()) {
                     //Check that value is 1 higher
-                    if (pile.getTopCard().getValue()==card.getValue()-1){
+                    if (pile.getTopCard().getValue() == card.getValue() - 1) {
                         return true;
                     }
                 }
@@ -83,7 +83,7 @@ public class Foundation implements Serializable {
         return false;
     }
 
-    public Foundation clone(){
+    public Foundation clone() {
         Foundation clone = new Foundation();
         for (int i = 0; i < clone.piles.length; i++) {
             clone.piles[i] = this.piles[i].clone();

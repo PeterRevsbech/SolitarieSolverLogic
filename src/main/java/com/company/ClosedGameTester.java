@@ -12,7 +12,5 @@ public class ClosedGameTester {
         pgs.initClosedSolitareState(solitaire.getStates().get(0));
         pgs.printCurrentState();
         System.out.println(solitaire.getNextMove());
-
     }
-
 }

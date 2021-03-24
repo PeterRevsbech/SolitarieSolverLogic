@@ -28,7 +28,6 @@ public class WastePile extends Pile implements Serializable {
         return cards.remove(cards.size() - 1);
     }
 
-
     @Override
     public WastePile clone() {
         WastePile clone = new WastePile();
@@ -37,6 +36,4 @@ public class WastePile extends Pile implements Serializable {
         }
         return clone;
     }
-
-
 }

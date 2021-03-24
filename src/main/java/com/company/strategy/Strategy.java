@@ -10,7 +10,7 @@ public class Strategy {
 
     private List<MoveType> prioritizedMoveTypes;
 
-    public Strategy(){
+    public Strategy() {
         prioritizedMoveTypes = new ArrayList<>();
         //Very primitive first strategy
         prioritizedMoveTypes.add(new TableauToFoundationReveal());

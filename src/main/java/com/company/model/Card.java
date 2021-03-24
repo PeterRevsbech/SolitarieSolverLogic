@@ -79,8 +79,8 @@ public class Card implements Serializable {
     }
 
     //Returns true if "this" can be placed on top of bottomCard in the tableau
-    public boolean isTableauCompatibleOn(Card bottomCard){
-        if (bottomCard == null){
+    public boolean isTableauCompatibleOn(Card bottomCard) {
+        if (bottomCard == null) {
             return false;
         }
         boolean suitMatches = bottomCard.isBlack() != this.isBlack();
@@ -88,7 +88,7 @@ public class Card implements Serializable {
         return suitMatches && valueMatches;
     }
 
-    public Card clone(){
-       return new Card(this.getSuit(),this.getValue(),this.isFaceUp());
+    public Card clone() {
+        return new Card(this.getSuit(), this.getValue(), this.isFaceUp());
     }
 }

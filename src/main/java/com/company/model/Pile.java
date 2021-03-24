@@ -55,9 +55,9 @@ public class Pile implements Serializable {
     }
 
     //Returns the north most face up card or null if pile is empty
-    public Card getFirstFaceUpCard(){
+    public Card getFirstFaceUpCard() {
         for (int i = 0; i < cards.size(); i++) {
-            if(cards.get(i).isFaceUp()){
+            if (cards.get(i).isFaceUp()) {
                 return cards.get(i);
             }
         }
@@ -85,13 +85,12 @@ public class Pile implements Serializable {
         return cards.isEmpty();
     }
 
-    public int getIndexOfCard (Card card){ //Given a card, this method finds the index of that card.
+    public int getIndexOfCard(Card card) { //Given a card, this method finds the index of that card.
 
         for (int i = 0; i < cards.size(); i++) {
 
             if (cards.get(i).equals(card))
                 return i;
-
         }
         return -1;
     }
@@ -100,10 +99,10 @@ public class Pile implements Serializable {
 
         int cardIndex = getIndexOfCard(card);
 
-        if(cardIndex == 0)
+        if (cardIndex == 0)
             return false;
 
-        if (cards.get(cardIndex-1).isFaceUp())
+        if (cards.get(cardIndex - 1).isFaceUp())
             return false;
 
         return true;
@@ -133,35 +132,35 @@ public class Pile implements Serializable {
     public String toString() {
         return cards.toString();
     }
-    
-    public boolean equals(Pile pile){
-        if (pile == null){
+
+    public boolean equals(Pile pile) {
+        if (pile == null) {
             return false;
         }
 
-        if (pile.getCards().size() != this.getCards().size()){
+        if (pile.getCards().size() != this.getCards().size()) {
             return false;
         }
         //For each card
         for (int i = 0; i < pile.getCards().size(); i++) {
             //If cards are different - return false
-            if (!pile.getCards().get(i).equals(this.cards.get(i))){
+            if (!pile.getCards().get(i).equals(this.cards.get(i))) {
                 return false;
             }
         }
         return true;
     }
 
-    public boolean contains(Card card){
-        for (Card pileCard:cards) {
-            if (pileCard.getSuit() == card.getSuit() && pileCard.getValue() == card.getValue() && pileCard.isFaceUp() == card.isFaceUp()){
+    public boolean contains(Card card) {
+        for (Card pileCard : cards) {
+            if (pileCard.getSuit() == card.getSuit() && pileCard.getValue() == card.getValue() && pileCard.isFaceUp() == card.isFaceUp()) {
                 return true;
             }
         }
         return false;
     }
 
-    public Pile clone(){
+    public Pile clone() {
         Pile clone = new Pile();
         for (int i = 0; i < this.cards.size(); i++) {
             clone.addCard(this.cards.get(i).clone());
@@ -169,13 +168,12 @@ public class Pile implements Serializable {
         return clone;
     }
 
-    public int indexOf(Card card){
+    public int indexOf(Card card) {
         for (int i = 0; i < cards.size(); i++) {
-            if (card.equals(cards.get(i))){
+            if (card.equals(cards.get(i))) {
                 return i;
             }
         }
         return -1;
     }
-
 }

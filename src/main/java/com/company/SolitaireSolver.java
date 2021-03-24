@@ -10,14 +10,14 @@ public class SolitaireSolver {
     private Strategy strategy = new Strategy();
 
     // determine best move
-    public SpecificMove bestPossibleMove (Solitaire game){
+    public SpecificMove bestPossibleMove(Solitaire game) {
         ISolitaireState state = game.getLastState();
 
         //find move
         SpecificMove move = null;
-        for (MoveType moveType:strategy.getPrioritizedMoveTypes()) {
+        for (MoveType moveType : strategy.getPrioritizedMoveTypes()) {
             move = moveType.getMove(state);
-            if (move!=null){
+            if (move != null) {
                 break;
             }
         }

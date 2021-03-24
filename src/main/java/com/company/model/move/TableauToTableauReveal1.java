@@ -8,7 +8,7 @@ import com.company.model.Tableau;
 import com.company.model.exceptions.SolitarieException;
 import com.company.model.state.ISolitaireState;
 
-public class TableauToTableauReveal1 extends TableauToTableau{
+public class TableauToTableauReveal1 extends TableauToTableau {
 
     public SpecificMove getMove(ISolitaireState state) {
 
@@ -20,12 +20,12 @@ public class TableauToTableauReveal1 extends TableauToTableau{
         for (Pile pile : tableau.getPiles()) {
 
             //If pile is empty, it cannot contain the fromCard
-            for (Card card : pile.getCards()){
+            for (Card card : pile.getCards()) {
                 //For each moveable card
-                if (card.isFaceUp()){
+                if (card.isFaceUp()) {
                     //Check if we can move this card somewhere else in tableau
-                    Pile compatiblePile = tableau.getCompatiblePile(card,pile);
-                    if (compatiblePile != null){
+                    Pile compatiblePile = tableau.getCompatiblePile(card, pile);
+                    if (compatiblePile != null) {
                         //If move is possible - check if we can reveal in next move
 
                         //Find candidateMove
@@ -35,9 +35,9 @@ public class TableauToTableauReveal1 extends TableauToTableau{
                         candidateMove.setToCard(compatiblePile.getTopCard());
 
                         //Execute candidateMove
-                        try{
-                            Solitaire.tableauToTableau(cloneState,candidateMove);
-                        } catch (SolitarieException e ){
+                        try {
+                            Solitaire.tableauToTableau(cloneState, candidateMove);
+                        } catch (SolitarieException e) {
                             System.out.println("TableauToTableauReveal1 error in cloned state");
                             e.printStackTrace();
                         }
@@ -57,10 +57,7 @@ public class TableauToTableauReveal1 extends TableauToTableau{
                         if (nextMove != null) {
                             return candidateMove;
                         }
-
                          */
-
-
                     }
                 }
             }

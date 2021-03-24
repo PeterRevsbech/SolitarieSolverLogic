@@ -93,7 +93,6 @@ public class ClosedSolitaireState implements ISolitaireState {
         this.foundation = foundation;
     }
 
-
     @Override
     public List<Card> getKnownStockWaste() {
         return knownStockWaste;
@@ -129,6 +128,4 @@ public class ClosedSolitaireState implements ISolitaireState {
         }
         return obj;
     }
-
-
 }

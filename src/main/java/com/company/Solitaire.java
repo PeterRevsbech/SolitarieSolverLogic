@@ -62,7 +62,6 @@ public class Solitaire {
 
     }
 
-
     public void play(){
         while (!makeNextMove()){
 
@@ -78,10 +77,10 @@ public class Solitaire {
 
         //change state according to move
         MoveType moveType = move.getMoveType();
-        if(true){
+/*        if(true){
             //For debugging
             System.out.println(moveType.toString());
-        }
+        }*/
         if (moveType instanceof StockMove) {
             stockMove(state);
         } else if (moveType instanceof WasteToTableau) {
@@ -105,7 +104,6 @@ public class Solitaire {
 
         //return new state
         return state;
-
     }
 
     public static void foundationToTableau(ISolitaireState state, SpecificMove move) throws SolitarieException {
@@ -382,8 +380,6 @@ public class Solitaire {
                     return;
                 }
             }
-
         }
     }
-
 }

@@ -8,10 +8,10 @@ public class SpecificMove {
     private Card fromParent;
     private Card toCard;
 
-    public SpecificMove(){
+    public SpecificMove() {
     }
 
-    public SpecificMove(MoveType moveType){
+    public SpecificMove(MoveType moveType) {
         this.moveType = moveType;
     }
 
@@ -20,8 +20,6 @@ public class SpecificMove {
         this.fromParent = fromParent;
         this.toCard = toCard;
     }
-
-
 
     public MoveType getMoveType() {
         return moveType;
@@ -47,14 +45,9 @@ public class SpecificMove {
         this.toCard = toCard;
     }
 
-
     @Override
     public String toString() {
-        return "SpecificMove{" +
-                "moveType=" + moveType +
-                ", fromParent=" + fromParent +
-                ", toCard=" + toCard +
-                '}';
+        return "Move type: " + moveType + "\nMove executed: " + fromParent + " -> " + toCard + "\nNew state: ";
     }
 }
 

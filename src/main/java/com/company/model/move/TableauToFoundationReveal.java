@@ -16,14 +16,14 @@ public class TableauToFoundationReveal extends TableauToFoundation {
 
             // Must fit in foundation and must be face down
 
-            if (card != null && pile.isPossibleReveal(card)){
-                if (card.getValue()==Card.ACE){ //If card is ace
+            if (card != null && pile.isPossibleReveal(card)) {
+                if (card.getValue() == Card.ACE) { //If card is ace
                     move.setFromParent(card);
                     return move;
 
-                } else{ //If card is not ace - check if it fits in foundation
+                } else { //If card is not ace - check if it fits in foundation
                     //Ask foundation, if it can recieve this card
-                    if(state.getFoundation().cardMatchesFoundation(card)){
+                    if (state.getFoundation().cardMatchesFoundation(card)) {
                         move.setFromParent(card);
                         return move;
                     }

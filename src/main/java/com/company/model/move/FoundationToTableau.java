@@ -5,20 +5,20 @@ import com.company.model.Pile;
 import com.company.model.SpecificMove;
 import com.company.model.state.ISolitaireState;
 
-public class FoundationToTableau extends MoveType{
+public class FoundationToTableau extends MoveType {
     @Override
     public SpecificMove getMove(ISolitaireState state) {
         SpecificMove move = new SpecificMove(new FoundationToTableau());
 
-        for (Pile foundationPile:state.getFoundation().getPiles()) {
-            if (!foundationPile.isEmpty()){
+        for (Pile foundationPile : state.getFoundation().getPiles()) {
+            if (!foundationPile.isEmpty()) {
                 //See if top card can be moved to somewhere in tableau
                 Card topCard = foundationPile.getTopCard();
 
-                Pile toPile = state.getTableau().getCompatiblePile(topCard,null);
+                Pile toPile = state.getTableau().getCompatiblePile(topCard, null);
 
-                if (toPile!= null){
-                    if (toPile.isEmpty()){
+                if (toPile != null) {
+                    if (toPile.isEmpty()) {
                         //IF we are moving a king back to an empty pile
                         move.setFromParent(topCard);
                         move.setToCard(null);

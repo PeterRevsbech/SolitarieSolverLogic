@@ -1,6 +1,7 @@
 package com.company.model.state;
 
 import com.company.model.*;
+import com.company.model.move.MoveType;
 import com.company.utils.PrintGameState;
 
 import java.io.*;
@@ -50,7 +51,7 @@ public class OpenSolitaireState implements ISolitaireState, Cloneable, Serializa
             }
 
             //Initialize knownStockWaste
-            state.knownStockWaste=new ArrayList<>();
+            state.knownStockWaste = new ArrayList<>();
         }
         return state;
     }
@@ -227,7 +228,6 @@ public class OpenSolitaireState implements ISolitaireState, Cloneable, Serializa
         return state;
     }
 
-
     public WastePile getWastePile() {
         return wastePile;
     }
@@ -279,7 +279,7 @@ public class OpenSolitaireState implements ISolitaireState, Cloneable, Serializa
 
     @Override
     public void setKnownStockWaste(List<Card> stockWaste) {
-        this.knownStockWaste=stockWaste;
+        this.knownStockWaste = stockWaste;
     }
 
     @Override
@@ -298,12 +298,8 @@ public class OpenSolitaireState implements ISolitaireState, Cloneable, Serializa
             ObjectInputStream in = new ObjectInputStream(
                     new ByteArrayInputStream(bos.toByteArray()));
             obj = (ISolitaireState) in.readObject();
-        }
-        catch(IOException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
-        }
-        catch(ClassNotFoundException cnfe) {
-            cnfe.printStackTrace();
         }
         return obj;
     }

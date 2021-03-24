@@ -56,21 +56,20 @@ public class Tableau implements Serializable {
         return max;
     }
 
-    public Pile getFirstEmptyPile(){
+    public Pile getFirstEmptyPile() {
         //Returns first empty pile or null if no empty pile present
         for (int i = 0; i < 7; i++) {
-            if (piles[i].isEmpty()){
+            if (piles[i].isEmpty()) {
                 return piles[i];
             }
         }
-
         return null;
     }
 
     //Finds a pile, where fromCard can be moved to, if there is any - otherwise returns null
     //If fromPile is not null, means card was moved from this pile, and cannot be move TO this pile
-    public Pile getCompatiblePile(Card fromCard, Pile fromPile){
-        List<Pile> compatiblePiles = getAllCompatiblePiles(fromCard,fromPile);
+    public Pile getCompatiblePile(Card fromCard, Pile fromPile) {
+        List<Pile> compatiblePiles = getAllCompatiblePiles(fromCard, fromPile);
         return compatiblePiles.isEmpty() ? null : compatiblePiles.get(0);
     }
 
@@ -79,7 +78,7 @@ public class Tableau implements Serializable {
     public List<Pile> getAllCompatiblePiles(Card fromCard, Pile fromPile) {
         List<Pile> compatiblePiles = new ArrayList<>();
 
-        if (fromCard==null){
+        if (fromCard == null) {
             return compatiblePiles;
         }
 
@@ -102,21 +101,16 @@ public class Tableau implements Serializable {
                 else if (compatible) {
                     compatiblePiles.add(pile);
                 }
-
             }
-
         }
         return compatiblePiles;
     }
 
-
-
-    public Tableau clone(){
+    public Tableau clone() {
         Tableau clone = new Tableau();
         for (int i = 0; i < this.piles.length; i++) {
             clone.piles[i] = this.piles[i].clone();
         }
         return clone;
     }
-
 }
