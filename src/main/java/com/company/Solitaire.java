@@ -7,6 +7,7 @@ import com.company.model.exceptions.CardNotFoundException;
 import com.company.model.exceptions.InvalidMoveException;
 import com.company.model.exceptions.SolitarieException;
 import com.company.model.move.*;
+import com.company.model.state.ClosedSolitaireState;
 import com.company.model.state.ISolitaireState;
 import com.company.model.state.OpenSolitaireState;
 
@@ -29,6 +30,38 @@ public class Solitaire {
         gameLost = false;
         stockIsKnown = false;
     }
+
+    public void initClosedGame(ClosedSolitaireState startState){
+        states = new ArrayList<>();
+        states.add(startState);
+        gameWon = false;
+        gameLost = false;
+        stockIsKnown = false;
+    }
+
+    public String getNextMove(){
+        return solver.bestPossibleMove(this).toString();
+    }
+
+    public void addNextClosedState(ClosedSolitaireState newState){
+        //Set knownStockWaste to be copy of previous states knownStockWaste
+        ISolitaireState previousState = states.get(states.size()-1);
+
+        //Make local clone of card list
+        List<Card> clone = new ArrayList<>();
+        for (Card card:previousState.getKnownStockWaste()) {
+            clone.add(new Card(card.getSuit(),card.getValue(),card.isFaceUp()));
+        }
+
+        //Set newStates knownStockWaste to the clone and update it
+        newState.setKnownStockWaste(clone);
+        updateKnownStockWaste(newState);
+
+        //Add the new state to list of states
+        states.add(newState);
+
+    }
+
 
     public void play(){
         while (!makeNextMove()){
@@ -62,6 +95,9 @@ public class Solitaire {
         } else if (moveType instanceof FoundationToTableau) {
             foundationToTableau(state, move);
         }
+
+        //Update knownStockWaste
+        updateKnownStockWaste(state);
 
         // evaluates if the game is won or lost
         evaluateGameWon(state);
@@ -308,6 +344,45 @@ public class Solitaire {
 
     public ISolitaireState getLastState(){
         return states.get(states.size()-1);
+    }
+
+    private void updateKnownStockWaste(ISolitaireState state){
+        //If we added a card to the list
+            //Card must be visible on top of WastePile
+        Card wasteTop = state.getWasteTop();
+
+        if (wasteTop != null ){
+            //If topcard has not been seen yet
+            if (!state.getKnownStockWaste().contains(wasteTop)) {
+                state.getKnownStockWaste().add(wasteTop);
+            }
+        } else {
+            //If we removed a card from the list
+                //Card must be visible on top of a tableau-pile or in foundation
+                // ==> should be removed from knownStockWaste
+
+            //First check tableau
+            for (Pile tableauPile:state.getTableau().getPiles()) {
+                Card topCard =tableauPile.getTopCard();
+                if (topCard != null && state.getKnownStockWaste().contains(topCard)) {
+                    //If card is not null, and it is present in knownStockWaste as well
+                    state.getKnownStockWaste().remove(topCard);
+                    return;
+
+                }
+            }
+
+            //Then check foundation
+            for (Pile foundaionPile:state.getFoundation().getPiles()) {
+                Card topCard =foundaionPile.getTopCard();
+                if (topCard != null && state.getKnownStockWaste().contains(topCard)) {
+                    //If card is not null, and it is present in knownStockWaste as well
+                    state.getKnownStockWaste().remove(topCard);
+                    return;
+                }
+            }
+
+        }
     }
 
 }

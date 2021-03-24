@@ -4,6 +4,9 @@ import com.company.model.*;
 import com.company.utils.PrintGameState;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class OpenSolitaireState implements ISolitaireState, Cloneable, Serializable {
 
@@ -11,6 +14,7 @@ public class OpenSolitaireState implements ISolitaireState, Cloneable, Serializa
     private StockPile stockPile;
     private Tableau tableau;
     private Foundation foundation;
+    private List<Card> knownStockWaste = new ArrayList<>();
 
     public static OpenSolitaireState newGame(boolean isShuffled) {
         OpenSolitaireState state = new OpenSolitaireState();
@@ -43,6 +47,9 @@ public class OpenSolitaireState implements ISolitaireState, Cloneable, Serializa
             while (!deque.getCardsList().isEmpty()) {
                 state.getStockPile().addCard(deque.draw());
             }
+
+            //Initialize knownStockWaste
+            state.knownStockWaste=new ArrayList<>();
         }
         return state;
     }
@@ -276,5 +283,15 @@ public class OpenSolitaireState implements ISolitaireState, Cloneable, Serializa
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public List<Card> getKnownStockWaste() {
+        return knownStockWaste;
+    }
+
+    @Override
+    public void setKnownStockWaste(List<Card> stockWaste) {
+        this.knownStockWaste=stockWaste;
     }
 }

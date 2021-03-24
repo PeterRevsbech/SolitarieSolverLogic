@@ -18,8 +18,9 @@ public class Strategy {
         prioritizedMoveTypes.add(new TableauToFoundation());
         prioritizedMoveTypes.add(new TableauToTableau());
         prioritizedMoveTypes.add(new WasteToFoundation());
-        prioritizedMoveTypes.add(new StockMove());
         prioritizedMoveTypes.add(new WasteToTableau());
+        prioritizedMoveTypes.add(new StockMove());
+
         prioritizedMoveTypes.add(new FoundationToTableau());
 
     }

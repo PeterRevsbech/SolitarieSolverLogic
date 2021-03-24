@@ -46,6 +46,16 @@ public class SpecificMove {
     public void setToCard(Card toCard) {
         this.toCard = toCard;
     }
+
+
+    @Override
+    public String toString() {
+        return "SpecificMove{" +
+                "moveType=" + moveType +
+                ", fromParent=" + fromParent +
+                ", toCard=" + toCard +
+                '}';
+    }
 }
 
 
