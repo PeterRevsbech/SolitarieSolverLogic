@@ -15,9 +15,6 @@ public class WasteToTableauReveal1 extends WasteToTableau{
         //TODO This is when the topcard in wastepile makes either a TableauToTableauReveal or TableauTOFoundationReveal possible in
 
 
-
-
-
         /*
         Card wasteCard = state.getWasteTop();
         if (wasteCard == null){
