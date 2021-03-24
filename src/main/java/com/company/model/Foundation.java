@@ -12,6 +12,7 @@ public class Foundation {
     public Foundation() {
         for (int i = 0; i < 4; i++) {
             piles[i] = new Pile();
+            piles[i].fanned=false;
         }
     }
 
@@ -80,4 +81,13 @@ public class Foundation {
         }
         return false;
     }
+
+    public Foundation clone(){
+        Foundation clone = new Foundation();
+        for (int i = 0; i < clone.piles.length; i++) {
+            clone.piles[i] = this.piles[i].clone();
+        }
+        return clone;
+    }
+
 }

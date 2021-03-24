@@ -270,20 +270,6 @@ public class OpenSolitaireState implements ISolitaireState, Cloneable {
     }
 
     @Override
-    public ISolitaireState clone() {
-        try {
-            ISolitaireState clone = (ISolitaireState) super.clone();
-            //System.out.println("CLONING WORKED!!!!");
-            return clone;
-
-        } catch (Exception e) {
-            //System.out.println("ERROR!!!! CLONING DID NOT WORK");
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    @Override
     public List<Card> getKnownStockWaste() {
         return knownStockWaste;
     }
@@ -292,4 +278,20 @@ public class OpenSolitaireState implements ISolitaireState, Cloneable {
     public void setKnownStockWaste(List<Card> stockWaste) {
         this.knownStockWaste=stockWaste;
     }
+
+    public ISolitaireState clone() {
+        OpenSolitaireState clone = new OpenSolitaireState();
+        clone.setFoundation(this.getFoundation().clone());
+        clone.setTableau(this.getTableau().clone());
+        clone.setStockPile(this.getStockPile().clone());
+        clone.setWastePile(this.getWastePile().clone());
+
+        //Clone known stockwaste
+        List<Card> clonedStockWaste = new ArrayList<>();
+        for (Card card: this.getKnownStockWaste()) {
+            clonedStockWaste.add(card.clone());
+        }
+        return clone;
+    }
+
 }

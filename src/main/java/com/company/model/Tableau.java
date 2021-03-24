@@ -87,4 +87,13 @@ public class Tableau {
         return null;
     }
 
+
+    public Tableau clone(){
+        Tableau clone = new Tableau();
+        for (int i = 0; i < this.piles.length; i++) {
+            clone.piles[i] = this.piles[i].clone();
+        }
+        return clone;
+    }
+
 }

@@ -2,6 +2,7 @@ package com.company.model.state;
 
 import com.company.model.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface ISolitaireState extends Cloneable {
@@ -21,10 +22,10 @@ public interface ISolitaireState extends Cloneable {
 
     String toString();
 
-    ISolitaireState clone();
-
     List<Card> getKnownStockWaste();
 
     void setKnownStockWaste(List<Card> stockWaste);
+
+    public ISolitaireState clone();
 
 }

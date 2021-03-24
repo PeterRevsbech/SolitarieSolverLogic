@@ -27,6 +27,9 @@ public class Main {
         pgs.initOpenSolitareState(states.get(0));
         pgs.printCurrentState();
 
+
+
+
         for (int i = 0; i < 1000; i++) {
             System.out.println(i);
             solitaire.makeNextMove();

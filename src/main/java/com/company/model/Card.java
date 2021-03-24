@@ -82,4 +82,8 @@ public class Card {
         boolean valueMatches = this.getValue() == bottomCard.getValue() - 1;
         return suitMatches && valueMatches;
     }
+
+    public Card clone(){
+       return new Card(this.getSuit(),this.getValue(),this.isFaceUp());
+    }
 }

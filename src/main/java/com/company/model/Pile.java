@@ -146,4 +146,13 @@ public class Pile {
         }
         return true;
     }
+
+    public Pile clone(){
+        Pile clone = new Pile();
+        for (int i = 0; i < this.cards.size(); i++) {
+            clone.addCard(this.cards.get(i).clone());
+        }
+        return clone;
+    }
+
 }
