@@ -2,6 +2,7 @@ package com.company.model.state;
 
 import com.company.model.*;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,19 +93,19 @@ public class ClosedSolitaireState implements ISolitaireState {
         this.foundation = foundation;
     }
 
-    @Override
-    public ISolitaireState clone() {
-        try {
-            ISolitaireState clone = (ISolitaireState) super.clone();
-            //System.out.println("CLONING WORKED!!!!");
-            return clone;
-
-        } catch (Exception e) {
-            //System.out.println("ERROR!!!! CLONING DID NOT WORK");
-            e.printStackTrace();
-        }
-        return null;
-    }
+//    @Override
+//    public ISolitaireState clone() {
+//        try {
+//            ISolitaireState clone = (ISolitaireState) super.clone();
+//            //System.out.println("CLONING WORKED!!!!");
+//            return clone;
+//
+//        } catch (Exception e) {
+//            //System.out.println("ERROR!!!! CLONING DID NOT WORK");
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
 
 
     @Override
@@ -115,5 +116,31 @@ public class ClosedSolitaireState implements ISolitaireState {
     @Override
     public void setKnownStockWaste(List<Card> stockWaste) {
         this.knownStockWaste=stockWaste;
+    }
+
+    @Override
+    public ISolitaireState clone() {
+        ISolitaireState obj = null;
+        try {
+            // Write the object out to a byte array
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            ObjectOutputStream out = new ObjectOutputStream(bos);
+            out.writeObject(this);
+            out.flush();
+            out.close();
+
+            // Make an input stream from the byte array and read
+            // a copy of the object back in.
+            ObjectInputStream in = new ObjectInputStream(
+                    new ByteArrayInputStream(bos.toByteArray()));
+            obj = (ISolitaireState) in.readObject();
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+        }
+        catch(ClassNotFoundException cnfe) {
+            cnfe.printStackTrace();
+        }
+        return obj;
     }
 }
