@@ -2,9 +2,10 @@ package com.company.model;
 
 import com.company.model.exceptions.CardNotFoundException;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
-public class Tableau {
+public class Tableau implements Serializable {
 
     private Pile[] piles = new Pile[7];
 

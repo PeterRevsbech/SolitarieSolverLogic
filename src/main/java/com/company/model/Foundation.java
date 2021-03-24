@@ -3,9 +3,10 @@ package com.company.model;
 import com.company.model.exceptions.InvalidMoveException;
 import com.company.model.exceptions.SolitarieException;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
-public class Foundation {
+public class Foundation implements Serializable {
 
     private Pile[] piles = new Pile[4];
 

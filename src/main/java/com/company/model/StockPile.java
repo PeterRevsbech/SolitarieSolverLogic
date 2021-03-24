@@ -1,6 +1,8 @@
 package com.company.model;
 
-public class StockPile extends Pile{
+import java.io.Serializable;
+
+public class StockPile extends Pile implements Serializable {
 
 
 }

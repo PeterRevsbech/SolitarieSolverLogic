@@ -1,6 +1,8 @@
 package com.company.model;
 
-public class Card {
+import java.io.Serializable;
+
+public class Card implements Serializable {
     public enum Suit {
         Clubs, Spades, Hearts, Diamonds
     }

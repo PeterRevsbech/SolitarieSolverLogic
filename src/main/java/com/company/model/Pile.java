@@ -2,10 +2,11 @@ package com.company.model;
 
 import com.company.model.exceptions.CardNotFoundException;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pile {
+public class Pile implements Serializable {
 
     protected List<Card> cards;
     protected boolean fanned;

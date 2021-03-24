@@ -2,10 +2,11 @@ package com.company.model;
 
 import com.company.model.exceptions.PileEmptyException;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WastePile extends Pile {
+public class WastePile extends Pile implements Serializable {
 
     //Remove all cards from pile and return them in reverse order facing opposite way of before
     public List<Card> takeTurnedPile() {

@@ -3,7 +3,9 @@ package com.company.model.state;
 import com.company.model.*;
 import com.company.utils.PrintGameState;
 
-public class OpenSolitaireState implements ISolitaireState, Cloneable {
+import java.io.Serializable;
+
+public class OpenSolitaireState implements ISolitaireState, Cloneable, Serializable {
 
     private WastePile wastePile;
     private StockPile stockPile;
