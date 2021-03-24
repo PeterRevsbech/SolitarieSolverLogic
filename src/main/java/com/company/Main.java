@@ -25,40 +25,30 @@ public class Main {
         solitaire.initGame(true);
 
         List<ISolitaireState> states = solitaire.getStates();
-//        ISolitaireState state = (ISolitaireState) copy(states.get(0));
         PrintGameState pgs = new PrintGameState();
 
         pgs.initOpenSolitareState(states.get(0));
         pgs.printCurrentState();
-        ISolitaireState copy=null;
 
-
-
-
+        OpenSolitaireState copy = (OpenSolitaireState) states.get(0).clone();
+        OpenSolitaireState copy2 = null;
         for (int i = 0; i < 1000; i++) {
             System.out.println(i);
             solitaire.makeNextMove();
-//            if(i==5){
-//                copy = (ISolitaireState) copy(states.get(5));
-//            }
+            if (i == 6) {
+                copy2 = (OpenSolitaireState) states.get(6).clone();
+            }
             pgs.initOpenSolitareState(states.get(i+1));
             pgs.printCurrentState();
-
         }
-//        System.out.println(copy.getTableau());
-//        System.out.println(states.get(99).getTableau());
+
+        System.out.println("KOPI AF STATE 0");
+        pgs.initOpenSolitareState(copy);
+        pgs.printCurrentState();
 
 
-//        System.out.println("State: " + copy().getTableau().toString() + "\nState2: " + state2.getTableau().toString());
-//        Card card = new Card(Card.Suit.Diamonds,13,true);
-//        ArrayList<Card> list = new ArrayList<>();
-//
-//        list.add(card);
-//        state2.getTableau().getPile(0).setCards(list);
-//        System.out.println("State: " + state.getTableau().toString() + "\nState2: " + state2.getTableau().toString()); // dette er shallow copy, vi skal bruge deep copy
-
-
+        System.out.println("KOPI AF STATE 6");
+        pgs.initOpenSolitareState(copy2);
+        pgs.printCurrentState();
     }
-
-
 }
