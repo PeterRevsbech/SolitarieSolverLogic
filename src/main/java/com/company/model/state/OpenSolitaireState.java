@@ -271,20 +271,6 @@ public class OpenSolitaireState implements ISolitaireState, Cloneable, Serializa
         this.foundation = foundation;
     }
 
-//    @Override
-//    public ISolitaireState clone() {
-//        try {
-//            ISolitaireState clone = (ISolitaireState) super.clone();
-//            //System.out.println("CLONING WORKED!!!!");
-//            return clone;
-//
-//        } catch (Exception e) {
-//            //System.out.println("ERROR!!!! CLONING DID NOT WORK");
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
-
     @Override
     public List<Card> getKnownStockWaste() {
         return knownStockWaste;
