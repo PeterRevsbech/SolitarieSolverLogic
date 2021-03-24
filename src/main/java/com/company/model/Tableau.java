@@ -36,7 +36,7 @@ public class Tableau {
     //If none of them do - throw an error
     public Pile getPileContainingCard(Card card) throws CardNotFoundException {
         for (Pile pile : piles) {
-            if (pile.cards.contains(card)) {
+            if (pile.contains(card)) {
                 return pile;
             }
         }
