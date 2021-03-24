@@ -3,7 +3,9 @@ package com.company.model;
 import com.company.model.exceptions.CardNotFoundException;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Tableau implements Serializable {
 
@@ -68,25 +70,45 @@ public class Tableau implements Serializable {
     //Finds a pile, where fromCard can be moved to, if there is any - otherwise returns null
     //If fromPile is not null, means card was moved from this pile, and cannot be move TO this pile
     public Pile getCompatiblePile(Card fromCard, Pile fromPile){
-        for (Pile pile:piles) {
+        List<Pile> compatiblePiles = getAllCompatiblePiles(fromCard,fromPile);
+        return compatiblePiles.isEmpty() ? null : compatiblePiles.get(0);
+    }
+
+    //Returns list of piles in tableau, that card can be moved to.
+    //Frompile indicates the pile, that the card was moved from - if it is null, it was not moved from tableau
+    public List<Pile> getAllCompatiblePiles(Card fromCard, Pile fromPile) {
+        List<Pile> compatiblePiles = new ArrayList<>();
+
+        if (fromCard==null){
+            return compatiblePiles;
+        }
+
+        for (Pile pile : piles) {
             //Must not be fromPile
-            if (fromPile != null && !pile.equals(fromPile)) {
+
+            if (!pile.equals(fromPile)) {
                 //If the pile is empty - only king can be placed
-                if (pile.isEmpty()){
-                    if (fromCard.getValue() == Card.KING){
-                        return pile;
+
+                Card topCard = pile.getTopCard();
+                boolean compatible = fromCard.isTableauCompatibleOn(topCard);
+
+                if (pile.isEmpty()) {
+                    if (fromCard.getValue() == Card.KING) {
+                        compatiblePiles.add(pile);
                     }
                 }
 
                 //Otherwise if fromCard can be placed on top of top card in pile
-                else if (fromCard.isTableauCompatibleOn(pile.getTopCard())){
-                    return pile;
+                else if (compatible) {
+                    compatiblePiles.add(pile);
                 }
 
             }
+
         }
-        return null;
+        return compatiblePiles;
     }
+
 
 
     public Tableau clone(){

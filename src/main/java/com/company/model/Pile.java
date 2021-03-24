@@ -135,6 +135,10 @@ public class Pile implements Serializable {
     }
     
     public boolean equals(Pile pile){
+        if (pile == null){
+            return false;
+        }
+
         if (pile.getCards().size() != this.getCards().size()){
             return false;
         }

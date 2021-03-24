@@ -108,7 +108,7 @@ public class Solitaire {
 
     }
 
-    private void foundationToTableau(ISolitaireState state, SpecificMove move) throws SolitarieException {
+    public static void foundationToTableau(ISolitaireState state, SpecificMove move) throws SolitarieException {
         Card parentCard = move.getFromParent();
         Card toChild = move.getToCard();
         // find the corresponding pile in foundation
@@ -135,7 +135,7 @@ public class Solitaire {
         }
     }
 
-    private void tableauToTableau(ISolitaireState state, SpecificMove move) throws SolitarieException {
+    public static void tableauToTableau(ISolitaireState state, SpecificMove move) throws SolitarieException {
         //Find fromPile in tableau
         Pile fromPile = state.getTableau().getPileContainingCard(move.getFromParent());
         Pile toPile;
@@ -181,7 +181,7 @@ public class Solitaire {
     }
 
     //Does not use toChild
-    private void tableauToFoundation(ISolitaireState state, SpecificMove move) throws SolitarieException {
+    public static void tableauToFoundation(ISolitaireState state, SpecificMove move) throws SolitarieException {
         Card card = move.getFromParent();
 
         //Draw card from tableau
@@ -204,7 +204,7 @@ public class Solitaire {
         foundationPile.addCard(card);
     }
 
-    private void stockMove(ISolitaireState state) throws CardNotFoundException {
+    public static void stockMove(ISolitaireState state) throws CardNotFoundException {
         Card topCard;
         if (state.getStockPile().getTopCard() == null) { // if stock is empty
             //Take all cards from waste in reverse order
@@ -218,7 +218,8 @@ public class Solitaire {
         }
     }
 
-    private void wasteToTableu(ISolitaireState state, SpecificMove move) throws SolitarieException {
+    //Makes no use of fromparent
+    public static void wasteToTableu(ISolitaireState state, SpecificMove move) throws SolitarieException {
         //Draw from waste
         Card card = state.getWastePile().draw();
         Pile tableuPile;
@@ -232,7 +233,7 @@ public class Solitaire {
             }
         } else {
             //IF we are moving a king to next empty pile
-            if (move.getFromParent().getValue() != Card.KING) {
+            if (move.getFromParent() != null && move.getFromParent().getValue() != Card.KING) {
                 throw new SolitarieException("Tried to move to card that is not king from waste to empty pile in tableau.");
             }
 
@@ -244,7 +245,7 @@ public class Solitaire {
     }
 
     //NOTE: doesnt actually use fromParent or toChild
-    private void wasteToFoundation(ISolitaireState state) throws SolitarieException {
+    public static void wasteToFoundation(ISolitaireState state) throws SolitarieException {
         //Draw card from waste
         Card card = state.getWastePile().draw();
 

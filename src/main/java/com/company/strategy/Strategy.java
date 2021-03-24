@@ -15,6 +15,7 @@ public class Strategy {
         //Very primitive first strategy
         prioritizedMoveTypes.add(new TableauToFoundationReveal());
         prioritizedMoveTypes.add(new TableauToTableauReveal());
+        prioritizedMoveTypes.add(new WasteToTableauReveal1());
         prioritizedMoveTypes.add(new TableauToFoundation());
         prioritizedMoveTypes.add(new TableauToTableau());
         prioritizedMoveTypes.add(new WasteToFoundation());
