@@ -14,4 +14,5 @@ public abstract class MoveType {
 
     public abstract String toString();
 
+
 }

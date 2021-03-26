@@ -1,6 +1,8 @@
 package com.company.model.state;
 
+import com.company.Solitaire;
 import com.company.model.*;
+import com.company.model.exceptions.SolitarieException;
 import com.company.model.move.MoveType;
 
 import java.util.ArrayList;
@@ -29,7 +31,7 @@ public interface ISolitaireState extends Cloneable {
 
     ISolitaireState clone();
 
-    default void swapStockTopCard(Card card) {
+    default void swapStockTopCard(Card card) throws SolitarieException {
         Card movedCard = null;
         //Find and remove the card from stock or waste
         for (int i = 0; i < getWastePile().getCards().size(); i++) {
@@ -45,7 +47,33 @@ public interface ISolitaireState extends Cloneable {
             }
         }
 
+        if (movedCard==null){
+            throw new SolitarieException("Tried to swap card to wasteTop, but card was not in stock or waste.");
+        }
+
         //Now movedCard should be removed
         getWastePile().addCard(movedCard);
+    }
+
+    default ISolitaireState simulateMoveWithClone(ISolitaireState state, SpecificMove move){
+        ISolitaireState cloneState = state.clone();
+
+        //Clone fromcard and to card to avoid interfering with original cards
+        if (move.getToCard()!= null) {
+            move.setToCard(move.getToCard().clone());
+        }
+        if (move.getFromParent()!=null){
+            move.setFromParent(move.getFromParent().clone());
+        }
+
+        try{
+            Solitaire.executeMove(cloneState,move);
+            Solitaire.updateKnownStockWaste(cloneState);
+        } catch (SolitarieException e){
+            System.out.println("Error in simulating move.");
+            e.printStackTrace();
+        }
+
+        return cloneState;
     }
 }

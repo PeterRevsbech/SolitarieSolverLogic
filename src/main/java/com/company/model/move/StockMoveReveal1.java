@@ -2,6 +2,7 @@ package com.company.model.move;
 
 import com.company.model.Card;
 import com.company.model.SpecificMove;
+import com.company.model.exceptions.SolitarieException;
 import com.company.model.state.ISolitaireState;
 
 import java.util.List;
@@ -32,7 +33,13 @@ public class StockMoveReveal1 extends StockMove {
                     }
                 }
 
-                cloneState.swapStockTopCard(card);
+                try{
+                    cloneState.swapStockTopCard(card);
+                } catch (SolitarieException e){
+                    e.printStackTrace();
+                    return null;
+                }
+
 
                 //See if WasteToTableauReveal1 is possible
                 if (wasteToTableauReveal1.getMove(cloneState) != null) {

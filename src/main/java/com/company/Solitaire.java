@@ -10,7 +10,6 @@ import com.company.model.move.*;
 import com.company.model.state.ClosedSolitaireState;
 import com.company.model.state.ISolitaireState;
 import com.company.model.state.OpenSolitaireState;
-import com.company.utils.PrintGameState;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,32 +73,15 @@ public class Solitaire {
 
     }
 
-    public ISolitaireState makeMove(ISolitaireState state, SpecificMove move) throws SolitarieException {
+    public ISolitaireState playTurn(ISolitaireState state, SpecificMove move) throws SolitarieException {
         //fromParent is irellevant, since we draw from waste
         //If top of wastepile is an ace - toChild should be null
 
         // make a copy of the current state and use that
         state = state.clone();
 
-        //change state according to move
-        MoveType moveType = move.getMoveType();
-/*        if(true){
-            //For debugging
-            System.out.println(moveType.toString());
-        }*/
-        if (moveType instanceof StockMove) {
-            stockMove(state);
-        } else if (moveType instanceof WasteToTableau) {
-            wasteToTableu(state, move);
-        } else if (moveType instanceof WasteToFoundation) {
-            wasteToFoundation(state);
-        } else if (moveType instanceof TableauToFoundation) {
-            tableauToFoundation(state, move);
-        } else if (moveType instanceof TableauToTableau) {
-            tableauToTableau(state, move);
-        } else if (moveType instanceof FoundationToTableau) {
-            foundationToTableau(state, move);
-        }
+        //Execute move
+        executeMove(state,move);
 
         //Update knownStockWaste
         updateKnownStockWaste(state);
@@ -113,6 +95,27 @@ public class Solitaire {
 
         //return new state
         return state;
+    }
+
+    public static void executeMove(ISolitaireState state, SpecificMove move) throws SolitarieException {
+        //change state according to move
+        MoveType moveType = move.getMoveType();
+
+        if (moveType instanceof StockMove) {
+            stockMove(state);
+        } else if (moveType instanceof WasteToTableau) {
+            wasteToTableu(state, move);
+        } else if (moveType instanceof WasteToFoundation) {
+            wasteToFoundation(state);
+        } else if (moveType instanceof TableauToFoundation) {
+            tableauToFoundation(state, move);
+        } else if (moveType instanceof TableauToTableau) {
+            tableauToTableau(state, move);
+        } else if (moveType instanceof FoundationToTableau) {
+            foundationToTableau(state, move);
+        } else{
+            throw new SolitarieException("Unknown move type");
+        }
     }
 
     public static void foundationToTableau(ISolitaireState state, SpecificMove move) throws SolitarieException {
@@ -302,7 +305,7 @@ public class Solitaire {
 
         // call the method makeMove, add the state to list of states
         try {
-            ISolitaireState nextState = makeMove(currentState, nextMove);
+            ISolitaireState nextState = playTurn(currentState, nextMove);
             states.add(nextState);
         } catch (SolitarieException e) {
             e.printStackTrace();
@@ -369,16 +372,14 @@ public class Solitaire {
         this.turnsPlayed = turnsPlayed;
     }
 
-    private void updateKnownStockWaste(ISolitaireState state){
+    public static void updateKnownStockWaste(ISolitaireState state){
         //If we added a card to the list
             //Card must be visible on top of WastePile
         Card wasteTop = state.getWasteTop();
 
-        if (wasteTop != null ){
+        if (wasteTop != null && !state.getKnownStockWaste().contains(wasteTop)){
             //If topcard has not been seen yet
-            if (!state.getKnownStockWaste().contains(wasteTop)) {
-                state.getKnownStockWaste().add(wasteTop);
-            }
+            state.getKnownStockWaste().add(wasteTop);
         } else {
             //If we removed a card from the list
                 //Card must be visible on top of a tableau-pile or in foundation
