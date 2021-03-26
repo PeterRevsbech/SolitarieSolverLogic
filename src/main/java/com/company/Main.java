@@ -23,7 +23,7 @@ public class Main {
         //Create a test game
         Solitaire solitaire = new Solitaire();
         //solitaire.initGame(false); //Use this to have a winnable game (testing purposes)
-        solitaire.initGame(true);
+        solitaire.initGame(true,true);
 
 
         List<ISolitaireState> states = solitaire.getStates();

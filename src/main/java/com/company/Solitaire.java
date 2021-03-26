@@ -10,6 +10,7 @@ import com.company.model.move.*;
 import com.company.model.state.ClosedSolitaireState;
 import com.company.model.state.ISolitaireState;
 import com.company.model.state.OpenSolitaireState;
+import com.company.utils.PrintGameState;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,14 +22,18 @@ public class Solitaire {
     private boolean gameWon;
     private boolean gameLost;
     private boolean stockIsKnown;
+    private boolean printing;
+    int turnsPlayed =0;
+    private final static int MAX_NUM_OF_MOVES = 250;
 
 
-    public void initGame(boolean isShuffled) {
+    public void initGame(boolean isShuffled, boolean printing) {
         states = new ArrayList<>();
         states.add(OpenSolitaireState.newGame(isShuffled));
         gameWon = false;
         gameLost = false;
         stockIsKnown = false;
+        this.printing=printing;
     }
 
     public void initClosedGame(ClosedSolitaireState startState){
@@ -37,6 +42,13 @@ public class Solitaire {
         gameWon = false;
         gameLost = false;
         stockIsKnown = false;
+    }
+
+    public boolean playGame(){
+        while (!(gameLost||gameWon)){
+            makeNextMove();
+        }
+        return gameWon;
     }
 
     public String getNextMove(){
@@ -60,12 +72,6 @@ public class Solitaire {
         //Add the new state to list of states
         states.add(newState);
 
-    }
-
-    public void play(){
-        while (!makeNextMove()){
-
-        }
     }
 
     public ISolitaireState makeMove(ISolitaireState state, SpecificMove move) throws SolitarieException {
@@ -101,6 +107,9 @@ public class Solitaire {
         // evaluates if the game is won or lost
         evaluateGameWon(state);
         evaluateGameLost();
+
+        //Update turnsPlayed
+        turnsPlayed++;
 
         //return new state
         return state;
@@ -256,6 +265,9 @@ public class Solitaire {
     private void evaluateGameLost() {
         //TODO Check if no progress in a long amount of time
         //If no NEW cards have been added to foundation...
+        if (turnsPlayed >MAX_NUM_OF_MOVES){
+            gameLost=true;
+        }
     }
 
     //Method that checks if the 4 tops cards in the foundation piles are kings, if so, the game is won
@@ -280,13 +292,12 @@ public class Solitaire {
         return isWinable;
     }
 
-    public boolean makeNextMove() {
+    public void makeNextMove() {
         // get latest state, call solver to find next move
         ISolitaireState currentState = states.get(states.size() - 1);
         SpecificMove nextMove = solver.bestPossibleMove(this);
         if (nextMove==null){
             gameLost=true;
-            return true;
         }
 
         // call the method makeMove, add the state to list of states
@@ -296,9 +307,6 @@ public class Solitaire {
         } catch (SolitarieException e) {
             e.printStackTrace();
         }
-
-        // returns true if the game is over in any way
-        return gameWon || gameLost;
     }
 
     public SolitaireSolver getSolver() {
@@ -345,6 +353,22 @@ public class Solitaire {
         return states.get(states.size()-1);
     }
 
+    public void setPrinting(boolean printing){
+        this.printing=printing;
+    }
+
+    public boolean isPrinting() {
+        return printing;
+    }
+
+    public int getTurnsPlayed() {
+        return turnsPlayed;
+    }
+
+    public void setTurnsPlayed(int turnsPlayed) {
+        this.turnsPlayed = turnsPlayed;
+    }
+
     private void updateKnownStockWaste(ISolitaireState state){
         //If we added a card to the list
             //Card must be visible on top of WastePile
@@ -381,5 +405,7 @@ public class Solitaire {
                 }
             }
         }
+
+
     }
 }
