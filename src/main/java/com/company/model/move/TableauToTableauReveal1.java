@@ -28,36 +28,28 @@ public class TableauToTableauReveal1 extends TableauToTableau {
                     if (compatiblePile != null) {
                         //If move is possible - check if we can reveal in next move
 
-                        //Find candidateMove
-                        ISolitaireState cloneState = state.clone();
+                        //Create candidateMove
                         SpecificMove candidateMove = new SpecificMove(new TableauToTableauReveal1());
                         candidateMove.setFromParent(card);
                         candidateMove.setToCard(compatiblePile.getTopCard());
 
-                        //Execute candidateMove
-                        try {
-                            Solitaire.tableauToTableau(cloneState, candidateMove);
-                        } catch (SolitarieException e) {
-                            System.out.println("TableauToTableauReveal1 error in cloned state");
-                            e.printStackTrace();
-                        }
+                        //Simluate the move in CloneState
+                        ISolitaireState cloneState = state.simulateMoveWithClone(state,candidateMove);
 
-                        //Check if reveal is possible - either FoundationToTableauReveal or TableauToTableauReveal
+                        //Check if reveal is possible - either TableauToTableauReveal or TableauToFoundationReveal
+                        //TableauToTableauReveal
                         TableauToTableauReveal tableauToTableauReveal = new TableauToTableauReveal();
                         nextMove = tableauToTableauReveal.getMove(cloneState);
                         if (nextMove != null) {
                             return candidateMove;
                         }
 
-
-                        //TODO fix this - should look for FoundationToTableauReveal
-                        /*
+                        //TableauToFoundationReveal
                         TableauToFoundationReveal tableauToFoundationReveal = new TableauToFoundationReveal();
                         nextMove = tableauToFoundationReveal.getMove(cloneState);
                         if (nextMove != null) {
                             return candidateMove;
                         }
-                         */
                     }
                 }
             }

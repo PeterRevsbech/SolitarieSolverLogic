@@ -17,6 +17,7 @@ public class Strategy {
 
 
         prioritizedMoveTypes.add(new TableauToTableauReveal());
+        prioritizedMoveTypes.add(new TableauToTableauReveal1());
         prioritizedMoveTypes.add(new WasteToTableauReveal1());
         prioritizedMoveTypes.add(new StockMoveReveal1());
 

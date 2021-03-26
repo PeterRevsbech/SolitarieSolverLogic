@@ -7,7 +7,7 @@ public class RandomGameTester {
 
     public static void main(String[] args) {
         RandomGameTester randomGameTester = new RandomGameTester();
-        System.out.println(randomGameTester.playGames(500));
+        System.out.println(randomGameTester.playGames(100));
     }
 
 
@@ -18,7 +18,7 @@ public class RandomGameTester {
 
         for (int i = 0; i < numberOfGames; i++) {
             Solitaire solitaire = new Solitaire();
-            solitaire.initGame(true,false,-1);
+            solitaire.initGame(true,false,1);
             if (solitaire.playGame()){
                 gamesWon++;
             }
