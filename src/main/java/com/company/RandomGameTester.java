@@ -18,7 +18,7 @@ public class RandomGameTester {
 
         for (int i = 0; i < numberOfGames; i++) {
             Solitaire solitaire = new Solitaire();
-            solitaire.initGame(true,false);
+            solitaire.initGame(true,false,-1);
             if (solitaire.playGame()){
                 gamesWon++;
             }

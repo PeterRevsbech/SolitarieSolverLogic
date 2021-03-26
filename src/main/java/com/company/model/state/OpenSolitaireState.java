@@ -18,9 +18,9 @@ public class OpenSolitaireState implements ISolitaireState, Cloneable, Serializa
     private List<Card> knownStockWaste = new ArrayList<>();
 
 
-    public static OpenSolitaireState newGame(boolean isShuffled) {
+    public static OpenSolitaireState newGame(boolean isShuffled, int dataSeed) {
         OpenSolitaireState state = new OpenSolitaireState();
-        CardDeque deque = new CardDeque(isShuffled);
+        CardDeque deque = new CardDeque(isShuffled, dataSeed);
 
         if (!isShuffled) {
             return newCheatGame(state);

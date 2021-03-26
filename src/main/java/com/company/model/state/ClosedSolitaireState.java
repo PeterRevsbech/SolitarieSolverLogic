@@ -16,7 +16,7 @@ public class ClosedSolitaireState implements ISolitaireState {
 
     public static ClosedSolitaireState newTestGame() {//Will probably not be used for more than debugging - The actual state will be given by OpenCV
         ClosedSolitaireState state = new ClosedSolitaireState();
-        CardDeque deque = new CardDeque(true);
+        CardDeque deque = new CardDeque(true,-1);
 
         state.setTableau(new Tableau());
         //Initialize Tableau

@@ -9,7 +9,7 @@ public class PrintTester {
     public static void main(String[] args) {
         //Create a test game
         Solitaire solitaire = new Solitaire();
-        solitaire.initGame(false,true); //Use this to have a winnable game (testing purposes)
+        solitaire.initGame(false,true,1); //Use this to have a winnable game (testing purposes)
         //solitaire.initGame(true);
 
         List<ISolitaireState> states = solitaire.getStates();

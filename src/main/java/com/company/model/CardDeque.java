@@ -1,13 +1,15 @@
 package com.company.model;
 
+import javax.management.relation.RelationNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class CardDeque {
 
     private List<Card> cardsList = new ArrayList<>();
 
-    public CardDeque(boolean isShuffled) {
+    public CardDeque(boolean isShuffled, int dataSeed) {
         for (Card.Suit suit : Card.Suit.values()) {
             for (int i = 1; i <= 13; i++) {
                 cardsList.add(new Card(suit, i));
@@ -15,15 +17,21 @@ public class CardDeque {
         }
 
         if (isShuffled) {
-            shuffle();
+            shuffle(dataSeed);
         }
     }
 
-    public void shuffle() {
+    public void shuffle(int dataSeed) {
+        Random rand = new Random();
+        if (dataSeed!=-1){
+            rand=new Random(dataSeed);
+        }
+
+
         for (int i = 0; i < 1000; i++) {
             int a, b;
-            a = (int) (Math.random() * cardsList.size());
-            b = (int) (Math.random() * cardsList.size());
+            a = (int) (rand.nextDouble() * cardsList.size());
+            b = (int) (rand.nextDouble() * cardsList.size());
 
             Card card1 = cardsList.get(a);
             Card card2 = cardsList.get(b);

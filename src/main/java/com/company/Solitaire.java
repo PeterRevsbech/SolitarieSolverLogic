@@ -26,9 +26,9 @@ public class Solitaire {
     private final static int MAX_NUM_OF_MOVES = 250;
 
 
-    public void initGame(boolean isShuffled, boolean printing) {
+    public void initGame(boolean isShuffled, boolean printing, int dataSeed) {
         states = new ArrayList<>();
-        states.add(OpenSolitaireState.newGame(isShuffled));
+        states.add(OpenSolitaireState.newGame(isShuffled,dataSeed));
         gameWon = false;
         gameLost = false;
         stockIsKnown = false;
