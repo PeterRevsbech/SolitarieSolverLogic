@@ -22,6 +22,8 @@ public class WasteToTableauReveal1 extends WasteToTableau {
             return null;
         }
 
+        ISolitaireState newState;
+
         //If topCard was moved to somewhere in tableau - would TableauToTableauReveal be possible
         List<Pile> compatiblePiles = state.getTableau().getAllCompatiblePiles(topCard, null);
         for (Pile pile : compatiblePiles) {
@@ -33,7 +35,7 @@ public class WasteToTableauReveal1 extends WasteToTableau {
             candidateMove.setToCard(pile.getTopCard());
 
             //Make clones
-            ISolitaireState newState = state.simulateMoveWithClone(state,candidateMove);
+            newState = state.simulateMoveWithClone(state,candidateMove);
 
             //See if Reveal nextMove possible
             //TableauToTabeleauReveal

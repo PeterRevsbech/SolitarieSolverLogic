@@ -25,6 +25,7 @@ public class TableauToTableauReveal1 extends TableauToTableau {
                 if (card.isFaceUp()) {
                     //Check if we can move this card somewhere else in tableau
                     Pile compatiblePile = tableau.getCompatiblePile(card, pile);
+                    ISolitaireState cloneState;
                     if (compatiblePile != null) {
                         //If move is possible - check if we can reveal in next move
 
@@ -34,7 +35,7 @@ public class TableauToTableauReveal1 extends TableauToTableau {
                         candidateMove.setToCard(compatiblePile.getTopCard());
 
                         //Simluate the move in CloneState
-                        ISolitaireState cloneState = state.simulateMoveWithClone(state,candidateMove);
+                        cloneState = state.simulateMoveWithClone(state,candidateMove);
 
                         //Check if reveal is possible - either TableauToTableauReveal or TableauToFoundationReveal
                         //TableauToTableauReveal
