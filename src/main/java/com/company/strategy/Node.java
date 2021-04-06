@@ -3,6 +3,7 @@ package com.company.strategy;
 import com.company.model.SpecificMove;
 import com.company.model.state.ISolitaireState;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Node {
@@ -14,6 +15,7 @@ public class Node {
     int branchPointsMax;
 
     public Node(ISolitaireState state, SpecificMove move) {
+        children = new ArrayList<>();
         this.state = state;
         this.move = move;
     }

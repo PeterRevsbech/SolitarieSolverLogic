@@ -1,5 +1,6 @@
 package com.company.strategy;
 
+import com.company.model.SpecificMove;
 import com.company.model.state.ISolitaireState;
 
 import java.util.List;
@@ -19,14 +20,23 @@ public class TreeSearcher {
         }
 
         //Make all child nodes
-        List<Node> nodes;
+        List<SpecificMove> movesFromRoot  = root.getState().getAllPossibleMoves();
 
+
+
+
+            //Find all possible moves from state
+            //Simulate all the moves
+                //Add to list of children
 
 
         //For each child node, call buildTree(childNode, depth-1)
 
 
     }
+
+
+
 
 
 

@@ -5,6 +5,8 @@ import com.company.model.Pile;
 import com.company.model.SpecificMove;
 import com.company.model.state.ISolitaireState;
 
+import java.util.List;
+
 public class WasteToTableau extends MoveType {
     @Override
     public SpecificMove getMove(ISolitaireState state) {
@@ -25,6 +27,10 @@ public class WasteToTableau extends MoveType {
             //Else if fromCard is a king - the toPile is empty and there is no toCard - so we don't set toCard
             return move;
         }
+        return null;
+    }
+
+    public static List<SpecificMove> getAllMoves(ISolitaireState state){
         return null;
     }
 

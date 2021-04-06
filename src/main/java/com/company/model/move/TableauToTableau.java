@@ -6,6 +6,8 @@ import com.company.model.SpecificMove;
 import com.company.model.Tableau;
 import com.company.model.state.ISolitaireState;
 
+import java.util.List;
+
 public class TableauToTableau extends MoveType {
     @Override
     public SpecificMove getMove(ISolitaireState state) {
@@ -33,6 +35,10 @@ public class TableauToTableau extends MoveType {
         }
 
         //If it was not possible, return null
+        return null;
+    }
+
+    public static List<SpecificMove> getAllMoves(ISolitaireState state){
         return null;
     }
 

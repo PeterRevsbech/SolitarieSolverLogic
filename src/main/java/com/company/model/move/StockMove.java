@@ -3,6 +3,8 @@ package com.company.model.move;
 import com.company.model.SpecificMove;
 import com.company.model.state.ISolitaireState;
 
+import java.util.List;
+
 public class StockMove extends MoveType {
 
     @Override
@@ -19,5 +21,10 @@ public class StockMove extends MoveType {
     @Override
     public String toString() {
         return "StockMove";
+    }
+
+
+    public static List<SpecificMove> getAllMoves(ISolitaireState state){
+        return null;
     }
 }

@@ -5,6 +5,8 @@ import com.company.model.Pile;
 import com.company.model.SpecificMove;
 import com.company.model.state.ISolitaireState;
 
+import java.util.List;
+
 public class FoundationToTableau extends MoveType {
     @Override
     public SpecificMove getMove(ISolitaireState state) {
@@ -31,6 +33,10 @@ public class FoundationToTableau extends MoveType {
             }
         }
 
+        return null;
+    }
+
+    public static List<SpecificMove> getAllMoves(ISolitaireState state){
         return null;
     }
 

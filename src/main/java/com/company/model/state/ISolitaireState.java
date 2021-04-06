@@ -3,7 +3,7 @@ package com.company.model.state;
 import com.company.Solitaire;
 import com.company.model.*;
 import com.company.model.exceptions.SolitarieException;
-import com.company.model.move.MoveType;
+import com.company.model.move.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,5 +90,17 @@ public interface ISolitaireState extends Cloneable {
 
         return count;
     }
+
+    default List<SpecificMove> getAllPossibleMoves(){
+        List<SpecificMove> moves = new ArrayList<>();
+        moves.addAll(StockMove.getAllMoves(this));
+        moves.addAll(FoundationToTableau.getAllMoves(this));
+        moves.addAll(TableauToFoundation.getAllMoves(this));
+        moves.addAll(TableauToTableau.getAllMoves(this));
+        moves.addAll(WasteToFoundation.getAllMoves(this));
+        moves.addAll(WasteToTableau.getAllMoves(this));
+        return moves;
+    }
+
 
 }
