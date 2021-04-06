@@ -56,7 +56,7 @@ public class SpecificMove {
         }
 
         if (moveType instanceof StockMove) {
-            return points+0;
+            return points-1;
         } else if (moveType instanceof WasteToTableau) {
             return points-5;
         } else if (moveType instanceof WasteToFoundation) {
@@ -64,7 +64,7 @@ public class SpecificMove {
         } else if (moveType instanceof TableauToFoundation) {
             return points+20;
         } else if (moveType instanceof TableauToTableau) {
-            return points+0;
+            return points-1;
         } else if (moveType instanceof FoundationToTableau) {
             return points-25;
         }

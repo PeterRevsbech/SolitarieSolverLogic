@@ -26,6 +26,11 @@ public class StockMove extends MoveType {
 
 
     public static List<SpecificMove> getAllMoves(ISolitaireState state){
-        return new ArrayList<>();
+        List<SpecificMove> moves = new ArrayList<>();
+        StockMove stockMove = new StockMove();
+        if (stockMove.getMove(state)!=null){
+            moves.add(stockMove.getMove(state));
+        };
+        return moves;
     }
 }

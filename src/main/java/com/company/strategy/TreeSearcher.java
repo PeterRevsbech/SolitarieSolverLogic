@@ -61,6 +61,9 @@ public class TreeSearcher {
         } else if (!node.isReveal() && node.getChildren().isEmpty()){
             //Dead end - no possible moves from this state, and it's not because we reached end of search
             node.setBranchPointsMax(Integer.MIN_VALUE);
+        } else if (node.isReveal() && node.getChildren().isEmpty()) {
+            //If it is reveal - we will stop looking further down this branch
+            node.setBranchPointsMax(node.getMyPoints());
         } else{
             //Node has children, and should find its branchMax by looking at max child
             int myPoints = node.getMyPoints();
