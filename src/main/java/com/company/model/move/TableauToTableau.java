@@ -6,6 +6,7 @@ import com.company.model.SpecificMove;
 import com.company.model.Tableau;
 import com.company.model.state.ISolitaireState;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TableauToTableau extends MoveType {
@@ -39,9 +40,8 @@ public class TableauToTableau extends MoveType {
     }
 
     public static List<SpecificMove> getAllMoves(ISolitaireState state){
-        List<SpecificMove> specificMoveList = null;
+        List<SpecificMove> specificMoveList = new ArrayList<>();
 
-        SpecificMove move = new SpecificMove(new TableauToTableau());
 
         Tableau tableau = state.getTableau();
 
@@ -52,8 +52,10 @@ public class TableauToTableau extends MoveType {
                 //For each moveable card
                 if(card.isFaceUp()){
                     //Check if we can move this card somewhere else in tableau
-                    Pile compatiblePile = tableau.getCompatiblePile(card,pile);
-                    if(compatiblePile!=null){
+                    List<Pile> compatiblePiles = tableau.getAllCompatiblePiles(card,pile);
+                    for (Pile compatiblePile: compatiblePiles) {
+                        SpecificMove move = new SpecificMove(new TableauToTableau());
+
                         move.setToCard(compatiblePile.getTopCard());
                         move.setFromParent(card);
                         specificMoveList.add(move);

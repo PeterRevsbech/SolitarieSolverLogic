@@ -13,6 +13,7 @@ public class Node {
     private List<Node> children;
     private int myPoints;
     private int branchPointsMax;
+    private boolean isReveal = false;
 
     public Node(ISolitaireState state, SpecificMove move) {
         children = new ArrayList<>();
@@ -24,7 +25,13 @@ public class Node {
         for (SpecificMove move:possibleMoves) {
             ISolitaireState newState = state.simulateMoveWithClone(state,move);
             Node child = new Node(newState,move);
+            child.setMyPoints(move.getPoints(state));
             children.add(child);
+
+            if (move.isReveal(state)){
+                child.setReveal(true);
+            }
+
         }
 
     }
@@ -67,5 +74,13 @@ public class Node {
 
     public void setBranchPointsMax(int branchPointsMax) {
         this.branchPointsMax = branchPointsMax;
+    }
+
+    public boolean isReveal() {
+        return isReveal;
+    }
+
+    public void setReveal(boolean reveal) {
+        isReveal = reveal;
     }
 }

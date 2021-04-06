@@ -72,7 +72,7 @@ public class SpecificMove {
         return 0;
     }
 
-    private boolean isReveal(ISolitaireState oldState){
+    public boolean isReveal(ISolitaireState oldState){
         ISolitaireState newState = oldState.simulateMoveWithClone(oldState,this);
         if (newState.getNumberOfFaceDownCards() == oldState.getNumberOfFaceDownCards()-1){
             return true;

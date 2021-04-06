@@ -5,6 +5,7 @@ import com.company.model.Pile;
 import com.company.model.SpecificMove;
 import com.company.model.state.ISolitaireState;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FoundationToTableau extends MoveType {
@@ -39,7 +40,7 @@ public class FoundationToTableau extends MoveType {
 
     public static List<SpecificMove> getAllMoves(ISolitaireState state){
 
-        List<SpecificMove> specificMoveList = null;
+        List<SpecificMove> specificMoveList = new ArrayList<>();
         SpecificMove move = new SpecificMove(new FoundationToTableau());
 
         for(Pile foundationPile: state.getFoundation().getPiles()){
