@@ -76,4 +76,19 @@ public interface ISolitaireState extends Cloneable {
 
         return cloneState;
     }
+
+    default int getNumberOfFaceDownCards(){
+        Tableau tableau = getTableau();
+        int count=0;
+        for (Pile pile:tableau.getPiles()) {
+            for (Card card: pile.getCards()) {
+                if (!card.isFaceUp()){
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
+
 }

@@ -1,6 +1,8 @@
 package com.company.model;
 
-import com.company.model.move.MoveType;
+import com.company.model.exceptions.SolitarieException;
+import com.company.model.move.*;
+import com.company.model.state.ISolitaireState;
 
 public class SpecificMove {
 
@@ -43,6 +45,39 @@ public class SpecificMove {
 
     public void setToCard(Card toCard) {
         this.toCard = toCard;
+    }
+
+
+    public int getPoints(ISolitaireState state){
+        int points = 0;
+
+        if (isReveal(state)){
+            points+=1000;
+        }
+
+        if (moveType instanceof StockMove) {
+            return points+0;
+        } else if (moveType instanceof WasteToTableau) {
+            return points-5;
+        } else if (moveType instanceof WasteToFoundation) {
+            return points+15;
+        } else if (moveType instanceof TableauToFoundation) {
+            return points+20;
+        } else if (moveType instanceof TableauToTableau) {
+            return points+0;
+        } else if (moveType instanceof FoundationToTableau) {
+            return points-25;
+        }
+
+        return 0;
+    }
+
+    private boolean isReveal(ISolitaireState oldState){
+        ISolitaireState newState = oldState.simulateMoveWithClone(oldState,this);
+        if (newState.getNumberOfFaceDownCards() == oldState.getNumberOfFaceDownCards()-1){
+            return true;
+        }
+        return false;
     }
 
     @Override
