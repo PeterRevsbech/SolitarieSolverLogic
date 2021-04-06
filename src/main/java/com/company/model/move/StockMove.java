@@ -25,6 +25,17 @@ public class StockMove extends MoveType {
 
 
     public static List<SpecificMove> getAllMoves(ISolitaireState state){
-        return null;
+        List<SpecificMove> specificMoveList = null;
+
+        if (state.isStockEmpty() && state.getWastePile().isEmpty()) {
+            return specificMoveList;
+        } else {
+            SpecificMove move = new SpecificMove();
+            move.setMoveType(new StockMove());
+            specificMoveList.add(move);
+        }
+
+
+        return specificMoveList;
     }
 }
