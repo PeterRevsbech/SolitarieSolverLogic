@@ -6,6 +6,7 @@ import com.company.model.SpecificMove;
 import com.company.model.Tableau;
 import com.company.model.state.ISolitaireState;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TableauToTableau extends MoveType {
@@ -39,7 +40,12 @@ public class TableauToTableau extends MoveType {
     }
 
     public static List<SpecificMove> getAllMoves(ISolitaireState state){
-        return null;
+        List<SpecificMove> list = new ArrayList<>();
+        TableauToTableau tableauToTableau = new TableauToTableau();
+        if (tableauToTableau.getMove(state)!= null){
+            list.add(tableauToTableau.getMove(state));
+        }
+        return list;
     }
 
     @Override

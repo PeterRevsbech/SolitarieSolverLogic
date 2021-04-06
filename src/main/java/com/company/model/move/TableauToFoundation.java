@@ -5,6 +5,7 @@ import com.company.model.Pile;
 import com.company.model.SpecificMove;
 import com.company.model.state.ISolitaireState;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TableauToFoundation extends MoveType {
@@ -34,7 +35,7 @@ public class TableauToFoundation extends MoveType {
     }
 
     public static List<SpecificMove> getAllMoves(ISolitaireState state){
-        return null;
+        return new ArrayList<>();
     }
 
     @Override

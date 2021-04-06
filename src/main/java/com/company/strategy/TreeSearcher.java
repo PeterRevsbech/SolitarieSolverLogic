@@ -22,22 +22,27 @@ public class TreeSearcher {
         //Make all child nodes
         List<SpecificMove> movesFromRoot  = root.getState().getAllPossibleMoves();
 
+        //If no moves were possible - we're at a dead end, and should return
+        if (movesFromRoot.isEmpty()){
+            //Set points to minimum value
+            root.setMyPoints(Integer.MIN_VALUE);
+            return;
+        }
 
-
-
-            //Find all possible moves from state
-            //Simulate all the moves
-                //Add to list of children
-
+        //Add the moves
+        root.addChildren(movesFromRoot);
 
         //For each child node, call buildTree(childNode, depth-1)
-
-
+        for (Node node: root.getChildren()) {
+            buildTree(node,depth-1);
+        }
     }
 
+    public Node getRoot() {
+        return root;
+    }
 
-
-
-
-
+    public void setRoot(Node root) {
+        this.root = root;
+    }
 }

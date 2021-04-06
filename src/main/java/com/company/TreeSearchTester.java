@@ -1,0 +1,13 @@
+package com.company;
+
+import com.company.model.state.ISolitaireState;
+import com.company.model.state.OpenSolitaireState;
+import com.company.strategy.TreeSearcher;
+
+public class TreeSearchTester {
+    public static void main(String[] args) {
+        ISolitaireState newState = OpenSolitaireState.newGame(true,1);
+        TreeSearcher treeSearcher = new TreeSearcher(newState);
+        treeSearcher.buildTree(treeSearcher.getRoot(),3);
+    }
+}

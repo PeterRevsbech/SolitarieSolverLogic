@@ -10,14 +10,23 @@ public class Node {
 
     private ISolitaireState state;
     private SpecificMove move;
-    List<Node> children;
-    int myPoints;
-    int branchPointsMax;
+    private List<Node> children;
+    private int myPoints;
+    private int branchPointsMax;
 
     public Node(ISolitaireState state, SpecificMove move) {
         children = new ArrayList<>();
         this.state = state;
         this.move = move;
+    }
+
+    public void addChildren(List<SpecificMove> possibleMoves){
+        for (SpecificMove move:possibleMoves) {
+            ISolitaireState newState = state.simulateMoveWithClone(state,move);
+            Node child = new Node(newState,move);
+            children.add(child);
+        }
+
     }
 
     public ISolitaireState getState() {

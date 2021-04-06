@@ -4,6 +4,7 @@ import com.company.model.Card;
 import com.company.model.SpecificMove;
 import com.company.model.state.ISolitaireState;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class WasteToFoundation extends MoveType {
@@ -27,7 +28,7 @@ public class WasteToFoundation extends MoveType {
     }
 
     public static List<SpecificMove> getAllMoves(ISolitaireState state){
-        return null;
+        return new ArrayList<>();
     }
 
     @Override
