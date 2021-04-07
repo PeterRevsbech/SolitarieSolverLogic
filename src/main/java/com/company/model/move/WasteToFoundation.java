@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WasteToFoundation extends MoveType {
+
     @Override
     public SpecificMove getMove(ISolitaireState state) {
         SpecificMove move = new SpecificMove(new WasteToFoundation());
@@ -28,7 +29,21 @@ public class WasteToFoundation extends MoveType {
     }
 
     public static List<SpecificMove> getAllMoves(ISolitaireState state){
-        return new ArrayList<>();
+        List<SpecificMove> specificMoveList = new ArrayList<>();
+        SpecificMove move = new SpecificMove(new WasteToFoundation());
+
+        Card wasteCard = state.getWasteTop();
+        if(wasteCard == null){
+            //Not possible, if waste is empty
+            return specificMoveList;
+        }
+
+        //If card matches foundation - return move
+        if(state.getFoundation().cardMatchesFoundation(wasteCard)){
+            specificMoveList.add(move);
+        }
+
+        return specificMoveList;
     }
 
     @Override
