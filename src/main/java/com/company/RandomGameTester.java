@@ -7,7 +7,7 @@ public class RandomGameTester {
 
     public static void main(String[] args) {
         RandomGameTester randomGameTester = new RandomGameTester();
-        System.out.println(randomGameTester.playGames(10, 10));
+        System.out.println(randomGameTester.playGames(500, 50));
     }
 
 
@@ -20,7 +20,7 @@ public class RandomGameTester {
 
         for (int i = 1; i <= numberOfGames; i++) {
             solitaire = new Solitaire();
-            solitaire.initGame(true, false, 1);
+            solitaire.initGame(true, false, -1);
             if (solitaire.playGame()) {
                 gamesWon++;
             }
@@ -46,7 +46,7 @@ public class RandomGameTester {
 
     private String update(int i) {
         String report = String.format("Played %d out of %d games so far. %d pct done.", i, numberOfGames, i / numberOfGames);
-        report += String.format("\nWon %d out of %d games. Winning percentage is %d\n", gamesWon, numberOfGames, gamesWon / numberOfGames);
+        report += String.format("\nWon %d out of %d games. Winning percentage is %s\n", gamesWon, i, (gamesWon*1.0 / i)*100);
         return report;
     }
 

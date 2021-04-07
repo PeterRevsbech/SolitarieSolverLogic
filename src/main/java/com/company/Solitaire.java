@@ -112,6 +112,7 @@ public class Solitaire {
             //System.exit(1);
         }*/
         evaluateGameLost();
+        evaluateGameWon(state);
 
         //Update turnsPlayed
         turnsPlayed++;
