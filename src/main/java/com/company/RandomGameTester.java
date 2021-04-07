@@ -34,8 +34,6 @@ public class RandomGameTester {
         this.endTime = System.currentTimeMillis();
 
         return report();
-
-
     }
 
     private String report(){

@@ -43,23 +43,20 @@ public class WasteToTableau extends MoveType {
         move.setFromParent(wasteCard);
 
         List<Pile> pileList = state.getTableau().getAllCompatiblePiles(wasteCard,null);
-        if(pileList==null){
-            //If no possible moves
-            return specificMoveList;
-        }
-        for (Pile toPile : pileList) {
-            if(toPile!=null && !toPile.isEmpty()){
-                //If move is possible, and card to be moved is not king
-                move.setToCard(toPile.getTopCard());
+        if(pileList != null){
+            for (Pile toPile : pileList) {
+                if(toPile!=null && !toPile.isEmpty()){
+                    //If move is possible, and card to be moved is not king
+                    move.setToCard(toPile.getTopCard());
 
-            }else if (toPile!=null){
-                //Else if fromCard is a king - the toPile is empty and there is no toCard - so we don't set toCard
-                specificMoveList.add(move);
+                }else if (toPile!=null){
+                    //Else if fromCard is a king - the toPile is empty and there is no toCard - so we don't set toCard
+                    specificMoveList.add(move);
+                }
+
             }
-
         }
-
-        return null;
+        return specificMoveList;
     }
 
     @Override
