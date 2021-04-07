@@ -35,7 +35,29 @@ public class TableauToFoundation extends MoveType {
     }
 
     public static List<SpecificMove> getAllMoves(ISolitaireState state){
-        return new ArrayList<>();
+        List<SpecificMove> moves = new ArrayList<>();
+
+
+        for (Pile pile : state.getTableau().getPiles()) {
+            Card card = pile.getTopCard();
+            if (card != null) {
+                if (card.getValue() == Card.ACE) { //If card is ace
+                    SpecificMove move = new SpecificMove(new TableauToFoundation());
+                    move.setFromParent(card);
+                    moves.add(move);
+
+                } else { //If card is not ace - check if it fits in foundation
+                    //Ask foundation, if it can recieve this card
+                    if (state.getFoundation().cardMatchesFoundation(card)) {
+                        SpecificMove move = new SpecificMove(new TableauToFoundation());
+                        move.setFromParent(card);
+                        moves.add(move);
+                    }
+                }
+            }
+        }
+
+        return moves;
     }
 
     @Override

@@ -14,11 +14,13 @@ public class SolitaireSolver {
     public SpecificMove bestPossibleMove(Solitaire game) {
         ISolitaireState state = game.getLastState();
 
+        int depth =7;
+
         //Try tree search first at see if something better than 900 points is found
         TreeSearcher treeSearcher = new TreeSearcher(state);
-        treeSearcher.buildTree(treeSearcher.getRoot(),3);
-        SpecificMove treeSearchMove = treeSearcher.evaluateTree(treeSearcher.getRoot(),3);
-        if (treeSearcher.getRoot().getBranchPointsMax() > 0){
+        treeSearcher.buildTree(treeSearcher.getRoot(),depth);
+        SpecificMove treeSearchMove = treeSearcher.evaluateTree(treeSearcher.getRoot(),depth);
+        if (treeSearcher.getRoot().getBranchPointsMax() > -500){
             return treeSearchMove;
         }
 

@@ -32,7 +32,7 @@ public class Main {
         pgs.printCurrentState();
 
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 300; i++) {
             System.out.println("Move: " + i);
             System.out.println(solitaire.getNextMove());
             solitaire.makeNextMove();

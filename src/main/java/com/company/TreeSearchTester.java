@@ -9,7 +9,7 @@ public class TreeSearchTester {
     public static void main(String[] args) {
         ISolitaireState newState = OpenSolitaireState.newGame(true,2);
         TreeSearcher treeSearcher = new TreeSearcher(newState);
-        treeSearcher.buildTree(treeSearcher.getRoot(),3);
+        treeSearcher.buildTree(treeSearcher.getRoot(),4);
         SpecificMove bestMove = treeSearcher.evaluateTree(treeSearcher.getRoot(),3);
         System.out.println(bestMove);
     }

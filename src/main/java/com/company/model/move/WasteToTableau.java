@@ -48,9 +48,11 @@ public class WasteToTableau extends MoveType {
                 if(toPile!=null && !toPile.isEmpty()){
                     //If move is possible, and card to be moved is not king
                     move.setToCard(toPile.getTopCard());
+                    specificMoveList.add(move);
 
                 }else if (toPile!=null){
                     //Else if fromCard is a king - the toPile is empty and there is no toCard - so we don't set toCard
+                    move.setToCard(null);
                     specificMoveList.add(move);
                 }
 
