@@ -47,7 +47,7 @@ public interface ISolitaireState extends Cloneable {
             }
         }
 
-        if (movedCard==null){
+        if (movedCard == null) {
             throw new SolitarieException("Tried to swap card to wasteTop, but card was not in stock or waste.");
         }
 
@@ -55,21 +55,21 @@ public interface ISolitaireState extends Cloneable {
         getWastePile().addCard(movedCard);
     }
 
-    default ISolitaireState simulateMoveWithClone(ISolitaireState state, SpecificMove move){
+    default ISolitaireState simulateMoveWithClone(ISolitaireState state, SpecificMove move) {
         ISolitaireState cloneState = state.clone();
 
         //Clone fromcard and to card to avoid interfering with original cards
-        if (move.getToCard()!= null) {
+        if (move.getToCard() != null) {
             move.setToCard(move.getToCard().clone());
         }
-        if (move.getFromParent()!=null){
+        if (move.getFromParent() != null) {
             move.setFromParent(move.getFromParent().clone());
         }
 
-        try{
-            Solitaire.executeMove(cloneState,move);
+        try {
+            Solitaire.executeMove(cloneState, move);
             Solitaire.updateKnownStockWaste(cloneState);
-        } catch (SolitarieException e){
+        } catch (SolitarieException e) {
             System.out.println("Error in simulating move.");
             e.printStackTrace();
         }
@@ -77,12 +77,12 @@ public interface ISolitaireState extends Cloneable {
         return cloneState;
     }
 
-    default int getNumberOfFaceDownCards(){
+    default int getNumberOfFaceDownCards() {
         Tableau tableau = getTableau();
-        int count=0;
-        for (Pile pile:tableau.getPiles()) {
-            for (Card card: pile.getCards()) {
-                if (!card.isFaceUp()){
+        int count = 0;
+        for (Pile pile : tableau.getPiles()) {
+            for (Card card : pile.getCards()) {
+                if (!card.isFaceUp()) {
                     count++;
                 }
             }
@@ -91,7 +91,7 @@ public interface ISolitaireState extends Cloneable {
         return count;
     }
 
-    default List<SpecificMove> getAllPossibleMoves(){
+    default List<SpecificMove> getAllPossibleMoves() {
         List<SpecificMove> moves = new ArrayList<>();
         moves.addAll(StockMove.getAllMoves(this));
         moves.addAll(FoundationToTableau.getAllMoves(this));

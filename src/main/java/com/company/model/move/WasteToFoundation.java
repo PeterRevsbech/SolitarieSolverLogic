@@ -28,18 +28,18 @@ public class WasteToFoundation extends MoveType {
         return null;
     }
 
-    public static List<SpecificMove> getAllMoves(ISolitaireState state){
+    public static List<SpecificMove> getAllMoves(ISolitaireState state) {
         List<SpecificMove> specificMoveList = new ArrayList<>();
         SpecificMove move = new SpecificMove(new WasteToFoundation());
 
         Card wasteCard = state.getWasteTop();
-        if(wasteCard == null){
+        if (wasteCard == null) {
             //Not possible, if waste is empty
             return specificMoveList;
         }
 
         //If card matches foundation - return move
-        if(state.getFoundation().cardMatchesFoundation(wasteCard)){
+        if (state.getFoundation().cardMatchesFoundation(wasteCard)) {
             specificMoveList.add(move);
         }
 

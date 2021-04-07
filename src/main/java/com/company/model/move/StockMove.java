@@ -24,13 +24,12 @@ public class StockMove extends MoveType {
         return "StockMove";
     }
 
-
-    public static List<SpecificMove> getAllMoves(ISolitaireState state){
+    public static List<SpecificMove> getAllMoves(ISolitaireState state) {
         List<SpecificMove> moves = new ArrayList<>();
         StockMove stockMove = new StockMove();
-        if (stockMove.getMove(state)!=null){
+        if (stockMove.getMove(state) != null) {
             moves.add(stockMove.getMove(state));
-        };
+        }
         return moves;
     }
 }

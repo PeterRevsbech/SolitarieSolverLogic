@@ -39,21 +39,21 @@ public class TableauToTableau extends MoveType {
         return null;
     }
 
-    public static List<SpecificMove> getAllMoves(ISolitaireState state){
+    public static List<SpecificMove> getAllMoves(ISolitaireState state) {
         List<SpecificMove> specificMoveList = new ArrayList<>();
 
 
         Tableau tableau = state.getTableau();
 
         //For each pile in tableau
-        for (Pile pile: tableau.getPiles()) {
+        for (Pile pile : tableau.getPiles()) {
             //If pile is empty, it cannot contain the fromCard
-            for(Card card : pile.getCards()){
+            for (Card card : pile.getCards()) {
                 //For each moveable card
-                if(card.isFaceUp()){
+                if (card.isFaceUp()) {
                     //Check if we can move this card somewhere else in tableau
-                    List<Pile> compatiblePiles = tableau.getAllCompatiblePiles(card,pile);
-                    for (Pile compatiblePile: compatiblePiles) {
+                    List<Pile> compatiblePiles = tableau.getAllCompatiblePiles(card, pile);
+                    for (Pile compatiblePile : compatiblePiles) {
                         SpecificMove move = new SpecificMove(new TableauToTableau());
 
                         move.setToCard(compatiblePile.getTopCard());
@@ -63,7 +63,6 @@ public class TableauToTableau extends MoveType {
                 }
             }
         }
-
         return specificMoveList;
     }
 

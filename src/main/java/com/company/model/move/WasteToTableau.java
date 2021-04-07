@@ -31,26 +31,26 @@ public class WasteToTableau extends MoveType {
         return null;
     }
 
-    public static List<SpecificMove> getAllMoves(ISolitaireState state){
+    public static List<SpecificMove> getAllMoves(ISolitaireState state) {
         SpecificMove move = new SpecificMove(new WasteToTableau());
         List<SpecificMove> specificMoveList = new ArrayList<>();
 
-        Card wasteCard =state.getWasteTop();
-        if(wasteCard==null){
+        Card wasteCard = state.getWasteTop();
+        if (wasteCard == null) {
             //Not possible if waste is empty
             return specificMoveList;
         }
         move.setFromParent(wasteCard);
 
-        List<Pile> pileList = state.getTableau().getAllCompatiblePiles(wasteCard,null);
-        if(pileList != null){
+        List<Pile> pileList = state.getTableau().getAllCompatiblePiles(wasteCard, null);
+        if (pileList != null) {
             for (Pile toPile : pileList) {
-                if(toPile!=null && !toPile.isEmpty()){
+                if (toPile != null && !toPile.isEmpty()) {
                     //If move is possible, and card to be moved is not king
                     move.setToCard(toPile.getTopCard());
                     specificMoveList.add(move);
 
-                }else if (toPile!=null){
+                } else if (toPile != null) {
                     //Else if fromCard is a king - the toPile is empty and there is no toCard - so we don't set toCard
                     move.setToCard(null);
                     specificMoveList.add(move);

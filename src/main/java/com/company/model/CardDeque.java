@@ -23,8 +23,8 @@ public class CardDeque {
 
     public void shuffle(int dataSeed) {
         Random rand = new Random();
-        if (dataSeed!=-1){
-            rand=new Random(dataSeed);
+        if (dataSeed != -1) {
+            rand = new Random(dataSeed);
         }
 
 

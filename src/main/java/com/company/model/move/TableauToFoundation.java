@@ -34,9 +34,8 @@ public class TableauToFoundation extends MoveType {
         return null;
     }
 
-    public static List<SpecificMove> getAllMoves(ISolitaireState state){
+    public static List<SpecificMove> getAllMoves(ISolitaireState state) {
         List<SpecificMove> moves = new ArrayList<>();
-
 
         for (Pile pile : state.getTableau().getPiles()) {
             Card card = pile.getTopCard();

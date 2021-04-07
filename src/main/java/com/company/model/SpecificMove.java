@@ -48,33 +48,33 @@ public class SpecificMove {
     }
 
 
-    public int getPoints(ISolitaireState state){
+    public int getPoints(ISolitaireState state) {
         int points = 0;
 
-        if (isReveal(state)){
-            points+=1000;
+        if (isReveal(state)) {
+            points += 1000;
         }
 
         if (moveType instanceof StockMove) {
-            return points-1;
+            return points - 1;
         } else if (moveType instanceof WasteToTableau) {
-            return points+1;
+            return points + 1;
         } else if (moveType instanceof WasteToFoundation) {
-            return points+15;
+            return points + 15;
         } else if (moveType instanceof TableauToFoundation) {
-            return points+20;
+            return points + 20;
         } else if (moveType instanceof TableauToTableau) {
-            return points-2;
+            return points - 2;
         } else if (moveType instanceof FoundationToTableau) {
-            return points-25;
+            return points - 25;
         }
 
         return 0;
     }
 
-    public boolean isReveal(ISolitaireState oldState){
-        ISolitaireState newState = oldState.simulateMoveWithClone(oldState,this);
-        if (newState.getNumberOfFaceDownCards() == oldState.getNumberOfFaceDownCards()-1){
+    public boolean isReveal(ISolitaireState oldState) {
+        ISolitaireState newState = oldState.simulateMoveWithClone(oldState, this);
+        if (newState.getNumberOfFaceDownCards() == oldState.getNumberOfFaceDownCards() - 1) {
             return true;
         }
         return false;

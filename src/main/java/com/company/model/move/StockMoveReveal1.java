@@ -33,9 +33,9 @@ public class StockMoveReveal1 extends StockMove {
                     }
                 }
 
-                try{
+                try {
                     cloneState.swapStockTopCard(card);
-                } catch (SolitarieException e){
+                } catch (SolitarieException e) {
                     e.printStackTrace();
                     return null;
                 }

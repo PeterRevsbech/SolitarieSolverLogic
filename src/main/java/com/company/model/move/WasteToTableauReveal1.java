@@ -18,7 +18,7 @@ public class WasteToTableauReveal1 extends WasteToTableau {
         SpecificMove candidateMove = new SpecificMove(new WasteToTableauReveal1());
         SpecificMove candidateRevealMove = null;
         Card topCard = state.getWasteTop();
-        if (topCard==null){
+        if (topCard == null) {
             return null;
         }
 
@@ -35,7 +35,7 @@ public class WasteToTableauReveal1 extends WasteToTableau {
             candidateMove.setToCard(pile.getTopCard());
 
             //Make clones
-            newState = state.simulateMoveWithClone(state,candidateMove);
+            newState = state.simulateMoveWithClone(state, candidateMove);
 
             //See if Reveal nextMove possible
             //TableauToTabeleauReveal

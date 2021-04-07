@@ -16,7 +16,7 @@ public class ClosedSolitaireState implements ISolitaireState {
 
     public static ClosedSolitaireState newTestGame() {//Will probably not be used for more than debugging - The actual state will be given by OpenCV
         ClosedSolitaireState state = new ClosedSolitaireState();
-        CardDeque deque = new CardDeque(true,-1);
+        CardDeque deque = new CardDeque(true, -1);
 
         state.setTableau(new Tableau());
         //Initialize Tableau
@@ -27,8 +27,8 @@ public class ClosedSolitaireState implements ISolitaireState {
                     //Turn the uppermost card in each pile face up
                     pile.addCard(deque.draw());
                     pile.getCards().get(i).setFaceUp(true);
-                } else{
-                    pile.addCard(new Card(null,0,false));
+                } else {
+                    pile.addCard(new Card(null, 0, false));
                 }
             }
         }
@@ -41,10 +41,10 @@ public class ClosedSolitaireState implements ISolitaireState {
 
         //Initialize StockPile
         state.setStockPile(new StockPile());
-        state.getStockPile().addCard(new Card(null,0,false));
+        state.getStockPile().addCard(new Card(null, 0, false));
 
         //Initialize knownStockWaste
-        state.knownStockWaste=new ArrayList<>();
+        state.knownStockWaste = new ArrayList<>();
 
         return state;
     }
@@ -100,7 +100,7 @@ public class ClosedSolitaireState implements ISolitaireState {
 
     @Override
     public void setKnownStockWaste(List<Card> stockWaste) {
-        this.knownStockWaste=stockWaste;
+        this.knownStockWaste = stockWaste;
     }
 
     @Override
@@ -119,11 +119,9 @@ public class ClosedSolitaireState implements ISolitaireState {
             ObjectInputStream in = new ObjectInputStream(
                     new ByteArrayInputStream(bos.toByteArray()));
             obj = (ISolitaireState) in.readObject();
-        }
-        catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
-        }
-        catch(ClassNotFoundException cnfe) {
+        } catch (ClassNotFoundException cnfe) {
             cnfe.printStackTrace();
         }
         return obj;

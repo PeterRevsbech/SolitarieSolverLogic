@@ -21,19 +21,17 @@ public class Node {
         this.move = move;
     }
 
-    public void addChildren(List<SpecificMove> possibleMoves){
-        for (SpecificMove move:possibleMoves) {
-            ISolitaireState newState = state.simulateMoveWithClone(state,move);
-            Node child = new Node(newState,move);
+    public void addChildren(List<SpecificMove> possibleMoves) {
+        for (SpecificMove move : possibleMoves) {
+            ISolitaireState newState = state.simulateMoveWithClone(state, move);
+            Node child = new Node(newState, move);
             child.setMyPoints(move.getPoints(state));
             children.add(child);
 
-            if (move.isReveal(state)){
+            if (move.isReveal(state)) {
                 child.setReveal(true);
             }
-
         }
-
     }
 
     public ISolitaireState getState() {

@@ -35,7 +35,7 @@ public class TableauToTableauReveal1 extends TableauToTableau {
                         candidateMove.setToCard(compatiblePile.getTopCard());
 
                         //Simluate the move in CloneState
-                        cloneState = state.simulateMoveWithClone(state,candidateMove);
+                        cloneState = state.simulateMoveWithClone(state, candidateMove);
 
                         //Check if reveal is possible - either TableauToTableauReveal or TableauToFoundationReveal
                         //TableauToTableauReveal
