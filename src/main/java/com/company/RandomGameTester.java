@@ -7,7 +7,7 @@ public class RandomGameTester {
 
     public static void main(String[] args) {
         RandomGameTester randomGameTester = new RandomGameTester();
-        System.out.println(randomGameTester.playGames(100, 5));
+        System.out.println(randomGameTester.playGames(10, 10));
     }
 
 
@@ -18,7 +18,7 @@ public class RandomGameTester {
         this.startTime = System.currentTimeMillis();
         Solitaire solitaire;
 
-        for (int i = 0; i < numberOfGames; i++) {
+        for (int i = 1; i <= numberOfGames; i++) {
             solitaire = new Solitaire();
             solitaire.initGame(true, false, 1);
             if (solitaire.playGame()) {

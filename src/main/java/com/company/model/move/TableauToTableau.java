@@ -4,6 +4,8 @@ import com.company.model.Card;
 import com.company.model.Pile;
 import com.company.model.SpecificMove;
 import com.company.model.Tableau;
+import com.company.model.exceptions.CardNotFoundException;
+import com.company.model.exceptions.SolitarieException;
 import com.company.model.state.ISolitaireState;
 
 import java.util.ArrayList;
@@ -69,5 +71,34 @@ public class TableauToTableau extends MoveType {
     @Override
     public String toString() {
         return "TableauToTableau";
+    }
+
+
+    //Tells if a move is a useless king move ==> moving a king from an empty tableau pile to another empty tableau pile
+    public static boolean isUselessKingMove(SpecificMove move, ISolitaireState state) {
+
+        if (!(move.getMoveType() instanceof TableauToTableau)){
+            return false;
+        }
+        if (move.getFromParent().getValue() != Card.KING){
+            return false;
+        }
+        if (move.getToCard() != null){
+            return false;
+        }
+
+        try {
+            Card kingCard = move.getFromParent();
+            Pile kingPile = state.getTableau().getPileContainingCard(kingCard);
+            if (kingPile.getIndexOfCard(kingCard) != 0){
+                return false;
+            }
+        } catch (SolitarieException e){
+            System.out.println("Useless king Tableau to Tableau -move wasn't recognized");
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
     }
 }

@@ -49,20 +49,20 @@ public class SpecificMove {
 
 
     public int getPoints(ISolitaireState state) {
-        int points = 0;
+        int points = -5;
 
         if (isReveal(state)) {
             points += 1000;
         }
 
         if (moveType instanceof StockMove) {
-            return points - 1;
+            return points - 2;
         } else if (moveType instanceof WasteToTableau) {
             return points + 1;
         } else if (moveType instanceof WasteToFoundation) {
-            return points + 15;
+            return points + 10;
         } else if (moveType instanceof TableauToFoundation) {
-            return points + 20;
+            return points + 10;
         } else if (moveType instanceof TableauToTableau) {
             return points - 2;
         } else if (moveType instanceof FoundationToTableau) {
@@ -82,7 +82,7 @@ public class SpecificMove {
 
     @Override
     public String toString() {
-        return "Move type: " + moveType + "\nMove executed: " + fromParent + " -> " + toCard + "\nNew state: ";
+        return "Move type: " + moveType + "\nMove executed: " + fromParent + " -> " + toCard;
     }
 }
 

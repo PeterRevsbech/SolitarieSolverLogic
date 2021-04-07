@@ -24,6 +24,7 @@ public class Solitaire {
     private boolean printing;
     int turnsPlayed =0;
     private final static int MAX_NUM_OF_MOVES = 250;
+    SpecificMove nextMove;
 
 
     public void initGame(boolean isShuffled, boolean printing, int dataSeed) {
@@ -50,8 +51,8 @@ public class Solitaire {
         return gameWon;
     }
 
-    public String getNextMove(){
-        return solver.bestPossibleMove(this).toString();
+    public SpecificMove getNextMove(){
+        return nextMove;
     }
 
     public void addNextClosedState(ClosedSolitaireState newState){
@@ -122,27 +123,29 @@ public class Solitaire {
         Card parentCard = move.getFromParent();
         Card toChild = move.getToCard();
         // find the corresponding pile in foundation
-        Pile foundationPile = state.getFoundation().getFoundationPileFromCard(parentCard);
+        Pile foundationPile = state.getFoundation().getPileContainingCard(parentCard);
         if (foundationPile == null) {
             throw new InvalidMoveException("tried to move a card from the foundationpiles, but the corresponding pile wasn't found, maybe they are all empty");
         }
 
         // if toChild is null and fromParent is a king then we want to move to an empty tableaupile
-        if (toChild == null && parentCard.equals(13)) {
+        if (toChild == null && parentCard.getValue()==Card.KING) {
             Pile emptyPile = state.getTableau().getFirstEmptyPile();
             emptyPile.addCard(parentCard);
             foundationPile.removeTopCard();
-        }
-
-        // toChild is not null we want to add the card to an existing pile
-        Pile tableauPile = state.getTableau().getPileContainingCard(toChild);
-        if (tableauPile != null) {
-            foundationPile.removeTopCard(); // only remove the card from the foundation if it has somewhere to go in the tableau
-            tableauPile.addCard(parentCard);
-
         } else {
-            throw new InvalidMoveException("couldnt find the card" + toChild + "in the tableau");
+            // toChild is not null: we want to add the card to an existing pile
+            Pile tableauPile = state.getTableau().getPileContainingCard(toChild);
+            if (tableauPile != null) {
+                foundationPile.removeTopCard(); // only remove the card from the foundation if it has somewhere to go in the tableau
+                tableauPile.addCard(parentCard);
+
+            } else {
+                throw new InvalidMoveException("couldnt find the card" + toChild + "in the tableau");
+            }
         }
+
+
     }
 
     public static void tableauToTableau(ISolitaireState state, SpecificMove move) throws SolitarieException {
@@ -199,7 +202,7 @@ public class Solitaire {
 
         //Draw the card and check if it is on top of pile
         if (!tableuPile.removeTopCard().equals(card)) {
-            throw new SolitarieException(String.format("Thried to draw %s from tableu to foundation, but it was not the top card.", card.toString()));
+            throw new SolitarieException(String.format("Tried to draw %s from tableu to foundation, but it was not the top card.", card.toString()));
         }
 
         //Set next card to faceUp
@@ -298,7 +301,7 @@ public class Solitaire {
     public void makeNextMove() {
         // get latest state, call solver to find next move
         ISolitaireState currentState = states.get(states.size() - 1);
-        SpecificMove nextMove = solver.bestPossibleMove(this);
+        nextMove = solver.bestPossibleMove(this);
         if (nextMove==null){
             gameLost=true;
         }

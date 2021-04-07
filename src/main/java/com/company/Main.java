@@ -9,6 +9,7 @@ import com.company.model.state.ClosedSolitaireState;
 import com.company.model.state.ISolitaireState;
 import com.company.model.state.OpenSolitaireState;
 import com.company.strategy.Strategy;
+import com.company.strategy.TreeSearcher;
 import com.company.utils.PrintGameState;
 
 import java.io.*;
@@ -23,7 +24,7 @@ public class Main {
         //Create a test game
         Solitaire solitaire = new Solitaire();
         //solitaire.initGame(false); //Use this to have a winnable game (testing purposes)
-        solitaire.initGame(true,true,2);
+        solitaire.initGame(true,true,24);
 
 
         List<ISolitaireState> states = solitaire.getStates();
@@ -34,9 +35,9 @@ public class Main {
 
         for (int i = 0; i < 300; i++) {
             System.out.println("Move: " + i);
-            System.out.println(solitaire.getNextMove());
             solitaire.makeNextMove();
-
+            System.out.println(solitaire.getNextMove().toString());
+            System.out.println(String.format("Evaluated %d nodes in tree search", TreeSearcher.getCounter()));
 
             pgs.initOpenSolitareState(states.get(i + 1));
             pgs.printCurrentState();

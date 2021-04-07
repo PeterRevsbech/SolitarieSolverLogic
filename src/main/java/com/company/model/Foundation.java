@@ -30,6 +30,17 @@ public class Foundation implements Serializable {
         return Arrays.toString(piles);
     }
 
+    //Returns the pile that contains the card. Null if there is no such pile
+    public Pile getPileContainingCard(Card card){
+        for (int i = 0; i < 4; i++) {
+            if (piles[i].contains(card)){
+                return piles[i];
+            }
+        }
+        return null;
+    }
+
+    //Returns the pile, that card will be compatible with ==> pile that you can put card in
     public Pile getFoundationPileFromCard(Card card) throws SolitarieException {
         Pile pile = null;
         //Find corresponding foundation-pile
@@ -71,6 +82,10 @@ public class Foundation implements Serializable {
     }
 
     public boolean cardMatchesFoundation(Card card) {
+        if (card.getValue()==Card.ACE){
+            return true;
+        }
+
         for (Pile pile : piles) {
             if (pile.getTopCard() != null) {
                 //Check that suit mathces

@@ -1,7 +1,9 @@
 package com.company.strategy;
 
 import com.company.model.SpecificMove;
+import com.company.model.move.TableauToTableau;
 import com.company.model.state.ISolitaireState;
+import sun.reflect.generics.tree.Tree;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,10 +25,17 @@ public class Node {
 
     public void addChildren(List<SpecificMove> possibleMoves) {
         for (SpecificMove move : possibleMoves) {
+            if (TableauToTableau.isUselessKingMove(move,state)){
+                //IF move is useless - don't evaluate it
+                break;
+            }
+
+
             ISolitaireState newState = state.simulateMoveWithClone(state, move);
             Node child = new Node(newState, move);
             child.setMyPoints(move.getPoints(state));
             children.add(child);
+            TreeSearcher.incrementCounter();//Adds 1 to the number of nodes searched
 
             if (move.isReveal(state)) {
                 child.setReveal(true);
