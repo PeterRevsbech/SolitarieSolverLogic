@@ -14,7 +14,7 @@ public class SolitaireSolver {
     public SpecificMove bestPossibleMove(Solitaire game) {
         ISolitaireState state = game.getLastState();
 
-        int depth =7;
+        int depth =5;
 
         //Try tree search first at see if something better than 900 points is found
         TreeSearcher treeSearcher = new TreeSearcher(state);

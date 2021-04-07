@@ -27,7 +27,7 @@ public class Node {
         for (SpecificMove move : possibleMoves) {
             if (TableauToTableau.isUselessKingMove(move,state)){
                 //IF move is useless - don't evaluate it
-                break;
+                continue;
             }
 
 

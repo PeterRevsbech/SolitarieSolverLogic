@@ -18,13 +18,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
+    public static int i =0;
 
     public static void main(String[] args) throws SolitarieException {
         ///for (int j = 0; j < 1000; j++) {
         //Create a test game
         Solitaire solitaire = new Solitaire();
         //solitaire.initGame(false); //Use this to have a winnable game (testing purposes)
-        solitaire.initGame(true,true,24);
+        solitaire.initGame(true,true,2);
 
 
         List<ISolitaireState> states = solitaire.getStates();
@@ -33,7 +34,7 @@ public class Main {
         pgs.printCurrentState();
 
 
-        for (int i = 0; i < 300; i++) {
+        for (i = 0; i < 300; i++) {
             System.out.println("Move: " + i);
             solitaire.makeNextMove();
             System.out.println(solitaire.getNextMove().toString());
