@@ -22,21 +22,41 @@ public class Solitaire {
     private boolean gameLost;
     private boolean stockIsKnown;
     private boolean printing;
-    int turnsPlayed =0;
+    int turnsPlayed = 0;
     private final static int MAX_NUM_OF_MOVES = 250;
     SpecificMove nextMove;
 
 
     public void initGame(boolean isShuffled, boolean printing, int dataSeed) {
         states = new ArrayList<>();
-        states.add(OpenSolitaireState.newGame(isShuffled,dataSeed));
+        states.add(OpenSolitaireState.newGame(isShuffled, dataSeed));
         gameWon = false;
         gameLost = false;
         stockIsKnown = false;
-        this.printing=printing;
+        this.printing = printing;
     }
 
-    public void initClosedGame(ClosedSolitaireState startState){
+    public boolean isAllCardsFaceUp(ISolitaireState state) {
+        boolean isAllFaceup = true;
+
+        //int tabLen = state.getTableau().getMaxTableauLength();
+        for (int i = 0; i < 7; i++) { // pile
+            for (int j = 0; j < 7; j++) { // cards
+                int pileLen = state.getTableau().getPiles()[i].getCards().size();
+                if (j >= pileLen) { //If there is no card at this place
+                    break;
+                }
+                if (!state.getTableau().getPiles()[i].getCard(j).isFaceUp()) { //if the card is NOT face up
+                    isAllFaceup = false;
+                }
+            }
+        }
+
+
+        return isAllFaceup;
+    }
+
+    public void initClosedGame(ClosedSolitaireState startState) {
         states = new ArrayList<>();
         states.add(startState);
         gameWon = false;
@@ -44,25 +64,25 @@ public class Solitaire {
         stockIsKnown = false;
     }
 
-    public boolean playGame(){
-        while (!(gameLost||gameWon)){
+    public boolean playGame() {
+        while (!(gameLost || gameWon)) {
             makeNextMove();
         }
         return gameWon;
     }
 
-    public SpecificMove getNextMove(){
+    public SpecificMove getNextMove() {
         return nextMove;
     }
 
-    public void addNextClosedState(ClosedSolitaireState newState){
+    public void addNextClosedState(ClosedSolitaireState newState) {
         //Set knownStockWaste to be copy of previous states knownStockWaste
-        ISolitaireState previousState = states.get(states.size()-1);
+        ISolitaireState previousState = states.get(states.size() - 1);
 
         //Make local clone of card list
         List<Card> clone = new ArrayList<>();
-        for (Card card:previousState.getKnownStockWaste()) {
-            clone.add(new Card(card.getSuit(),card.getValue(),card.isFaceUp()));
+        for (Card card : previousState.getKnownStockWaste()) {
+            clone.add(new Card(card.getSuit(), card.getValue(), card.isFaceUp()));
         }
 
         //Set newStates knownStockWaste to the clone and update it
@@ -82,13 +102,15 @@ public class Solitaire {
         state = state.clone();
 
         //Execute move
-        executeMove(state,move);
+        executeMove(state, move);
 
         //Update knownStockWaste
         updateKnownStockWaste(state);
 
         // evaluates if the game is won or lost
-        evaluateGameWon(state);
+/*        if (evaluateGameWon(state)) {
+            //System.exit(1);
+        }*/
         evaluateGameLost();
 
         //Update turnsPlayed
@@ -114,7 +136,7 @@ public class Solitaire {
             tableauToTableau(state, move);
         } else if (moveType instanceof FoundationToTableau) {
             foundationToTableau(state, move);
-        } else{
+        } else {
             throw new SolitarieException("Unknown move type");
         }
     }
@@ -129,7 +151,7 @@ public class Solitaire {
         }
 
         // if toChild is null and fromParent is a king then we want to move to an empty tableaupile
-        if (toChild == null && parentCard.getValue()==Card.KING) {
+        if (toChild == null && parentCard.getValue() == Card.KING) {
             Pile emptyPile = state.getTableau().getFirstEmptyPile();
             emptyPile.addCard(parentCard);
             foundationPile.removeTopCard();
@@ -186,7 +208,7 @@ public class Solitaire {
         fromPile.removeCards(movedCards);
 
         //Set next card faceUp in fromPile
-        if (!fromPile.isEmpty()){
+        if (!fromPile.isEmpty()) {
             fromPile.getTopCard().setFaceUp(true);
         }
 
@@ -206,7 +228,7 @@ public class Solitaire {
         }
 
         //Set next card to faceUp
-        if (!tableuPile.isEmpty()){
+        if (!tableuPile.isEmpty()) {
             tableuPile.getTopCard().setFaceUp(true);
         }
 
@@ -236,7 +258,7 @@ public class Solitaire {
         //Draw from waste
         Card card = state.getWastePile().draw();
         Pile tableuPile;
-        if (move.getToCard() != null){ // If we are not moving a king to an empty pile
+        if (move.getToCard() != null) { // If we are not moving a king to an empty pile
             //Find correct tableu-pile
             tableuPile = state.getTableau().getPileContainingCard(move.getToCard());
 
@@ -271,20 +293,22 @@ public class Solitaire {
     private void evaluateGameLost() {
         //TODO Check if no progress in a long amount of time
         //If no NEW cards have been added to foundation...
-        if (turnsPlayed >MAX_NUM_OF_MOVES){
-            gameLost=true;
+        if (turnsPlayed > MAX_NUM_OF_MOVES) {
+            gameLost = true;
         }
     }
 
     //Method that checks if the 4 tops cards in the foundation piles are kings, if so, the game is won
-    private void evaluateGameWon(ISolitaireState state) {
-        for (int i = 0; i < 3; i++) {
-            if (!state.getFoundation().getPiles()[i].isEmpty() && state.getFoundation().getPiles()[i].getTopCard().getValue() == 13) {
+    public boolean evaluateGameWon(ISolitaireState state) {
+        gameWon = false;
+        for (int i = 0; i <= 3; i++) {
+            if (state.getTableau().getMaxTableauLength() == 0 && state.getStockPile().isEmpty() && state.getWastePile().isEmpty()) {
                 gameWon = true;
-            } else if (!state.getFoundation().getPiles()[i].isEmpty() && state.getFoundation().getPiles()[i].getTopCard().getValue() != 13) {
-                gameWon = false;
+            } else {
+                gameWon= false;
             }
         }
+        return gameWon;
     }
 
     //Method that checks if every card on the tableau is faceup, if they are, the game is winable.
@@ -302,8 +326,8 @@ public class Solitaire {
         // get latest state, call solver to find next move
         ISolitaireState currentState = states.get(states.size() - 1);
         nextMove = solver.bestPossibleMove(this);
-        if (nextMove==null){
-            gameLost=true;
+        if (nextMove == null) {
+            gameLost = true;
         }
 
         // call the method makeMove, add the state to list of states
@@ -355,12 +379,12 @@ public class Solitaire {
         this.stockIsKnown = stockIsKnown;
     }
 
-    public ISolitaireState getLastState(){
-        return states.get(states.size()-1);
+    public ISolitaireState getLastState() {
+        return states.get(states.size() - 1);
     }
 
-    public void setPrinting(boolean printing){
-        this.printing=printing;
+    public void setPrinting(boolean printing) {
+        this.printing = printing;
     }
 
     public boolean isPrinting() {
@@ -375,22 +399,22 @@ public class Solitaire {
         this.turnsPlayed = turnsPlayed;
     }
 
-    public static void updateKnownStockWaste(ISolitaireState state){
+    public static void updateKnownStockWaste(ISolitaireState state) {
         //If we added a card to the list
-            //Card must be visible on top of WastePile
+        //Card must be visible on top of WastePile
         Card wasteTop = state.getWasteTop();
 
-        if (wasteTop != null && !state.getKnownStockWaste().contains(wasteTop)){
+        if (wasteTop != null && !state.getKnownStockWaste().contains(wasteTop)) {
             //If topcard has not been seen yet
             state.getKnownStockWaste().add(wasteTop);
         } else {
             //If we removed a card from the list
-                //Card must be visible on top of a tableau-pile or in foundation
-                // ==> should be removed from knownStockWaste
+            //Card must be visible on top of a tableau-pile or in foundation
+            // ==> should be removed from knownStockWaste
 
             //First check tableau
-            for (Pile tableauPile:state.getTableau().getPiles()) {
-                Card topCard =tableauPile.getTopCard();
+            for (Pile tableauPile : state.getTableau().getPiles()) {
+                Card topCard = tableauPile.getTopCard();
                 if (topCard != null && state.getKnownStockWaste().contains(topCard)) {
                     //If card is not null, and it is present in knownStockWaste as well
                     state.getKnownStockWaste().remove(topCard);
@@ -400,8 +424,8 @@ public class Solitaire {
             }
 
             //Then check foundation
-            for (Pile foundaionPile:state.getFoundation().getPiles()) {
-                Card topCard =foundaionPile.getTopCard();
+            for (Pile foundaionPile : state.getFoundation().getPiles()) {
+                Card topCard = foundaionPile.getTopCard();
                 if (topCard != null && state.getKnownStockWaste().contains(topCard)) {
                     //If card is not null, and it is present in knownStockWaste as well
                     state.getKnownStockWaste().remove(topCard);

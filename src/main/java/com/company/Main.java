@@ -18,14 +18,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    public static int i =0;
+    public static int i = 0;
 
     public static void main(String[] args) throws SolitarieException {
         ///for (int j = 0; j < 1000; j++) {
         //Create a test game
         Solitaire solitaire = new Solitaire();
         //solitaire.initGame(false); //Use this to have a winnable game (testing purposes)
-        solitaire.initGame(true,true,2);
+        solitaire.initGame(true, true, 2);
 
 
         List<ISolitaireState> states = solitaire.getStates();
@@ -33,8 +33,13 @@ public class Main {
         pgs.initOpenSolitareState(states.get(0));
         pgs.printCurrentState();
 
-
         for (i = 0; i < 300; i++) {
+
+            if (solitaire.evaluateGameWon(states.get(i))) {
+                winnerMsg();
+                System.exit(0);
+            }
+
             System.out.println("Move: " + i);
             solitaire.makeNextMove();
             System.out.println(solitaire.getNextMove().toString());
@@ -43,10 +48,42 @@ public class Main {
             pgs.initOpenSolitareState(states.get(i + 1));
             pgs.printCurrentState();
 
-        }
-        //}
 
+        }
     }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    private static void winnerMsg() {
+        System.out.println("  /$$$$$$   /$$$$$$  /$$      /$$ /$$$$$$$$       /$$      /$$  /$$$$$$  /$$   /$$\n" +
+                " /$$__  $$ /$$__  $$| $$$    /$$$| $$_____/      | $$  /$ | $$ /$$__  $$| $$$ | $$\n" +
+                "| $$  \\__/| $$  \\ $$| $$$$  /$$$$| $$            | $$ /$$$| $$| $$  \\ $$| $$$$| $$\n" +
+                "| $$ /$$$$| $$$$$$$$| $$ $$/$$ $$| $$$$$         | $$/$$ $$ $$| $$  | $$| $$ $$ $$\n" +
+                "| $$|_  $$| $$__  $$| $$  $$$| $$| $$__/         | $$$$_  $$$$| $$  | $$| $$  $$$$\n" +
+                "| $$  \\ $$| $$  | $$| $$\\  $ | $$| $$            | $$$/ \\  $$$| $$  | $$| $$\\  $$$\n" +
+                "|  $$$$$$/| $$  | $$| $$ \\/  | $$| $$$$$$$$      | $$/   \\  $$|  $$$$$$/| $$ \\  $$\n" +
+                " \\______/ |__/  |__/|__/     |__/|________/      |__/     \\__/ \\______/ |__/  \\__/\n" +
+                "                                                                                  \n" +
+                "                                                                                  \n" +
+                "                ");
+    }
 }
