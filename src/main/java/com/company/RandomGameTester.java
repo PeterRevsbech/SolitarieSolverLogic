@@ -7,7 +7,7 @@ public class RandomGameTester {
 
     public static void main(String[] args) {
         RandomGameTester randomGameTester = new RandomGameTester();
-        System.out.println(randomGameTester.playGames(100, 100));
+        System.out.println(randomGameTester.playGames(1000, 1000));
     }
 
 

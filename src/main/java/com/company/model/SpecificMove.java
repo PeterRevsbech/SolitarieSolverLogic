@@ -51,7 +51,7 @@ public class SpecificMove {
 
 
     public int getPoints(ISolitaireState state) {
-        int points = -1;
+        int points = PointsTable.TURN_COST;
 
         if (moveType instanceof StockMove) {
             return points + PointsTable.STOCKMOVE;

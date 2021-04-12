@@ -9,4 +9,5 @@ public class PointsTable {
     public static final int FODUNDATION_TO_TABLEAU = -250;
     public static final int REVEAL_BONUS = 1000;
     public static final int WIN_BONUS = 100000;
+    public static final int TURN_COST = -1;
 }
