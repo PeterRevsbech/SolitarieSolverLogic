@@ -1,13 +1,9 @@
 package com.company;
 
 import com.company.model.Card;
-import com.company.model.Pile;
 import com.company.model.SpecificMove;
-import com.company.model.exceptions.CardNotFoundException;
-import com.company.model.exceptions.InvalidMoveException;
 import com.company.model.exceptions.SolitarieException;
 import com.company.model.move.*;
-import com.company.model.move.movestypes.*;
 import com.company.model.state.ClosedSolitaireState;
 import com.company.model.state.ISolitaireState;
 import com.company.model.state.OpenSolitaireState;
@@ -17,7 +13,7 @@ import java.util.List;
 
 public class Solitaire {
 
-    private SolitaireSolver solver = new SolitaireSolver();
+    private SolitaireSolver solver;
     private List<ISolitaireState> states;
     private boolean gameWon;
     private boolean gameLost;
@@ -28,7 +24,8 @@ public class Solitaire {
     SpecificMove nextMove;
 
 
-    public void initGame(boolean isShuffled, boolean printing, int dataSeed) {
+    public void initGame(boolean isShuffled, boolean printing, int dataSeed, long timeLimitMillis, int fixedDepth) {
+        solver = new SolitaireSolver(fixedDepth, timeLimitMillis);
         states = new ArrayList<>();
         states.add(OpenSolitaireState.newGame(isShuffled, dataSeed));
         gameWon = false;
@@ -130,15 +127,12 @@ public class Solitaire {
 
     //Method that checks if the 4 tops cards in the foundation piles are kings, if so, the game is won
     public boolean evaluateGameWon(ISolitaireState state) {
-        gameWon = false;
-        for (int i = 0; i <= 3; i++) {
-            if (state.getTableau().getMaxTableauLength() == 0 && state.getStockPile().isEmpty() && state.getWastePile().isEmpty()) {
-                gameWon = true;
-            } else {
-                gameWon= false;
-            }
-        }
+        gameWon=isStateWon(state);
         return gameWon;
+    }
+
+    public static boolean isStateWon(ISolitaireState state) {
+        return state.getTableau().getMaxTableauLength() == 0 && state.getStockPile().isEmpty() && state.getWastePile().isEmpty();
     }
 
     //Method that checks if every card on the tableau is faceup, if they are, the game is winable.

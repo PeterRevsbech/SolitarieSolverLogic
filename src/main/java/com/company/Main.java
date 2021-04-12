@@ -15,7 +15,7 @@ public class Main {
         //Create a test game
         Solitaire solitaire = new Solitaire();
         //solitaire.initGame(false); //Use this to have a winnable game (testing purposes)
-        solitaire.initGame(true, true, 2);
+        solitaire.initGame(true, true, 2, 100,-1);
 
 
         List<ISolitaireState> states = solitaire.getStates();
@@ -33,7 +33,7 @@ public class Main {
             System.out.println("Move: " + i);
             solitaire.makeNextMove();
             System.out.println(solitaire.getNextMove().toString());
-            System.out.println(String.format("Evaluated %d nodes in tree search", TreeSearcher.getCounter()));
+            System.out.println(String.format("Evaluated %d nodes in a depth of %d", TreeSearcher.getCounter(), TreeSearcher.getStartDepth()));
 
             pgs.initOpenSolitareState(states.get(i + 1));
             pgs.printCurrentState();
