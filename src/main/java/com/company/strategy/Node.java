@@ -1,9 +1,9 @@
 package com.company.strategy;
 
+import com.company.Solitaire;
 import com.company.model.SpecificMove;
-import com.company.model.move.TableauToTableau;
+import com.company.model.move.movestypes.TableauToTableau;
 import com.company.model.state.ISolitaireState;
-import sun.reflect.generics.tree.Tree;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +16,7 @@ public class Node {
     private int myPoints;
     private int branchPointsMax;
     private boolean isReveal = false;
+    private boolean isWon = false;
 
     public Node(ISolitaireState state, SpecificMove move) {
         children = new ArrayList<>();
@@ -37,8 +38,13 @@ public class Node {
             children.add(child);
             TreeSearcher.incrementCounter();//Adds 1 to the number of nodes searched
 
-            if (move.isReveal(state)) {
+            if (Solitaire.isStateWon(newState)){
+                child.setWon(true);
+                child.increaseMyPoints(PointsTable.WIN_BONUS);
+            }
+            if (SpecificMove.isReveal(state,newState)) {
                 child.setReveal(true);
+                child.increaseMyPoints(PointsTable.REVEAL_BONUS);
             }
         }
     }
@@ -75,6 +81,10 @@ public class Node {
         this.myPoints = myPoints;
     }
 
+    public void increaseMyPoints(int points){
+        this.myPoints+=points;
+    }
+
     public int getBranchPointsMax() {
         return branchPointsMax;
     }
@@ -89,5 +99,13 @@ public class Node {
 
     public void setReveal(boolean reveal) {
         isReveal = reveal;
+    }
+
+    public boolean isWon() {
+        return isWon;
+    }
+
+    public void setWon(boolean won) {
+        isWon = won;
     }
 }

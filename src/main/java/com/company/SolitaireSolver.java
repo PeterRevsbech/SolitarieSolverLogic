@@ -8,13 +8,20 @@ import com.company.strategy.TreeSearcher;
 
 public class SolitaireSolver {
 
+    private final int fixedDepth;
+    private final long timeLimitMillis;
+
     private Strategy strategy = new Strategy();
+
+    public SolitaireSolver(int fixedDepth, long timeLimitMillis) {
+        this.fixedDepth = fixedDepth;
+        this.timeLimitMillis = timeLimitMillis;
+    }
 
     // determine best move
     public SpecificMove bestPossibleMove(Solitaire game) {
         ISolitaireState state = game.getLastState();
 
-        int depth = 3;
         SpecificMove move = null;
 
         if (game.isAllCardsFaceUp(state)) {
@@ -22,18 +29,28 @@ public class SolitaireSolver {
             for (MoveType moveType : strategy.getPrioritizedMoveTypes()) {
                 move = moveType.getMove(state);
                 if (move != null) {
-                    break;
+                    return move;
                 }
             }
-        } else {
-            //Try tree search first at see if something better than 900 points is found
-            TreeSearcher treeSearcher = new TreeSearcher(state);
+        }
+
+        long t0 = System.currentTimeMillis();
+        int depth = 2; //Start with a depth of 2 and increase as long as there is time
+
+        while (System.currentTimeMillis() - t0 < timeLimitMillis){ //While the time limit has not yet been exceeded - start a new round
+            if (fixedDepth!=-1){ //If fixed depth is set - use it
+                depth=fixedDepth;
+            }
+            TreeSearcher treeSearcher = new TreeSearcher(state,depth);
             treeSearcher.buildTree(treeSearcher.getRoot(), depth);
-            SpecificMove treeSearchMove = treeSearcher.evaluateTree(treeSearcher.getRoot(), depth);
-            if (treeSearcher.getRoot().getBranchPointsMax() > -500) {
-                return treeSearchMove;
+            move = treeSearcher.evaluateTree(treeSearcher.getRoot(), depth);
+            depth++;
+            if (fixedDepth!=-1){ //If fixed depth is set - do no more iterations
+                break;
             }
         }
+
+
         //Return move
         return move;
     }

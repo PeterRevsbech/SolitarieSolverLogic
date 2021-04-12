@@ -1,6 +1,7 @@
 package com.company.strategy;
 
 import com.company.model.move.*;
+import com.company.model.move.movestypes.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,13 +14,6 @@ public class Strategy {
     public Strategy() {
         prioritizedMoveTypes = new ArrayList<>();
         //Very primitive first strategy
-        prioritizedMoveTypes.add(new TableauToFoundationReveal());
-
-
-        prioritizedMoveTypes.add(new TableauToTableauReveal());
-        prioritizedMoveTypes.add(new TableauToTableauReveal1());
-        prioritizedMoveTypes.add(new WasteToTableauReveal1());
-        prioritizedMoveTypes.add(new StockMoveReveal1());
 
         prioritizedMoveTypes.add(new WasteToFoundation());
         prioritizedMoveTypes.add(new TableauToFoundation());

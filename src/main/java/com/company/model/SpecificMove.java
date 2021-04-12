@@ -1,8 +1,10 @@
 package com.company.model;
 
-import com.company.model.exceptions.SolitarieException;
+import com.company.Solitaire;
 import com.company.model.move.*;
+import com.company.model.move.movestypes.*;
 import com.company.model.state.ISolitaireState;
+import com.company.strategy.PointsTable;
 
 public class SpecificMove {
 
@@ -51,29 +53,24 @@ public class SpecificMove {
     public int getPoints(ISolitaireState state) {
         int points = -1;
 
-        if (isReveal(state)) {
-            points += 10000;
-        }
-
         if (moveType instanceof StockMove) {
-            return points - 10;
+            return points + PointsTable.STOCKMOVE;
         } else if (moveType instanceof WasteToTableau) {
-            return points + 10;
+            return points + PointsTable.WASTE_TO_TABLEAU;
         } else if (moveType instanceof WasteToFoundation) {
-            return points + 150;
+            return points + PointsTable.WASTE_TO_FOUNDATION;
         } else if (moveType instanceof TableauToFoundation) {
-            return points + 200;
+            return points + PointsTable.TABLEAU_TO_FOUNDATION;
         } else if (moveType instanceof TableauToTableau) {
-            return points - 20;
+            return points + PointsTable.TABLEAU_TO_TABLEAU;
         } else if (moveType instanceof FoundationToTableau) {
-            return points - 250;
+            return points + PointsTable.FODUNDATION_TO_TABLEAU;
         }
 
         return 0;
     }
 
-    public boolean isReveal(ISolitaireState oldState) {
-        ISolitaireState newState = oldState.simulateMoveWithClone(oldState, this);
+    public static boolean isReveal(ISolitaireState oldState, ISolitaireState newState) {
         if (newState.getNumberOfFaceDownCards() == oldState.getNumberOfFaceDownCards() - 1) {
             return true;
         }

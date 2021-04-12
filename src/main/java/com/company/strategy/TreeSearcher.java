@@ -1,7 +1,6 @@
 package com.company.strategy;
 
 import com.company.model.SpecificMove;
-import com.company.model.move.TableauToTableau;
 import com.company.model.state.ISolitaireState;
 
 import java.util.List;
@@ -9,12 +8,14 @@ import java.util.List;
 public class TreeSearcher {
     private Node root;
     private static int counter;
+    private static int startDepth;
 
 
-    public TreeSearcher(ISolitaireState rootState) {
+    public TreeSearcher(ISolitaireState rootState, int startDepth) {
         root = new Node(rootState, null);
         root.setMyPoints(0);
         counter=0;
+        this.startDepth=startDepth;
     }
 
     public void buildTree(Node root, int depth) {
@@ -23,6 +24,8 @@ public class TreeSearcher {
         } else if (root.isReveal()) {
             //Stop the seach here, since we have found a reveal
             return;
+        } else if (root.isWon()){
+            return; //Stop the search, if game is won here
         }
 
         //Make all child nodes
@@ -97,4 +100,7 @@ public class TreeSearcher {
         return counter;
     }
 
+    public static int getStartDepth() {
+        return startDepth;
+    }
 }

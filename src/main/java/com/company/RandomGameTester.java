@@ -7,7 +7,7 @@ public class RandomGameTester {
 
     public static void main(String[] args) {
         RandomGameTester randomGameTester = new RandomGameTester();
-        System.out.println(randomGameTester.playGames(500, 50));
+        System.out.println(randomGameTester.playGames(100, 100));
     }
 
 
@@ -20,7 +20,7 @@ public class RandomGameTester {
 
         for (int i = 1; i <= numberOfGames; i++) {
             solitaire = new Solitaire();
-            solitaire.initGame(true, false, -1);
+            solitaire.initGame(true, false, -1, 100, -1);
             if (solitaire.playGame()) {
                 gamesWon++;
             }
@@ -37,7 +37,7 @@ public class RandomGameTester {
     }
 
     private String report() {
-        String report = String.format("Won %d out of %d games. Winning percentage is %d", gamesWon, numberOfGames, gamesWon / numberOfGames);
+        String report = String.format("Won %d out of %d games. Winning percentage is %.2f", gamesWon, numberOfGames, gamesWon / numberOfGames);
         report += String.format("\nTotal time: %d ms", (endTime - startTime));
         report += String.format("\nAverage time pr game: %d ms", (endTime - startTime) / numberOfGames);
         report += String.format("\nAverage number of turns pr game: %d\n", totalTurnsPlayed / numberOfGames);
@@ -45,8 +45,8 @@ public class RandomGameTester {
     }
 
     private String update(int i) {
-        String report = String.format("Played %d out of %d games so far. %d pct done.", i, numberOfGames, i / numberOfGames);
-        report += String.format("\nWon %d out of %d games. Winning percentage is %s\n", gamesWon, i, (gamesWon*1.0 / i)*100);
+        String report = String.format("Played %d out of %d games so far. %.2f pct done.", i, numberOfGames, (i*100.0) / numberOfGames);
+        report += String.format("\nWon %d out of %d games. Winning percentage is %.2f\n", gamesWon, i, (100.0*gamesWon) / i);
         return report;
     }
 
