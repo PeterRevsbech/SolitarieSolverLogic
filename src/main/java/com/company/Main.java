@@ -1,20 +1,10 @@
 package com.company;
 
-import com.company.model.Card;
-import com.company.model.SpecificMove;
 import com.company.model.exceptions.SolitarieException;
-import com.company.model.move.FoundationToTableau;
-import com.company.model.move.StockMove;
-import com.company.model.state.ClosedSolitaireState;
 import com.company.model.state.ISolitaireState;
-import com.company.model.state.OpenSolitaireState;
-import com.company.strategy.Strategy;
 import com.company.strategy.TreeSearcher;
 import com.company.utils.PrintGameState;
 
-import java.io.*;
-import java.time.chrono.IsoChronology;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Main {

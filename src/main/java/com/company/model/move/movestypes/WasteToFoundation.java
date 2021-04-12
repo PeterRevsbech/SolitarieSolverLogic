@@ -1,7 +1,8 @@
-package com.company.model.move;
+package com.company.model.move.movestypes;
 
 import com.company.model.Card;
 import com.company.model.SpecificMove;
+import com.company.model.move.MoveType;
 import com.company.model.state.ISolitaireState;
 
 import java.util.ArrayList;

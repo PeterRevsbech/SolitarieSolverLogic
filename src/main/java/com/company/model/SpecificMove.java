@@ -1,7 +1,7 @@
 package com.company.model;
 
-import com.company.model.exceptions.SolitarieException;
 import com.company.model.move.*;
+import com.company.model.move.movestypes.*;
 import com.company.model.state.ISolitaireState;
 
 public class SpecificMove {

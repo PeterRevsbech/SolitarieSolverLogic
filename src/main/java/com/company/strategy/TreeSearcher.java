@@ -1,7 +1,6 @@
 package com.company.strategy;
 
 import com.company.model.SpecificMove;
-import com.company.model.move.TableauToTableau;
 import com.company.model.state.ISolitaireState;
 
 import java.util.List;

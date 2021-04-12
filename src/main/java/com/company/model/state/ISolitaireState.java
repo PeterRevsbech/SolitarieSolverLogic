@@ -3,7 +3,8 @@ package com.company.model.state;
 import com.company.Solitaire;
 import com.company.model.*;
 import com.company.model.exceptions.SolitarieException;
-import com.company.model.move.*;
+import com.company.model.move.MoveExecuter;
+import com.company.model.move.movestypes.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,8 +68,8 @@ public interface ISolitaireState extends Cloneable {
         }
 
         try {
-            Solitaire.executeMove(cloneState, move);
-            Solitaire.updateKnownStockWaste(cloneState);
+            MoveExecuter.executeMove(cloneState, move);
+            MoveExecuter.updateKnownStockWaste(cloneState);
         } catch (SolitarieException e) {
             System.out.println("Error in simulating move.");
             e.printStackTrace();

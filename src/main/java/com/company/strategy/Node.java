@@ -1,9 +1,8 @@
 package com.company.strategy;
 
 import com.company.model.SpecificMove;
-import com.company.model.move.TableauToTableau;
+import com.company.model.move.movestypes.TableauToTableau;
 import com.company.model.state.ISolitaireState;
-import sun.reflect.generics.tree.Tree;
 
 import java.util.ArrayList;
 import java.util.List;

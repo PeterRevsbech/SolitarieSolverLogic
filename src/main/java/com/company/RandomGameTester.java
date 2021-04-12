@@ -20,7 +20,7 @@ public class RandomGameTester {
 
         for (int i = 1; i <= numberOfGames; i++) {
             solitaire = new Solitaire();
-            solitaire.initGame(true, false, 1);
+            solitaire.initGame(true, false, -1);
             if (solitaire.playGame()) {
                 gamesWon++;
             }
