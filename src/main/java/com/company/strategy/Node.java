@@ -46,6 +46,10 @@ public class Node {
                 child.setReveal(true);
                 child.increaseMyPoints(PointsTable.REVEAL_BONUS);
             }
+            if (state.isStockKnown() ){
+
+
+            }
 
             //TODO IF STOCK-REVEAL MOVE - add a bonus
         }

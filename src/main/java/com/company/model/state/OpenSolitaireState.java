@@ -278,6 +278,16 @@ public class OpenSolitaireState implements ISolitaireState, Cloneable, Serializa
     }
 
     @Override
+    public void setRevealedStockWaste(int knownCards) {
+
+    }
+
+    @Override
+    public int getRevealedStockWaste() {
+        return 0;
+    }
+
+    @Override
     public void setKnownStockWaste(List<Card> stockWaste) {
         this.knownStockWaste = stockWaste;
     }

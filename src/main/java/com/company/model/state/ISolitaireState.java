@@ -28,6 +28,10 @@ public interface ISolitaireState extends Cloneable {
 
     List<Card> getKnownStockWaste();
 
+    void setRevealedStockWaste(int knownCards);
+
+    int getRevealedStockWaste();
+
     void setKnownStockWaste(List<Card> stockWaste);
 
     ISolitaireState clone();
@@ -101,6 +105,14 @@ public interface ISolitaireState extends Cloneable {
         moves.addAll(WasteToFoundation.getAllMoves(this));
         moves.addAll(WasteToTableau.getAllMoves(this));
         return moves;
+    }
+
+
+    default boolean isStockKnown(){
+        if (getRevealedStockWaste() >= 24){
+            return true;
+        }
+        return false;
     }
 
 

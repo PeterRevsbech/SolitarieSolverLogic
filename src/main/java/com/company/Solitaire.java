@@ -17,7 +17,6 @@ public class Solitaire {
     private List<ISolitaireState> states;
     private boolean gameWon;
     private boolean gameLost;
-    private boolean stockIsKnown;
     private boolean printing;
     int turnsPlayed = 0;
     private final static int MAX_NUM_OF_MOVES = 250;
@@ -30,7 +29,6 @@ public class Solitaire {
         states.add(OpenSolitaireState.newGame(isShuffled, dataSeed));
         gameWon = false;
         gameLost = false;
-        stockIsKnown = false;
         this.printing = printing;
     }
 
@@ -59,7 +57,6 @@ public class Solitaire {
         states.add(startState);
         gameWon = false;
         gameLost = false;
-        stockIsKnown = false;
     }
 
     public boolean playGame() {
@@ -193,14 +190,6 @@ public class Solitaire {
 
     public void setGameLost(boolean gameLost) {
         this.gameLost = gameLost;
-    }
-
-    public boolean isStockIsKnown() {
-        return stockIsKnown;
-    }
-
-    public void setStockIsKnown(boolean stockIsKnown) {
-        this.stockIsKnown = stockIsKnown;
     }
 
     public ISolitaireState getLastState() {
