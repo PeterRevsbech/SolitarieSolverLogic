@@ -169,6 +169,9 @@ public class MoveExecuter {
 
         //Add to pile
         tableuPile.addCard(card);
+
+        //Remove the card from the StockWaste list
+        state.getKnownStockWaste().remove(card);
     }
 
     //NOTE: doesnt actually use fromParent or toChild
@@ -180,6 +183,9 @@ public class MoveExecuter {
 
         //Put in pile
         pile.addCard(card);
+
+        //Remove the card from the StockWaste list
+        state.getKnownStockWaste().remove(card);
     }
 
 
@@ -193,6 +199,11 @@ public class MoveExecuter {
             //If topcard has not been seen yet
             state.getKnownStockWaste().add(wasteTop);
         } else {
+
+
+
+            /*
+
             //If we removed a card from the list
             //Card must be visible on top of a tableau-pile or in foundation
             // ==> should be removed from knownStockWaste
@@ -217,6 +228,8 @@ public class MoveExecuter {
                     return;
                 }
             }
+            */
+
         }
 
 

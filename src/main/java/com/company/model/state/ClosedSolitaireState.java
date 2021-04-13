@@ -103,6 +103,8 @@ public class ClosedSolitaireState implements ISolitaireState {
         this.knownStockWaste = stockWaste;
     }
 
+
+
     @Override
     public ISolitaireState clone() {
         ISolitaireState obj = null;
