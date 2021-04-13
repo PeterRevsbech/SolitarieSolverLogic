@@ -142,10 +142,19 @@ public class MoveExecuter {
             //Put them in stock
             state.getStockPile().setCards(newStockPile);
         } else {
+            //If stock was not empty
             topCard = state.getStockPile().removeTopCard();
             topCard.setFaceUp(true);
             state.getWastePile().addCard(topCard);
+            if (!state.getKnownStockWaste().contains(topCard)) {
+                //If topcard has not been seen yet
+                state.getKnownStockWaste().add(topCard);
+                state.setRevealedStockWaste(state.getRevealedStockWaste()+1);
+            }
+
         }
+
+
     }
 
     //Makes no use of fromparent
@@ -189,53 +198,5 @@ public class MoveExecuter {
 
         //Remove the card from the StockWaste list
         state.getKnownStockWaste().remove(card);
-    }
-
-
-    public static void updateKnownStockWaste(ISolitaireState state) {
-        //TODO Make this work with cards in the correct order
-        //If we added a card to the list
-        //Card must be visible on top of WastePile
-        Card wasteTop = state.getWasteTop();
-
-        if (wasteTop != null && !state.getKnownStockWaste().contains(wasteTop)) {
-            //If topcard has not been seen yet
-            state.getKnownStockWaste().add(wasteTop);
-            state.setRevealedStockWaste(state.getRevealedStockWaste()+1);
-        } else {
-
-
-
-            /*
-
-            //If we removed a card from the list
-            //Card must be visible on top of a tableau-pile or in foundation
-            // ==> should be removed from knownStockWaste
-
-            //First check tableau
-            for (Pile tableauPile : state.getTableau().getPiles()) {
-                Card topCard = tableauPile.getTopCard();
-                if (topCard != null && state.getKnownStockWaste().contains(topCard)) {
-                    //If card is not null, and it is present in knownStockWaste as well
-                    state.getKnownStockWaste().remove(topCard);
-                    return;
-
-                }
-            }
-
-            //Then check foundation
-            for (Pile foundaionPile : state.getFoundation().getPiles()) {
-                Card topCard = foundaionPile.getTopCard();
-                if (topCard != null && state.getKnownStockWaste().contains(topCard)) {
-                    //If card is not null, and it is present in knownStockWaste as well
-                    state.getKnownStockWaste().remove(topCard);
-                    return;
-                }
-            }
-            */
-
-        }
-
-
     }
 }
