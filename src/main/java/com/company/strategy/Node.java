@@ -2,6 +2,7 @@ package com.company.strategy;
 
 import com.company.Solitaire;
 import com.company.model.SpecificMove;
+import com.company.model.move.movestypes.StockMove;
 import com.company.model.move.movestypes.TableauToTableau;
 import com.company.model.state.ISolitaireState;
 
@@ -15,7 +16,7 @@ public class Node {
     private List<Node> children;
     private int myPoints;
     private int branchPointsMax;
-    private boolean isReveal = false;
+    private boolean isReveal = false; //Indicates if move to this state was a reveal move - either stock or tableau -reveal
     private boolean isWon = false;
 
     public Node(ISolitaireState state, SpecificMove move) {
@@ -38,20 +39,19 @@ public class Node {
             children.add(child);
             TreeSearcher.incrementCounter();//Adds 1 to the number of nodes searched
 
-            if (Solitaire.isStateWon(newState)){
+            if (Solitaire.isStateWon(newState)){ //If move won the game
                 child.setWon(true);
                 child.increaseMyPoints(PointsTable.WIN_BONUS);
             }
-            if (SpecificMove.isReveal(state,newState)) {
+            if (SpecificMove.isTableauReveal(state,newState)) { //If move revealed something in tableau
                 child.setReveal(true);
-                child.increaseMyPoints(PointsTable.REVEAL_BONUS);
+                child.increaseMyPoints(PointsTable.TABLEAU_REVEAL_BONUS);
             }
-            if (state.isStockKnown() ){
-
-
+            if (!state.isStockKnown() && move.getMoveType() instanceof StockMove){ //If move revealed something in stock
+                child.setReveal(true);
+                child.increaseMyPoints(PointsTable.STOCK_REVEAL_BONUS);
             }
 
-            //TODO IF STOCK-REVEAL MOVE - add a bonus
         }
     }
 

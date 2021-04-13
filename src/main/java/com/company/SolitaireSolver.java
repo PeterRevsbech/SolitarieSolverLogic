@@ -12,6 +12,8 @@ public class SolitaireSolver {
     private final long timeLimitMillis;
 
     private Strategy strategy = new Strategy();
+    private Strategy endGameStrategy = Strategy.endGameStrategy();
+
 
     public SolitaireSolver(int fixedDepth, long timeLimitMillis) {
         this.fixedDepth = fixedDepth;
@@ -26,7 +28,7 @@ public class SolitaireSolver {
 
         if (game.isAllCardsFaceUp(state)) {
             //find move
-            for (MoveType moveType : strategy.getPrioritizedMoveTypes()) {
+            for (MoveType moveType : endGameStrategy.getPrioritizedMoveTypes()) {
                 move = moveType.getMove(state);
                 if (move != null) {
                     return move;
@@ -37,7 +39,7 @@ public class SolitaireSolver {
         long t0 = System.currentTimeMillis();
         int depth = 2; //Start with a depth of 2 and increase as long as there is time
 
-        while (System.currentTimeMillis() - t0 < timeLimitMillis){ //While the time limit has not yet been exceeded - start a new round
+        while (fixedDepth != -1 || System.currentTimeMillis() - t0 < timeLimitMillis){ //While the time limit has not yet been exceeded - start a new round
             if (fixedDepth!=-1){ //If fixed depth is set - use it
                 depth=fixedDepth;
             }

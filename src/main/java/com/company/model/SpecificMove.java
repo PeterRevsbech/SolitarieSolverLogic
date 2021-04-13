@@ -70,7 +70,7 @@ public class SpecificMove {
         return 0;
     }
 
-    public static boolean isReveal(ISolitaireState oldState, ISolitaireState newState) {
+    public static boolean isTableauReveal(ISolitaireState oldState, ISolitaireState newState) {
         if (newState.getNumberOfFaceDownCards() == oldState.getNumberOfFaceDownCards() - 1) {
             return true;
         }

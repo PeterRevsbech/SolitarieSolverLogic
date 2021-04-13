@@ -19,12 +19,23 @@ public class Strategy {
         prioritizedMoveTypes.add(new TableauToFoundation());
 
         prioritizedMoveTypes.add(new TableauToTableau());
+        prioritizedMoveTypes.add(new StockMove());
+
 
         prioritizedMoveTypes.add(new WasteToTableau());
-        prioritizedMoveTypes.add(new StockMove());
 
         prioritizedMoveTypes.add(new FoundationToTableau());
 
+    }
+
+    public static Strategy endGameStrategy(){
+        Strategy strategy=  new Strategy();
+        strategy.setPrioritizedMoveTypes(new ArrayList<>());
+        strategy.prioritizedMoveTypes.add(new WasteToFoundation());
+        strategy.prioritizedMoveTypes.add(new TableauToFoundation());
+        strategy.prioritizedMoveTypes.add(new StockMove());
+
+        return strategy;
     }
 
     public List<MoveType> getPrioritizedMoveTypes() {

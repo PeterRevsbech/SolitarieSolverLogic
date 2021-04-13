@@ -21,7 +21,7 @@ public class TreeSearcher {
     public void buildTree(Node root, int depth) {
         if (depth == 0) {
             return;
-        } else if (root.isReveal()) { //TODO IF IT IS REVEAL OR STOCKREVEAL
+        } else if (root.isReveal()) {
             //Stop the seach here, since we have found a reveal
             return;
         } else if (root.isWon()){
