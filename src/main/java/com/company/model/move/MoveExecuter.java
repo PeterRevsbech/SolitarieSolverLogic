@@ -184,6 +184,7 @@ public class MoveExecuter {
 
 
     public static void updateKnownStockWaste(ISolitaireState state) {
+        //TODO Make this work with cards in the correct order
         //If we added a card to the list
         //Card must be visible on top of WastePile
         Card wasteTop = state.getWasteTop();
