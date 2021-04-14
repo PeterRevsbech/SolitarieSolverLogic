@@ -37,7 +37,7 @@ public class RandomGameTester {
     }
 
     private String report() {
-        String report = String.format("Won %d out of %d games. Winning percentage is %.2f", gamesWon, numberOfGames, gamesWon / numberOfGames);
+        String report = String.format("Won %d out of %d games. Winning percentage is %.2f", gamesWon, numberOfGames, (gamesWon*100.0) / numberOfGames);
         report += String.format("\nTotal time: %d ms", (endTime - startTime));
         report += String.format("\nAverage time pr game: %d ms", (endTime - startTime) / numberOfGames);
         report += String.format("\nAverage number of turns pr game: %d\n", totalTurnsPlayed / numberOfGames);
