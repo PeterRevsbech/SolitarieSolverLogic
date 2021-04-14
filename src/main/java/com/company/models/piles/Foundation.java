@@ -31,9 +31,9 @@ public class Foundation implements Serializable {
     }
 
     //Returns the pile that contains the card. Null if there is no such pile
-    public Pile getPileContainingCard(Card card){
+    public Pile getPileContainingCard(Card card) {
         for (int i = 0; i < 4; i++) {
-            if (piles[i].contains(card)){
+            if (piles[i].contains(card)) {
                 return piles[i];
             }
         }
@@ -82,7 +82,7 @@ public class Foundation implements Serializable {
     }
 
     public boolean cardMatchesFoundation(Card card) {
-        if (card.getValue()==Card.ACE){
+        if (card.getValue() == Card.ACE) {
             return true;
         }
 

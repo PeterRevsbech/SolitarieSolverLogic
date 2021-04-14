@@ -107,8 +107,8 @@ public interface ISolitaireState extends Cloneable {
     }
 
 
-    default boolean isStockKnown(){
-        if (getRevealedStockWaste() >= 24){
+    default boolean isStockKnown() {
+        if (getRevealedStockWaste() >= 24) {
             return true;
         }
         return false;

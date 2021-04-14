@@ -77,23 +77,23 @@ public class TableauToTableau extends MoveType {
     //Tells if a move is a useless king move ==> moving a king from an empty tableau pile to another empty tableau pile
     public static boolean isUselessKingMove(SpecificMove move, ISolitaireState state) {
 
-        if (!(move.getMoveType() instanceof TableauToTableau)){
+        if (!(move.getMoveType() instanceof TableauToTableau)) {
             return false;
         }
-        if (move.getFromParent().getValue() != Card.KING){
+        if (move.getFromParent().getValue() != Card.KING) {
             return false;
         }
-        if (move.getToCard() != null){
+        if (move.getToCard() != null) {
             return false;
         }
 
         try {
             Card kingCard = move.getFromParent();
             Pile kingPile = state.getTableau().getPileContainingCard(kingCard);
-            if (kingPile.getIndexOfCard(kingCard) != 0){
+            if (kingPile.getIndexOfCard(kingCard) != 0) {
                 return false;
             }
-        } catch (SolitarieException e){
+        } catch (SolitarieException e) {
             System.out.println("Useless king Tableau to Tableau -move wasn't recognized");
             e.printStackTrace();
             return false;

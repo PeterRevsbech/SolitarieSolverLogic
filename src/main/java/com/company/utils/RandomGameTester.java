@@ -6,7 +6,7 @@ public class RandomGameTester {
     long startTime, endTime, currentGameTime, currentStartTime;
     int gamesWon, numberOfGames, totalTurnsPlayed, turnsThisGame, totalTurnsWonGames, wonGameCounter;
     private final int DATA_SEED = -1;
-    private final double TIME_LIMIT_MILIS = 10;
+    private final double TIME_LIMIT_MILIS = 100;
     private final int FIXED_DEPTH = -1;
     private static final int NUMBER_OF_GAMES = 10;
     private static final int NUMBER_OF_UPDATES = 10;
@@ -53,9 +53,8 @@ public class RandomGameTester {
     }
 
     private String report() {
-        String report = String.format("Search time limit: %.2f s", TIME_LIMIT_MILIS / 1000);
-        report += String.format("\nWon %d out of %d games. Winning percentage: %.2f", gamesWon, numberOfGames, (gamesWon * 100.0) / numberOfGames);
-        report += String.format("\nAverage time pr game: %d s", ((endTime - startTime) / numberOfGames) / 1000);
+        String report = String.format("\nWon %d out of %d games. Winning percentage: %.2f", gamesWon, numberOfGames, (gamesWon * 100.0) / numberOfGames);
+        report += String.format("\nAverage time spend pr game: %d s", ((endTime - startTime) / numberOfGames) / 1000);
         report += String.format("\nAverage number of moves pr WON game: %d", totalTurnsWonGames / wonGameCounter);
         report += String.format("\nAverage number of moves pr TOTAL game: %d", totalTurnsPlayed / numberOfGames);
         report += String.format("\nTotal run time: %d s", (endTime - startTime) / 1000);
@@ -66,7 +65,7 @@ public class RandomGameTester {
         String report = String.format("Played %d out of %d games. %.2f pct done.", i, numberOfGames, (i * 100.0) / numberOfGames);
         report += String.format("\nMoves this game: %d, time spend this game: %d s", turnsThisGame, currentGameTime / 1000);
         //report += String.format("\nWon %d out of %d games. Winning percentage is %.2f\n", gamesWon, i, (100.0 * gamesWon) / i);
-        report += String.format("\nWins: %d, Losses: %d. Winning percentage: %.2f\n", gamesWon, i-gamesWon,(100.0 * gamesWon) / i);
+        report += String.format("\nWins: %d, Losses: %d. Winning percentage: %.2f\n", gamesWon, i - gamesWon, (100.0 * gamesWon) / i);
         return report;
     }
 

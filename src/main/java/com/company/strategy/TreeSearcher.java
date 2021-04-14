@@ -14,8 +14,8 @@ public class TreeSearcher {
     public TreeSearcher(ISolitaireState rootState, int startDepth) {
         root = new Node(rootState, null);
         root.setMyPoints(0);
-        counter=0;
-        this.startDepth=startDepth;
+        counter = 0;
+        this.startDepth = startDepth;
     }
 
     public void buildTree(Node root, int depth) {
@@ -24,7 +24,7 @@ public class TreeSearcher {
         } else if (root.isReveal()) {
             //Stop the seach here, since we have found a reveal
             return;
-        } else if (root.isWon()){
+        } else if (root.isWon()) {
             return; //Stop the search, if game is won here
         }
 
@@ -92,7 +92,7 @@ public class TreeSearcher {
         this.root = root;
     }
 
-    public static void incrementCounter(){
+    public static void incrementCounter() {
         counter++;
     }
 

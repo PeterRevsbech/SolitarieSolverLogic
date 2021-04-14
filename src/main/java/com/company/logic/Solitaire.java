@@ -110,7 +110,6 @@ public class Solitaire {
     }
 
 
-
     private void evaluateGameLost() {
         //TODO Check if no progress in a long amount of time
         //If no NEW cards have been added to foundation...
@@ -121,7 +120,7 @@ public class Solitaire {
 
     //Method that checks if the 4 tops cards in the foundation piles are kings, if so, the game is won
     public boolean evaluateGameWon(ISolitaireState state) {
-        gameWon=isStateWon(state);
+        gameWon = isStateWon(state);
         return gameWon;
     }
 

@@ -27,7 +27,7 @@ public class Node {
 
     public void addChildren(List<SpecificMove> possibleMoves) {
         for (SpecificMove move : possibleMoves) {
-            if (TableauToTableau.isUselessKingMove(move,state)){
+            if (TableauToTableau.isUselessKingMove(move, state)) {
                 //IF move is useless - don't evaluate it
                 continue;
             }
@@ -39,15 +39,15 @@ public class Node {
             children.add(child);
             TreeSearcher.incrementCounter();//Adds 1 to the number of nodes searched
 
-            if (Solitaire.isStateWon(newState)){ //If move won the game
+            if (Solitaire.isStateWon(newState)) { //If move won the game
                 child.setWon(true);
                 child.increaseMyPoints(PointsTable.WIN_BONUS);
             }
-            if (SpecificMove.isTableauReveal(state,newState)) { //If move revealed something in tableau
+            if (SpecificMove.isTableauReveal(state, newState)) { //If move revealed something in tableau
                 child.setReveal(true);
                 child.increaseMyPoints(PointsTable.TABLEAU_REVEAL_BONUS);
             }
-            if (!state.isStockKnown() && move.getMoveType() instanceof StockMove){ //If move revealed something in stock
+            if (!state.isStockKnown() && move.getMoveType() instanceof StockMove) { //If move revealed something in stock
                 child.setReveal(true);
                 child.increaseMyPoints(PointsTable.STOCK_REVEAL_BONUS);
             }
@@ -87,8 +87,8 @@ public class Node {
         this.myPoints = myPoints;
     }
 
-    public void increaseMyPoints(int points){
-        this.myPoints+=points;
+    public void increaseMyPoints(int points) {
+        this.myPoints += points;
     }
 
     public int getBranchPointsMax() {

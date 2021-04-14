@@ -28,8 +28,8 @@ public class Strategy {
 
     }
 
-    public static Strategy endGameStrategy(){
-        Strategy strategy=  new Strategy();
+    public static Strategy endGameStrategy() {
+        Strategy strategy = new Strategy();
         strategy.setPrioritizedMoveTypes(new ArrayList<>());
         strategy.prioritizedMoveTypes.add(new WasteToFoundation());
         strategy.prioritizedMoveTypes.add(new TableauToFoundation());

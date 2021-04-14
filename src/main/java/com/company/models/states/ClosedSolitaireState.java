@@ -14,7 +14,7 @@ public class ClosedSolitaireState implements ISolitaireState {
     private Tableau tableau;
     private Foundation foundation;
     private List<Card> knownStockWaste = new ArrayList<>();
-    private int revealedStockWaste =0;
+    private int revealedStockWaste = 0;
 
     public static ClosedSolitaireState newTestGame() {//Will probably not be used for more than debugging - The actual state will be given by OpenCV
         ClosedSolitaireState state = new ClosedSolitaireState();

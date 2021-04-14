@@ -133,7 +133,7 @@ public class MoveExecuter {
 
     public static void stockMove(ISolitaireState state) throws CardNotFoundException {
         Card topCard = null;
-        if (!state.getKnownStockWaste().contains(state.getWasteTop())){ // if known stock does not contain top card
+        if (!state.getKnownStockWaste().contains(state.getWasteTop())) { // if known stock does not contain top card
 
         }
         if (state.getStockPile().getTopCard() == null) { // if stock is empty
@@ -149,7 +149,7 @@ public class MoveExecuter {
             if (!state.getKnownStockWaste().contains(topCard)) {
                 //If topcard has not been seen yet
                 state.getKnownStockWaste().add(topCard);
-                state.setRevealedStockWaste(state.getRevealedStockWaste()+1);
+                state.setRevealedStockWaste(state.getRevealedStockWaste() + 1);
             }
 
         }
