@@ -1,7 +1,7 @@
 package com.company.strategy;
 
-import com.company.model.move.*;
-import com.company.model.move.movestypes.*;
+import com.company.models.moves.*;
+import com.company.models.moves.movestypes.*;
 
 import java.util.ArrayList;
 import java.util.List;

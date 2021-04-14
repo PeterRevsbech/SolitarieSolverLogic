@@ -1,7 +1,8 @@
 package com.company;
 
-import com.company.model.exceptions.SolitarieException;
-import com.company.model.state.ISolitaireState;
+import com.company.logic.Solitaire;
+import com.company.models.exceptions.SolitarieException;
+import com.company.models.states.ISolitaireState;
 import com.company.strategy.TreeSearcher;
 import com.company.utils.PrintGameState;
 

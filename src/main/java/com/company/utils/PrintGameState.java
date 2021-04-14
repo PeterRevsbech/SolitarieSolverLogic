@@ -1,10 +1,10 @@
 package com.company.utils;
 
-import com.company.model.Foundation;
-import com.company.model.StockPile;
-import com.company.model.Tableau;
-import com.company.model.WastePile;
-import com.company.model.state.ISolitaireState;
+import com.company.models.piles.Foundation;
+import com.company.models.piles.StockPile;
+import com.company.models.piles.Tableau;
+import com.company.models.piles.WastePile;
+import com.company.models.states.ISolitaireState;
 
 public class PrintGameState {
 

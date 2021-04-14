@@ -1,7 +1,7 @@
 package com.company.strategy;
 
-import com.company.model.SpecificMove;
-import com.company.model.state.ISolitaireState;
+import com.company.models.SpecificMove;
+import com.company.models.states.ISolitaireState;
 
 import java.util.List;
 

@@ -1,10 +1,10 @@
 package com.company.strategy;
 
-import com.company.Solitaire;
-import com.company.model.SpecificMove;
-import com.company.model.move.movestypes.StockMove;
-import com.company.model.move.movestypes.TableauToTableau;
-import com.company.model.state.ISolitaireState;
+import com.company.logic.Solitaire;
+import com.company.models.SpecificMove;
+import com.company.models.moves.movestypes.StockMove;
+import com.company.models.moves.movestypes.TableauToTableau;
+import com.company.models.states.ISolitaireState;
 
 import java.util.ArrayList;
 import java.util.List;
