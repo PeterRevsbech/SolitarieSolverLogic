@@ -73,7 +73,6 @@ public interface ISolitaireState extends Cloneable {
 
         try {
             MoveExecuter.executeMove(cloneState, move);
-            MoveExecuter.updateKnownStockWaste(cloneState);
         } catch (SolitarieException e) {
             System.out.println("Error in simulating move.");
             e.printStackTrace();

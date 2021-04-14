@@ -82,7 +82,7 @@ public class Solitaire {
 
         //Set newStates knownStockWaste to the clone and update it
         newState.setKnownStockWaste(clone);
-        MoveExecuter.updateKnownStockWaste(newState);
+
 
         //Add the new state to list of states
         states.add(newState);
@@ -98,9 +98,6 @@ public class Solitaire {
 
         //Execute move
         MoveExecuter.executeMove(state, move);
-
-        //Update knownStockWaste
-        MoveExecuter.updateKnownStockWaste(state);
 
         evaluateGameLost();
         evaluateGameWon(state);
