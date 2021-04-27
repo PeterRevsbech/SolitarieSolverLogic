@@ -43,6 +43,10 @@ public class Main {
         }
     }
 
+    public static void pythonCoupling(String s) {
+        System.out.println(s);
+    }
+
 
     private static void winnerMsg() {
         System.out.println("  /$$$$$$   /$$$$$$  /$$      /$$ /$$$$$$$$       /$$      /$$  /$$$$$$  /$$   /$$\n" +
