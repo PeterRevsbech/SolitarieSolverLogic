@@ -24,18 +24,30 @@ def main():
               [sg.Text('Your moves', size=(40, 1), justification='left', font='Helvetica 14')],
               [sg.Multiline(size=(30, 5),disabled=True, key='textbox',justification='top'),sg.Image(filename='', key='image')],
               [sg.ReadButton('Exit', size=(10, 1), pad=((200, 0), 3), font='Helvetica 14'),
-               sg.RButton('Capture', size=(10, 1), font='Any 14')]]
+               sg.RButton('Start Capture', size=(10, 1), font='Any 14'),
+               sg.RButton('End Capture', size=(10, 1), font='Any 14')]]
 
     # create the window and show it without the plot
     window = sg.Window('Demo Application - OpenCV Integration',
                        location=(800, 400))
     window.Layout(layout).Finalize()
 
+
+
+    #Initialize video capture and dimensions
+    cap = cv.VideoCapture(0)
+    _, frame = cap.read()  #
+    height, width, _ = frame.shape
+
     #Init the stateRecognizer
-    recognizer = stateRecognizer.StateRecognizer()
+    recognizer = stateRecognizer.StateRecognizer(width,height)
+
+    #State parameters
+    capturing = False
+    firstRound = True
+
 
     # ---===--- Event LOOP Read and display frames, operate the GUI --- #
-    cap = cv.VideoCapture(0)
     while True:
 
 
@@ -43,7 +55,16 @@ def main():
 
         if button == 'Exit' or values is None:
             sys.exit(0)
-        elif button == 'Capture':
+        elif button == 'Start Capture':
+            recognizer.reset()
+        elif button == 'End Capture':
+            if firstRound:
+                recognizer.evaluateFirstRound()
+                firstRound=False
+            else:
+                recognizer.evaluate("STOCK",None,None)
+
+
             answer = sg.popup_yes_no('Confirming state',
                                      'Are you satisfied with the current state recognized?',
                                      keep_on_top=True)
