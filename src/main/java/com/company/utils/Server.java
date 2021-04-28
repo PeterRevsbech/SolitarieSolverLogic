@@ -1,8 +1,6 @@
 package com.company.utils;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Arrays;
@@ -12,18 +10,19 @@ public class Server {
     public static void main(String[] args) throws IOException {
         String fromclient;
 
-        ServerSocket Server = new ServerSocket(5000);
+        ServerSocket server_socket = new ServerSocket(5000);
 
         System.out.println("TCPServer Waiting for client on port 5000");
 
         while (true) {
-            Socket connected = Server.accept();
-            System.out.println(" THE CLIENT" + " " + connected.getInetAddress() + ":" + connected.getPort() + " IS CONNECTED ");
+            Socket client_socket = server_socket.accept();
+            PrintWriter output = new PrintWriter(client_socket.getOutputStream(),true);
+            BufferedReader input = new BufferedReader(new InputStreamReader(client_socket.getInputStream()));
 
-            BufferedReader inFromClient = new BufferedReader(new InputStreamReader(connected.getInputStream()));
+            System.out.println(" THE CLIENT" + " " + client_socket.getInetAddress() + ":" + client_socket.getPort() + " IS CONNECTED ");
 
             while (true) {
-                fromclient = inFromClient.readLine(); //Læser "startopstilling fra python
+                fromclient = input.readLine(); //Læser "startopstilling fra python
 
                 //bygge startopstillingen vha logikken
 
@@ -33,12 +32,11 @@ public class Server {
 
                 //lukker socket
                 if (fromclient.equals("q") || fromclient.equals("Q")) {
-                    connected.close();
+                    client_socket.close();
                     break;
                 } else {
                     String[] cardArray = fromclient.split(" ");
                     System.out.println("RECIEVED: " + Arrays.toString(cardArray));
-                    
                 }
             }
         }
