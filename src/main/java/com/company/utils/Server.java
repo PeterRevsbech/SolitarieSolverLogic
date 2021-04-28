@@ -28,7 +28,7 @@ public class Server {
                     BufferedReader stdIn = new BufferedReader(new InputStreamReader(socket.getInputStream())); //Gets the list of visible cards from python
                     PrintWriter out = new PrintWriter(socket.getOutputStream(), true); //printwriter is used to send messages back to python
                     String in = stdIn.readLine(); //saves the input in a string
-                    //System.out.println(in);
+                    System.out.println(in);
 
                     //Byg et solitaire state ud fra de synlige kort
 
