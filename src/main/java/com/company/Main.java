@@ -18,7 +18,6 @@ public class Main {
         //solitaire.initGame(false); //Use this to have a winnable game (testing purposes)
         solitaire.initGame(true, true, 2, 100, -1);
 
-
         List<ISolitaireState> states = solitaire.getStates();
         PrintGameState pgs = new PrintGameState();
         pgs.initOpenSolitareState(states.get(0));
