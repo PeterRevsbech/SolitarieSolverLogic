@@ -24,8 +24,11 @@ public class Server {
         Server server = new Server();
         server.startServer();
         System.out.println(server.readInput());
-        server.writeOutput("HEJ PYTHON");
-
+        server.writeOutput("FRA JAVA 1");
+        System.out.println(server.readInput());
+        server.writeOutput("FRA JAVA 2");
+        System.out.println(server.readInput());
+        server.writeOutput("FRA JAVA 3");
     }
 
     public String readInput() {
