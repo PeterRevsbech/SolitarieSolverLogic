@@ -8,12 +8,12 @@ public class FakeServer implements IServer{
 
     @Override
     public String readInput() {
-        return null;
+        return scanner.nextLine();
     }
 
     @Override
     public void writeOutput(String moveMsg) {
-
+        System.out.println(moveMsg);
     }
 
     @Override

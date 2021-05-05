@@ -5,12 +5,14 @@ import com.company.models.SpecificMove;
 import com.company.models.exceptions.SolitarieException;
 import com.company.models.states.ClosedSolitaireState;
 import com.company.models.states.ISolitaireState;
+import com.company.utils.FakeServer;
+import com.company.utils.IServer;
 import com.company.utils.Server;
 
 public class Main {
     public static void main(String[] args) throws SolitarieException {
         //Init server and game-object
-        Server server = new Server();
+        IServer server = new FakeServer();
         Solitaire solitaire = new Solitaire();
         server.startServer();
 
