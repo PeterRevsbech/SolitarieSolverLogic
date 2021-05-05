@@ -5,6 +5,7 @@ import com.company.models.piles.*;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ClosedSolitaireState implements ISolitaireState {
@@ -16,17 +17,51 @@ public class ClosedSolitaireState implements ISolitaireState {
     private List<Card> knownStockWaste = new ArrayList<>();
     private int revealedStockWaste = 0;
 
-    public static ClosedSolitaireState newGameFromInput(String[] initialCards){
+    public static ClosedSolitaireState newGameFromInput(String[] initialCards) {
         //TODO make method body
         //Input string is the 7 cards from left to right
+
+        CardDeque cardDeque = new CardDeque();
+        List<Card> cards = cardDeque.buildDeque(initialCards);
 
         //Validate that the 7 cards are valid
 
         //Create new start-state with all null-cards (value null, suit null, faceUp=false)
-            //==> the 7 cards should be initialized correctly
+        //==> the 7 cards should be initialized correctly
+        ClosedSolitaireState state = new ClosedSolitaireState();
+
+        state.setTableau(new Tableau());
+        //Initialize Tableau
+        for (int i = 0; i < 7; i++) {
+            Pile pile = state.getTableau().getPiles()[i];
+            for (int j = 0; j < i + 1; j++) {
+                if (j == i) {
+                    //Turn the uppermost card in each pile face up
+                    pile.addCard(cards.get(i));
+                    pile.getCards().get(i).setFaceUp(true);
+                } else {
+                    pile.addCard(new Card(null, 0, false));
+                }
+            }
+        }
+        //Initialize Foundation
+        state.setFoundation(new Foundation());
+
+        //Initialize WastePile
+        state.setWastePile(new WastePile());
+
+        //Initialize StockPile
+        state.setStockPile(new StockPile());
+        for (int i = 0; i < 24; i++) {
+            state.getStockPile().addCard(new Card(null, 0, false));
+        }
+
+        //Initialize knownStockWaste
+        state.knownStockWaste = new ArrayList<>();
 
         //Return the state
-        return null;
+        return state;
+
     }
 
     public static ClosedSolitaireState newTestGame() {//Will probably not be used for more than debugging - The actual state will be given by OpenCV

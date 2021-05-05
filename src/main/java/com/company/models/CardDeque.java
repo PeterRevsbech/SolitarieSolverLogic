@@ -1,12 +1,38 @@
 package com.company.models;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
 public class CardDeque {
 
+    public CardDeque() {
+
+    }
+
     private List<Card> cardsList = new ArrayList<>();
+
+    public List<Card> buildDeque(String[] cards) {
+        HashMap<String, Card> cardMap = new HashMap<>();
+
+        int counter = 0;
+        for (Card.Suit suit : Card.Suit.values()) {
+            for (int i = 0; i <= 12; i++) {
+                cardsList.add(new Card(suit, i + 1));
+                cardMap.put(cardsList.get(counter).toString(), cardsList.get(counter));
+                counter++;
+            }
+        }
+
+        List<Card> cards1 = new ArrayList<>();
+        for (String card : cards) {
+            cards1.add(cardMap.get(card));
+        }
+
+        return cards1;
+    }
+
 
     public CardDeque(boolean isShuffled, int dataSeed) {
         for (Card.Suit suit : Card.Suit.values()) {

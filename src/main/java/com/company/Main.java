@@ -3,6 +3,7 @@ package com.company;
 import com.company.logic.Solitaire;
 import com.company.models.states.ClosedSolitaireState;
 import com.company.models.states.ISolitaireState;
+import com.company.utils.PrintGameState;
 import com.company.utils.Server;
 
 public class Main {
@@ -16,11 +17,18 @@ public class Main {
         String input = server.readInput();
 
         //Init game
+        //String[] init = {"AH", "KH", "QH", "JH", "10H", "9H", "8H"};
+        //ISolitaireState startState = ClosedSolitaireState.newGameFromInput(init);
         ISolitaireState startState = ClosedSolitaireState.newGameFromInput(input.split(" "));
         solitaire.initClosedGame(startState);
 
+        PrintGameState pgs = new PrintGameState();
+
+        pgs.initClosedSolitareState(startState);
+        pgs.printCurrentState();
+
         //While game is not over
-        while (!solitaire.isGameWon() && !solitaire.isGameLost()){
+/*        while (!solitaire.isGameWon() && !solitaire.isGameLost()){
             //Get moveMsg
             String moveMsg = solitaire.findNextMoveClosedGame().formatGuiMoveMsg(solitaire.isUnkownCard());
 
@@ -32,7 +40,7 @@ public class Main {
 
             //Update game from input
             solitaire.updateClosedGame(input);
-        }
+        }*/
 
 
     }
