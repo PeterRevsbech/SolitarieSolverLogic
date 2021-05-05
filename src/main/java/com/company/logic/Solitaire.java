@@ -13,7 +13,7 @@ import java.util.List;
 
 public class Solitaire {
 
-    private boolean unkownCard = true;
+    public static Card unkownCard;
     public static final String NO_CARD = "NONE";
     private SolitaireSolver solver;
     private List<ISolitaireState> states;
@@ -54,37 +54,68 @@ public class Solitaire {
         return isAllFaceup;
     }
 
-    public void updateClosedGame(String input){
-        //TODO make method body
+    public void updateClosedGame(String input) throws SolitarieException {
         //Input is either a card (as string)  or NO_CARD ("NONE")
 
-        //if input is not "NONE" (also unkown card must be true)
-            //Take old state ==> Set unknown card to card from input
-            //Set unknown card to false
+        if (input.equals(NO_CARD)){
+            //Game is already up to date
 
-        //Add new state to list of states
+            //Assert that unknownCard is null
+            if (unkownCard != null){//also unkown card must be true
+                throw new SolitarieException("Got NONE from GUI, but expected to find a card.");
+            }
 
+        } else {//if input is not "NONE"
+            if (unkownCard == null){//also unkown card must be true
+                throw new SolitarieException("Got "+input+" from GUI, but expected NONE.");
+            }
+
+            //Set value of unknown card from input
+            unkownCard.setSuit(Card.suitFromString(input));
+            unkownCard.setValue(Card.valueFromString(input));
+
+            //Indicate, that game no longer contains an unknown card.
+            unkownCard = null;
+        }
     }
 
+    /*
     public SpecificMove findNextMoveClosedGame(){
-        //TODO make method body
         //Assumes that game state is valid (no unknown card, that should not be unknown)
 
         //Find next move
+        // get latest state, call solver to find next move
+        ISolitaireState currentState = states.get(states.size() - 1);
+
+        nextMove = solver.bestPossibleMove(this);
+        if (nextMove == null) {
+            gameLost = true;
+        }
+
+        // call the method makeMove, add the state to list of states
+        try {
+            ISolitaireState nextState = playTurn(currentState, nextMove);
+        } catch (SolitarieException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+
 
         //If move is reveal move ==> set variable that indicates, we need to known which card it is
-        unkownCard = true;
+        //unkownCard = true;
 
       return null;
     }
 
+     */
+
     public boolean isUnkownCard() {
-        return unkownCard;
+        return unkownCard!=null;
     }
 
-    public void setUnkownCard(boolean unkownCard) {
-        this.unkownCard = unkownCard;
-    }
 
     public void initClosedGame(ISolitaireState startState) {
         states = new ArrayList<>();

@@ -1,12 +1,14 @@
 package com.company;
 
 import com.company.logic.Solitaire;
+import com.company.models.SpecificMove;
+import com.company.models.exceptions.SolitarieException;
 import com.company.models.states.ClosedSolitaireState;
 import com.company.models.states.ISolitaireState;
 import com.company.utils.Server;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SolitarieException {
         //Init server and game-object
         Server server = new Server();
         Solitaire solitaire = new Solitaire();
@@ -21,8 +23,11 @@ public class Main {
 
         //While game is not over
         while (!solitaire.isGameWon() && !solitaire.isGameLost()){
+
             //Get moveMsg
-            String moveMsg = solitaire.findNextMoveClosedGame().formatGuiMoveMsg(solitaire.isUnkownCard());
+            solitaire.makeNextMove();
+            SpecificMove move = solitaire.getNextMove();
+            String moveMsg = move.formatGuiMoveMsg(solitaire.isUnkownCard());
 
             //Write to GUI: unknownCard;move
             server.writeOutput(moveMsg);

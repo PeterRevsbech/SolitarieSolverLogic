@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class Server {
+public class Server implements  IServer{
 
     private Thread sent;
     private Thread receive;

@@ -1,5 +1,6 @@
 package com.company.models.moves;
 
+import com.company.logic.Solitaire;
 import com.company.models.Card;
 import com.company.models.piles.Pile;
 import com.company.models.SpecificMove;
@@ -68,10 +69,10 @@ public class MoveExecuter {
         Pile toPile;
 
         if (move.getToCard() == null) {//If moving til empty pile
-            //If move.toChild is null, it means move to an empty pile
+            //If move.getToChild is null, it means move to an empty pile
 
             //Assure that card being moved is a king
-            if (move.getFromParent().getValue() != 13) {
+            if (move.getFromParent().getValue() != Card.KING) {
                 throw new SolitarieException(String.format("Trying to move %s to empty pile", move.getFromParent().toString()));
             }
 
@@ -99,11 +100,18 @@ public class MoveExecuter {
         List<Card> movedCards = fromPile.getChildren(move.getFromParent());
         fromPile.removeCards(movedCards);
 
-        //Set next card faceUp in fromPile
-        if (!fromPile.isEmpty()) {
-            fromPile.getTopCard().setFaceUp(true);
+
+        //Check if card underneath was previously face down
+        if (!fromPile.isEmpty() && !fromPile.getTopCard().isFaceUp()){
+            //Set next card faceUp in fromPile
+            Card unkownCard = fromPile.getTopCard();
+            unkownCard.setFaceUp(true);
+
+            //Set unknown card in Solitaire
+            Solitaire.unkownCard = unkownCard;
         }
 
+        //add moved cards to toPile
         toPile.addCards(movedCards);
     }
 
@@ -119,9 +127,14 @@ public class MoveExecuter {
             throw new SolitarieException(String.format("Tried to draw %s from tableu to foundation, but it was not the top card.", card.toString()));
         }
 
-        //Set next card to faceUp
-        if (!tableuPile.isEmpty()) {
-            tableuPile.getTopCard().setFaceUp(true);
+        //Check if card underneath was previously face down
+        if (!tableuPile.isEmpty() && !tableuPile.getTopCard().isFaceUp()){
+            //Set next card to faceUp
+            Card unkownCard = tableuPile.getTopCard();
+            unkownCard.setFaceUp(true);
+
+            //Set unknown card in Solitaire
+            Solitaire.unkownCard = unkownCard;
         }
 
         //Find correct pile in foundation
@@ -133,9 +146,15 @@ public class MoveExecuter {
 
     public static void stockMove(ISolitaireState state) throws CardNotFoundException {
         Card topCard = null;
-        if (!state.getKnownStockWaste().contains(state.getWasteTop())) { // if known stock does not contain top card
 
+        /* TODO find ud af om det her er nødvendigt
+        // if known stock does not contain top card
+        if (!state.getKnownStockWaste().contains(state.getWasteTop())) {
+            state.getKnownStockWaste().add(state.getWasteTop());
         }
+         */
+
+
         if (state.getStockPile().getTopCard() == null) { // if stock is empty
             //Take all cards from waste in reverse order
             List<Card> newStockPile = state.getWastePile().takeTurnedPile();
@@ -150,6 +169,9 @@ public class MoveExecuter {
                 //If topcard has not been seen yet
                 state.getKnownStockWaste().add(topCard);
                 state.setRevealedStockWaste(state.getRevealedStockWaste() + 1);
+
+                //This card is unknown in a closed game untill GUI updates it
+                Solitaire.unkownCard = topCard;
             }
 
         }
