@@ -14,13 +14,16 @@ public class CardDeque {
     private List<Card> cardsList = new ArrayList<>();
 
     public List<Card> buildDeque(String[] cards) {
+        final List<Card> cardsList2 = new ArrayList<>();
         HashMap<String, Card> cardMap = new HashMap<>();
 
         int counter = 0;
+
+        //Adding all 52 cards to a hash maps which uses the shortened name as key.
         for (Card.Suit suit : Card.Suit.values()) {
             for (int i = 0; i <= 12; i++) {
-                cardsList.add(new Card(suit, i + 1));
-                cardMap.put(cardsList.get(counter).toString(), cardsList.get(counter));
+                cardsList2.add(new Card(suit, i + 1));
+                cardMap.put(cardsList2.get(counter).toString(), cardsList2.get(counter));
                 counter++;
             }
         }
