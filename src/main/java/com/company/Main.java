@@ -11,7 +11,7 @@ import com.company.utils.Server;
 public class Main {
     public static void main(String[] args) throws SolitarieException {
         //Init server and game-object
-        Server server = new Server();
+        IServer server = new FakeServer();
         Solitaire solitaire = new Solitaire();
         server.startServer();
 
