@@ -1,5 +1,7 @@
 package com.company.models;
 
+import com.company.models.exceptions.SolitarieException;
+
 import java.io.Serializable;
 
 public class Card implements Serializable {
@@ -90,5 +92,50 @@ public class Card implements Serializable {
 
     public Card clone() {
         return new Card(this.getSuit(), this.getValue(), this.isFaceUp());
+    }
+
+
+    public static int valueFromString(String input) throws SolitarieException {
+        if (input.contains("A")){
+            return Card.ACE;
+        } else if (input.contains("2")){
+            return 2;
+        } else if (input.contains("3")){
+            return 3;
+        } else if (input.contains("4")){
+            return 4;
+        } else if (input.contains("5")){
+            return 5;
+        } else if (input.contains("6")){
+            return 6;
+        } else if (input.contains("7")){
+            return 7;
+        } else if (input.contains("8")){
+            return 8;
+        } else if (input.contains("9")){
+            return 9;
+        } else if (input.contains("10")){
+            return 10;
+        } else if (input.contains("J")){
+            return Card.JACK;
+        } else if (input.contains("Q")){
+            return Card.QUEEN;
+        } else if (input.contains("K")){
+            return Card.KING;
+        }
+        throw new SolitarieException("Unkown card string - cannot match value of card" + input);
+    }
+
+    public static Suit suitFromString(String input) throws SolitarieException {
+        if (input.contains("H")){
+            return Suit.Hearts;
+        } else if (input.contains("D")){
+            return Suit.Diamonds;
+        } else if (input.contains("C")){
+            return Suit.Clubs;
+        } else if (input.contains("S")){
+            return Suit.Spades;
+        }
+        throw new SolitarieException("Unkown suit string - cannot match suit of card" + input);
     }
 }
