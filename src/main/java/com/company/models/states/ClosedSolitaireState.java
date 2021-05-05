@@ -16,6 +16,19 @@ public class ClosedSolitaireState implements ISolitaireState {
     private List<Card> knownStockWaste = new ArrayList<>();
     private int revealedStockWaste = 0;
 
+    public static ClosedSolitaireState newGameFromInput(String[] initialCards){
+        //TODO make method body
+        //Input string is the 7 cards from left to right
+
+        //Validate that the 7 cards are valid
+
+        //Create new start-state with all null-cards (value null, suit null, faceUp=false)
+            //==> the 7 cards should be initialized correctly
+
+        //Return the state
+        return null;
+    }
+
     public static ClosedSolitaireState newTestGame() {//Will probably not be used for more than debugging - The actual state will be given by OpenCV
         ClosedSolitaireState state = new ClosedSolitaireState();
         CardDeque deque = new CardDeque(true, -1);

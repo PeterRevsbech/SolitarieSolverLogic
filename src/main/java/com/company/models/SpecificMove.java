@@ -80,6 +80,11 @@ public class SpecificMove {
     public String toString() {
         return "Move type: " + moveType + "\nMove executed: " + fromParent + " -> " + toCard;
     }
+
+
+    public String formatGuiMoveMsg(boolean unkownCard){
+        return null;
+    }
 }
 
 

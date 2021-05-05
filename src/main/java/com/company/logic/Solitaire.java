@@ -13,6 +13,8 @@ import java.util.List;
 
 public class Solitaire {
 
+    private boolean unkownCard = true;
+    public static final String NO_CARD = "NONE";
     private SolitaireSolver solver;
     private List<ISolitaireState> states;
     private boolean gameWon;
@@ -52,7 +54,39 @@ public class Solitaire {
         return isAllFaceup;
     }
 
-    public void initClosedGame(ClosedSolitaireState startState) {
+    public void updateClosedGame(String input){
+        //TODO make method body
+        //Input is either a card (as string)  or NO_CARD ("NONE")
+
+        //if input is not "NONE" (also unkown card must be true)
+            //Take old state ==> Set unknown card to card from input
+            //Set unknown card to false
+
+        //Add new state to list of states
+
+    }
+
+    public SpecificMove findNextMoveClosedGame(){
+        //TODO make method body
+        //Assumes that game state is valid (no unknown card, that should not be unknown)
+
+        //Find next move
+
+        //If move is reveal move ==> set variable that indicates, we need to known which card it is
+        unkownCard = true;
+
+      return null;
+    }
+
+    public boolean isUnkownCard() {
+        return unkownCard;
+    }
+
+    public void setUnkownCard(boolean unkownCard) {
+        this.unkownCard = unkownCard;
+    }
+
+    public void initClosedGame(ISolitaireState startState) {
         states = new ArrayList<>();
         states.add(startState);
         gameWon = false;
