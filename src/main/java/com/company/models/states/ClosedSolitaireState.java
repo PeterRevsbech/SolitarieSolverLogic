@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ClosedSolitaireState implements ISolitaireState {
+public class ClosedSolitaireState implements ISolitaireState, Serializable {
 
     private WastePile wastePile;
     private StockPile stockPile;

@@ -83,7 +83,7 @@ public class SpecificMove {
 
 
     public String formatGuiMoveMsg(boolean unkownCard){
-        return null;
+        return toString() +" "+ unkownCard;
     }
 }
 

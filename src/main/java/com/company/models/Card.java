@@ -60,6 +60,10 @@ public class Card implements Serializable {
 
     @Override
     public String toString() {
+        if (value == 0 && suit == null){
+            return "*";
+        }
+
         if (value == 11) {
             return "J" + suit.toString().charAt(0);
         }

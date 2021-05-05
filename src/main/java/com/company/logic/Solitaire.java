@@ -14,6 +14,7 @@ import java.util.List;
 public class Solitaire {
 
     public static Card unkownCard;
+    public static boolean simulating = false;
     public static final String NO_CARD = "NONE";
     private SolitaireSolver solver;
     private List<ISolitaireState> states;
@@ -117,7 +118,8 @@ public class Solitaire {
     }
 
 
-    public void initClosedGame(ISolitaireState startState) {
+    public void initClosedGame(ISolitaireState startState, int fixedDepth, long timeLimitMillis) {
+        solver = new SolitaireSolver(fixedDepth, timeLimitMillis);
         states = new ArrayList<>();
         states.add(startState);
         gameWon = false;

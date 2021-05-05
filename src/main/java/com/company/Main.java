@@ -5,6 +5,8 @@ import com.company.models.SpecificMove;
 import com.company.models.exceptions.SolitarieException;
 import com.company.models.states.ClosedSolitaireState;
 import com.company.models.states.ISolitaireState;
+import com.company.utils.FakeServer;
+import com.company.utils.IServer;
 import com.company.utils.PrintGameState;
 import com.company.utils.Server;
 
@@ -22,12 +24,7 @@ public class Main {
         //String[] init = {"AH", "KH", "QH", "JH", "10H", "9H", "8H"};
         //ISolitaireState startState = ClosedSolitaireState.newGameFromInput(init);
         ISolitaireState startState = ClosedSolitaireState.newGameFromInput(input.split(" "));
-        solitaire.initClosedGame(startState);
-
-        PrintGameState pgs = new PrintGameState();
-
-        pgs.initClosedSolitareState(startState);
-        pgs.printCurrentState();
+        solitaire.initClosedGame(startState,-1,100);
 
         //While game is not over
         while (!solitaire.isGameWon() && !solitaire.isGameLost()){
