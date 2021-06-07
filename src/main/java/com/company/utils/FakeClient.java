@@ -2,7 +2,7 @@ package com.company.utils;
 
 import java.util.Scanner;
 
-public class FakeServer implements IServer{
+public class FakeClient implements IClient {
 
     Scanner scanner;
 
@@ -17,7 +17,7 @@ public class FakeServer implements IServer{
     }
 
     @Override
-    public void startServer() {
+    public void startClient() {
         scanner = new Scanner(System.in);
     }
 }

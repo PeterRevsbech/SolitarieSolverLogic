@@ -13,7 +13,7 @@ import java.util.List;
 
 public class Solitaire {
 
-    public static Card unkownCard;
+    public static Card unkownCard; //Points to null: all cards are known ;    Points to a card with value null and suit null: the unknown card
     public static boolean simulating = false;
     public static final String NO_CARD = "NONE";
     private SolitaireSolver solver;
@@ -213,6 +213,8 @@ public class Solitaire {
         if (nextMove == null) {
             gameLost = true;
         }
+        //Simulations may have set unknownCard ==> Reset it
+        unkownCard = null;
 
         // call the method makeMove, add the state to list of states
         try {

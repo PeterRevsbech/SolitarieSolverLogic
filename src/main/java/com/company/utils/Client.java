@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class Server implements  IServer{
+public class Client implements IClient {
 
     private Thread sent;
     private Thread receive;
@@ -19,16 +19,16 @@ public class Server implements  IServer{
     private PrintWriter stdOut;
 
     public static void main(String[] args) {
-        //For at oprette forbindelse til python laves en server, der kaldes start server.
+        //For at oprette forbindelse til python laves en client, der kaldes start client.
         //man kan derefter læse input vha. readInput og skrive til python vha writeOutput
-        Server server = new Server();
-        server.startServer();
-        System.out.println(server.readInput());
-        server.writeOutput("FRA JAVA 1");
-        System.out.println(server.readInput());
-        server.writeOutput("FRA JAVA 2");
-        System.out.println(server.readInput());
-        server.writeOutput("FRA JAVA 3");
+        Client client = new Client();
+        client.startClient();
+        System.out.println(client.readInput());
+        client.writeOutput("FRA JAVA 1");
+        System.out.println(client.readInput());
+        client.writeOutput("FRA JAVA 2");
+        System.out.println(client.readInput());
+        client.writeOutput("FRA JAVA 3");
     }
 
     public String readInput() {
@@ -66,7 +66,7 @@ public class Server implements  IServer{
         }
     }
 
-    public void startServer() {
+    public void startClient() {
         try {
             socket = new Socket(HOST, PORT); //Creates a new socket
         } catch (IOException e1) {

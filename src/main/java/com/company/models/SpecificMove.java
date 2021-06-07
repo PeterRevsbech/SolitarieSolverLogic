@@ -83,6 +83,7 @@ public class SpecificMove {
 
 
     public String formatGuiMoveMsg(boolean unkownCard){
+        //TODO make this friendly
         return toString() +" "+ unkownCard;
     }
 }

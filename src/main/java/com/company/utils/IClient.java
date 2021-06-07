@@ -6,12 +6,12 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public interface IServer {
+public interface IClient {
 
     public String readInput();
 
     //method used to send a string to the  client
     public void writeOutput(String moveMsg);
 
-    public void startServer();
+    public void startClient();
 }
