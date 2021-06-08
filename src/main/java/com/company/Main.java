@@ -5,6 +5,7 @@ import com.company.models.SpecificMove;
 import com.company.models.exceptions.SolitarieException;
 import com.company.models.states.ClosedSolitaireState;
 import com.company.models.states.ISolitaireState;
+import com.company.utils.Client;
 import com.company.utils.FakeClient;
 import com.company.utils.IClient;
 
@@ -20,7 +21,8 @@ public class Main {
 
     public static void main(String[] args) throws SolitarieException, IOException {
         //Init client and game-object
-        IClient client = new FakeClient();
+        //IClient client = new FakeClient();
+        IClient client = new Client();
         Solitaire solitaire = new Solitaire();
         client.startClient();
 
@@ -62,8 +64,6 @@ public class Main {
             //Update game from input
             solitaire.updateClosedGame(input);
         }
-
-
     }
 
     static String extractUnknownCard(String msg){

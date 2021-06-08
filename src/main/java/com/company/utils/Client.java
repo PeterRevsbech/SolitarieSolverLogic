@@ -40,6 +40,7 @@ public class Client implements IClient {
             e.printStackTrace();
             System.out.println("READING INPUT ERROR");
         }
+        System.out.println("Python input "+input);
         return input;
     }
 
@@ -59,6 +60,7 @@ public class Client implements IClient {
         });
         sent.start();
         try {
+            System.out.println("Next move: "+moveMsg);
             sent.join();
         } catch (InterruptedException e) {
             // TODO Auto-generated catch block
