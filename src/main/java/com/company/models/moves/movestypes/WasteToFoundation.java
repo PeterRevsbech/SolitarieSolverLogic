@@ -49,6 +49,6 @@ public class WasteToFoundation extends MoveType {
 
     @Override
     public String toString() {
-        return "WasteToFoundation";
+        return "Waste -> Foundation";
     }
 }

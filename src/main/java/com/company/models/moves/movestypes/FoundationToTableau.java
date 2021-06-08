@@ -75,6 +75,6 @@ public class FoundationToTableau extends MoveType {
 
     @Override
     public String toString() {
-        return "FoundationToTableau";
+        return "Foundation -> Tableau";
     }
 }

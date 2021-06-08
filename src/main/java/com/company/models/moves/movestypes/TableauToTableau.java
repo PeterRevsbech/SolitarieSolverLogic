@@ -70,7 +70,7 @@ public class TableauToTableau extends MoveType {
 
     @Override
     public String toString() {
-        return "TableauToTableau";
+        return "Tableau -> Tableau";
     }
 
 
