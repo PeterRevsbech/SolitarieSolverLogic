@@ -21,8 +21,8 @@ public class Main {
 
     public static void main(String[] args) throws SolitarieException, IOException {
         //Init client and game-object
-        //IClient client = new FakeClient();
-        IClient client = new Client();
+        IClient client = new FakeClient();
+        //IClient client = new Client();
         Solitaire solitaire = new Solitaire();
         client.startClient();
 

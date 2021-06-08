@@ -81,13 +81,39 @@ public class SpecificMove {
         return "Move type: " + moveType + "\nMove executed: " + fromParent + " -> " + toCard;
     }
 
+
+
     public String detailedToString() {
         //TODO create this
-        return "Move type: " + moveType + "\nMove executed: " + fromParent + " -> " + toCard;
+        String stringToCard = "";
+        if (toCard==null) {
+            stringToCard="empty field";
+        } else{
+            stringToCard=toCard.toString();
+        }
+
+        if (moveType instanceof StockMove) {
+            return "Turn the top card from the stock.";
+        } else if (moveType instanceof WasteToTableau ) {
+            return "Move "+fromParent+" from waste, to "+stringToCard+" in the tableau.";
+        } else if (moveType instanceof WasteToFoundation ) {
+            return "Move "+fromParent+" from waste, to the foundation.";
+        } else if (moveType instanceof TableauToFoundation) {
+            return "Move "+fromParent+" from tableau, to the foundation.";
+        } else if (moveType instanceof TableauToTableau) {
+            return "Move "+fromParent+" from tableau, to "+stringToCard+" in the tableau.";
+        } else if (moveType instanceof FoundationToTableau) {
+            return "Move "+fromParent+" from foundation, to "+stringToCard+" in the tableau.";
+        }
+        //TODO Flip stockpile
+
+
+
+        return "";
     }
 
     public String formatGuiMoveMsg(boolean unkownCard){
-        //TODO make this friendly
+        //TODO remove unknownCards for debugging purp
         return detailedToString() +";"+ unkownCard;
     }
 }
