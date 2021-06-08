@@ -81,8 +81,6 @@ public class SpecificMove {
         return "Move type: " + moveType + "\nMove executed: " + fromParent + " -> " + toCard;
     }
 
-
-
     public String detailedToString() {
         //TODO create this
         String stringToCard = "";
@@ -113,8 +111,8 @@ public class SpecificMove {
     }
 
     public String formatGuiMoveMsg(boolean unkownCard){
-        //TODO remove unknownCards for debugging purp
-        return detailedToString() +";"+ unkownCard;
+        //TODO make this friendly
+        return detailedToString() +";"+ unkownCard + ";" + "PUT WON OR LOST MSG HERE";
     }
 }
 
