@@ -50,7 +50,12 @@ public class Main {
 
             //-----------------------Read next request from client----------------------
             if (input.contains(END_GAME)){//If client wants to end game
-                System.exit(0);
+                //Restart everything
+                solitaire = new Solitaire();
+                //Init game
+                startState = ClosedSolitaireState.newGameFromInput(input.split(" "));
+                solitaire.initClosedGame(startState,-1,100);
+                continue;
             }
 
             if (solitaire.isUnkownCard()){ //If we asked for unknown card - read it
