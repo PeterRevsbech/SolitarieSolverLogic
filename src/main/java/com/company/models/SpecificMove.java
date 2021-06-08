@@ -81,10 +81,14 @@ public class SpecificMove {
         return "Move type: " + moveType + "\nMove executed: " + fromParent + " -> " + toCard;
     }
 
+    public String detailedToString() {
+        //TODO create this
+        return "Move type: " + moveType + "\nMove executed: " + fromParent + " -> " + toCard;
+    }
 
     public String formatGuiMoveMsg(boolean unkownCard){
         //TODO make this friendly
-        return toString() +" "+ unkownCard;
+        return detailedToString() +";"+ unkownCard;
     }
 }
 
