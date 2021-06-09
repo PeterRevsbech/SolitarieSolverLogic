@@ -121,7 +121,11 @@ public class ClosedSolitaireState implements ISolitaireState, Serializable {
 
     @Override
     public boolean isStockEmpty() {
-        return stockPile.isEmpty();
+        //TODO check that is is correct
+        //In closed state - knownstockwaste is used instead of the real stock
+        // ==> check if stock empty by looking at number of cards seen in stockwaste
+        //28 cards in intial setup ==> 24 cards in stock in total
+        return revealedStockWaste == 24;
     }
 
     public void setTableau(Tableau tableau) {
