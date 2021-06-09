@@ -84,11 +84,7 @@ public class SpecificMove {
     public String detailedToString() {
         //TODO create this
         String stringToCard = "";
-        if (toCard==null) {
-            stringToCard="empty field";
-        } else{
-            stringToCard=toCard.toString();
-        }
+        stringToCard= toCard == null ? "empty field" : toCard.toString();
 
         if (moveType instanceof StockMove) {
             return "Reveal the top card from the stock and move it to the waste pile.";
