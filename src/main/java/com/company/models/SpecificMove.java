@@ -110,9 +110,9 @@ public class SpecificMove {
         return "";
     }
 
-    public String formatGuiMoveMsg(boolean unkownCard){
+    public String formatGuiMoveMsg(boolean unkownCard,String gameState){
         //TODO make this friendly
-        return detailedToString() +";"+ unkownCard + ";" + "PUT WON OR LOST MSG HERE";
+        return detailedToString() +";"+ unkownCard + ";" + gameState;
     }
 }
 

@@ -39,7 +39,13 @@ public class Main {
             //Get moveMsg
             solitaire.makeNextMove();
             SpecificMove move = solitaire.getNextMove();
-            String moveMsg = move.formatGuiMoveMsg(solitaire.isUnkownCard());
+            String gameState="";
+            if (solitaire.isGameWon()){
+                gameState=GAME_WON;
+            } else if(solitaire.isGameLost()) {
+                gameState=GAME_LOST;
+            }
+            String moveMsg = move.formatGuiMoveMsg(solitaire.isUnkownCard(), gameState);
 
             //Write to GUI: unknownCard;move
             client.writeOutput(moveMsg);
