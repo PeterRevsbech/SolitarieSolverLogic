@@ -1,5 +1,7 @@
 package com.company.utils;
 
+import com.company.models.SpecificMove;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -76,4 +78,6 @@ public class Client implements IClient {
             e1.printStackTrace();
         }
     }
+
+
 }

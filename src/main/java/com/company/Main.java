@@ -45,7 +45,7 @@ public class Main {
             } else if(solitaire.isGameLost()) {
                 wonOrLost=GAME_LOST;
             }
-            String moveMsg = move.formatGuiMoveMsg(solitaire.isUnkownCard(), wonOrLost,solitaire.getTurnsPlayed());
+            String moveMsg = client.formatGuiMoveMsg(move,solitaire.isUnkownCard(), wonOrLost,solitaire.getTurnsPlayed());
 
             //Write to GUI: unknownCard;move
             client.writeOutput(moveMsg);

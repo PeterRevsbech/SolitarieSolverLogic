@@ -1,5 +1,7 @@
 package com.company.utils;
 
+import com.company.models.SpecificMove;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -14,4 +16,8 @@ public interface IClient {
     public void writeOutput(String moveMsg);
 
     public void startClient();
+
+    public default String formatGuiMoveMsg(SpecificMove move, boolean unkownCard, String wonOrLost){
+        return move.detailedToString() +";"+ unkownCard + ";" + wonOrLost;
+    }
 }
