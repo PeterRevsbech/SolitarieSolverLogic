@@ -17,7 +17,7 @@ public interface IClient {
 
     public void startClient();
 
-    public default String formatGuiMoveMsg(SpecificMove move, boolean unkownCard, String wonOrLost){
+    public default String formatGuiMoveMsg(SpecificMove move, boolean unkownCard, String wonOrLost, int getTurnsplayed){
         return move.detailedToString() +";"+ unkownCard + ";" + wonOrLost;
     }
 }
