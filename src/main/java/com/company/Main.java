@@ -45,14 +45,23 @@ public class Main {
             } else if(solitaire.isGameLost()) {
                 wonOrLost=GAME_LOST;
             }
-            String moveMsg = client.formatGuiMoveMsg(move,solitaire.isUnkownCard(), wonOrLost,solitaire.getTurnsPlayed());
+
+            ISolitaireState previousState;
+            if (solitaire.getStates().size() == 1) {
+                previousState = null;
+            } else {
+                previousState = solitaire.getStates().get(solitaire.getStates().size()-2);
+            }
+
+            boolean unkownCard = solitaire.isUnkownCard();
+            int turnsPlayed = solitaire.getTurnsPlayed();
+            String moveMsg = client.formatGuiMoveMsg(previousState,move,unkownCard, wonOrLost,turnsPlayed);
 
             //Write to GUI: unknownCard;move
             client.writeOutput(moveMsg);
 
             //Read next request from client
             input = client.readInput();
-
 
             //-----------------------Read next request from client----------------------
             if (input.contains(END_GAME)){//If client wants to end game

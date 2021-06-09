@@ -81,13 +81,17 @@ public class SpecificMove {
         return "Move type: " + moveType + "\nMove executed: " + fromParent + " -> " + toCard;
     }
 
-    public String detailedToString() {
+    public String detailedToString(ISolitaireState state) {
         //TODO create this
         String stringToCard = "";
         stringToCard= toCard == null ? "empty field" : toCard.toString();
 
         if (moveType instanceof StockMove) {
+            if (state != null && state.isStockEmpty()){ //If stock is empty (cannot be in first round)
+                return "Turn the waste pile over to renew the stock pile.";
+            }
             return "Reveal the top card from the stock and move it to the waste pile.";
+
         } else if (moveType instanceof WasteToTableau ) {
             return "Move "+fromParent+" from waste to "+stringToCard+" in the tableau.";
         } else if (moveType instanceof WasteToFoundation ) {
@@ -106,10 +110,7 @@ public class SpecificMove {
         return "";
     }
 
-    public String formatGuiMoveMsg(boolean unkownCard,String wonOrLost,int turnsPlayed){
-        //TODO make this friendly
-        return detailedToString() +";"+ unkownCard + ";" + wonOrLost+";"+turnsPlayed;
-    }
+
 }
 
 
