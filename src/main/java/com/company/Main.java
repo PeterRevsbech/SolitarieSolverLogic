@@ -21,8 +21,8 @@ public class Main {
 
     public static void main(String[] args) throws SolitarieException, IOException {
         //Init client and game-object
-        IClient client = new FakeClient();
-        //IClient client = new Client();
+        //IClient client = new FakeClient();
+        IClient client = new Client();
         Solitaire solitaire = new Solitaire();
         client.startClient();
 
@@ -45,7 +45,7 @@ public class Main {
             } else if(solitaire.isGameLost()) {
                 gameState=GAME_LOST;
             }
-            String moveMsg = move.formatGuiMoveMsg(solitaire.isUnkownCard(), gameState);
+            String moveMsg = move.formatGuiMoveMsg(solitaire.isUnkownCard(), gameState, solitaire.getTurnsPlayed());
 
             //Write to GUI: unknownCard;move
             client.writeOutput(moveMsg);

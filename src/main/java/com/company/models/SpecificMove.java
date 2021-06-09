@@ -110,9 +110,9 @@ public class SpecificMove {
         return "";
     }
 
-    public String formatGuiMoveMsg(boolean unkownCard,String gameState){
+    public String formatGuiMoveMsg(boolean unkownCard,String gameState,int turnsPlayed){
         //TODO make this friendly
-        return detailedToString() +";"+ unkownCard + ";" + gameState;
+        return detailedToString() +";"+ unkownCard + ";" + gameState+";"+turnsPlayed; //python fejler hvis der ikke sendes gamestate
     }
 }
 
