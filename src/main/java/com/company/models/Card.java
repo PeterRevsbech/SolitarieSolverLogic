@@ -118,7 +118,7 @@ public class Card implements Serializable {
             return 8;
         } else if (input.contains("9")){
             return 9;
-        } else if (input.contains("10")){
+        } else if (input.contains("1 0")){
             return 10;
         } else if (input.contains("J")){
             return Card.JACK;

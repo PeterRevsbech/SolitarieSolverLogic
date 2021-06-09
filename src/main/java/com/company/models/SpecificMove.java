@@ -84,11 +84,7 @@ public class SpecificMove {
     public String detailedToString() {
         //TODO create this
         String stringToCard = "";
-        if (toCard==null) {
-            stringToCard="empty field";
-        } else{
-            stringToCard=toCard.toString();
-        }
+        stringToCard= toCard == null ? "empty field" : toCard.toString();
 
         if (moveType instanceof StockMove) {
             return "Reveal the top card from the stock and move it to the waste pile.";
@@ -110,9 +106,9 @@ public class SpecificMove {
         return "";
     }
 
-    public String formatGuiMoveMsg(boolean unkownCard,String gameState,int turnsPlayed){
+    public String formatGuiMoveMsg(boolean unkownCard,String wonOrLost,int turnsPlayed){
         //TODO make this friendly
-        return detailedToString() +";"+ unkownCard + ";" + gameState+";"+turnsPlayed; //python fejler hvis der ikke sendes gamestate
+        return detailedToString() +";"+ unkownCard + ";" + wonOrLost+";"+turnsPlayed;
     }
 }
 
