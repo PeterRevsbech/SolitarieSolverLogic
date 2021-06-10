@@ -17,6 +17,7 @@ public class Main {
     private static final String END_GAME = "END_GAME";
     private static final String GAME_WON = "GAME_WON";
     private static final String GAME_LOST = "GAME_LOST";
+    private static boolean b = false;
 
 
     public static void main(String[] args) throws SolitarieException, IOException {
@@ -35,6 +36,18 @@ public class Main {
 
         //While game is not over
         while (!solitaire.isGameWon() && !solitaire.isGameLost()){
+
+            //When New Game is pressed, we need to read new input to reset states. Ask Mads or Sebastian if in doubt :)
+            if (b){
+                //Read start configuration from GUI
+                input = client.readInput();
+
+                //Init game
+                startState = ClosedSolitaireState.newGameFromInput(input.split(" "));
+                solitaire.initClosedGame(startState,-1,100);
+                b = false;
+            }
+
 
             //Get moveMsg
             solitaire.makeNextMove();
@@ -68,8 +81,9 @@ public class Main {
                 //Restart everything
                 solitaire = new Solitaire();
                 //Init game
-                startState = ClosedSolitaireState.newGameFromInput(input.split(" "));
-                solitaire.initClosedGame(startState,-1,100);
+                //startState = ClosedSolitaireState.newGameFromInput(input.split(" "));
+                b=true;
+                //solitaire.initClosedGame(startState,-1,100);
                 continue;
             }
 
