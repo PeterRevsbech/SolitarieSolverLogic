@@ -58,17 +58,17 @@ public class Solitaire {
     public void updateClosedGame(String input) throws SolitarieException {
         //Input is either a card (as string)  or NO_CARD ("NONE")
 
-        if (input.equals(NO_CARD)){
+        if (input.equals(NO_CARD)) {
             //Game is already up to date
 
             //Assert that unknownCard is null
-            if (unkownCard != null){//also unkown card must be true
+            if (unkownCard != null) {//also unkown card must be true
                 throw new SolitarieException("Got NONE from GUI, but expected to find a card.");
             }
 
         } else {//if input is not "NONE"
-            if (unkownCard == null){//also unkown card must be true
-                throw new SolitarieException("Got "+input+" from GUI, but expected NONE.");
+            if (unkownCard == null) {//also unkown card must be true
+                throw new SolitarieException("Got " + input + " from GUI, but expected NONE.");
             }
 
             //Set value of unknown card from input
@@ -114,7 +114,7 @@ public class Solitaire {
      */
 
     public boolean isUnkownCard() {
-        return unkownCard!=null;
+        return unkownCard != null;
     }
 
 

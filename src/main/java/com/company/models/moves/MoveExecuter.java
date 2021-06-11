@@ -102,7 +102,7 @@ public class MoveExecuter {
 
 
         //Check if card underneath was previously face down
-        if (!fromPile.isEmpty() && !fromPile.getTopCard().isFaceUp()){
+        if (!fromPile.isEmpty() && !fromPile.getTopCard().isFaceUp()) {
             //Set next card faceUp in fromPile
             Card unkownCard = fromPile.getTopCard();
             unkownCard.setFaceUp(true);
@@ -128,7 +128,7 @@ public class MoveExecuter {
         }
 
         //Check if card underneath was previously face down
-        if (!tableuPile.isEmpty() && !tableuPile.getTopCard().isFaceUp()){
+        if (!tableuPile.isEmpty() && !tableuPile.getTopCard().isFaceUp()) {
             //Set next card to faceUp
             Card unkownCard = tableuPile.getTopCard();
             unkownCard.setFaceUp(true);

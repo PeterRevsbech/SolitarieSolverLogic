@@ -36,15 +36,12 @@ public class TableauToTableau extends MoveType {
                 }
             }
         }
-
         //If it was not possible, return null
         return null;
     }
 
     public static List<SpecificMove> getAllMoves(ISolitaireState state) {
         List<SpecificMove> specificMoveList = new ArrayList<>();
-
-
         Tableau tableau = state.getTableau();
 
         //For each pile in tableau

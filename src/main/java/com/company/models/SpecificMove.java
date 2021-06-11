@@ -84,29 +84,28 @@ public class SpecificMove {
     public String detailedToString(ISolitaireState state) {
         //TODO create this
         String stringToCard = "";
-        stringToCard= toCard == null ? "empty field" : toCard.toString();
+        stringToCard = toCard == null ? "empty field" : toCard.toString();
 
         if (moveType instanceof StockMove) {
-            if (state != null && state.isStockEmpty()){ //If stock is empty (cannot be in first round)
+            if (state != null && state.isStockEmpty()) { //If stock is empty (cannot be in first round)
                 return "Turn the waste pile over to renew the stock pile.";
             }
             return toCard == null ? "Reveal the top card from the stock and move it to the empty " +
                     "field in the waste pile." : "Reveal the top card from the stock and move it " +
                     "to " + toCard + " in the waste pile.";
 
-        } else if (moveType instanceof WasteToTableau ) {
-            return "Move "+fromParent+" from waste to "+stringToCard+" in the tableau.";
-        } else if (moveType instanceof WasteToFoundation ) {
-            return "Move "+fromParent+" from waste to the foundation.";
+        } else if (moveType instanceof WasteToTableau) {
+            return "Move " + fromParent + " from waste to " + stringToCard + " in the tableau.";
+        } else if (moveType instanceof WasteToFoundation) {
+            return "Move " + fromParent + " from waste to the foundation.";
         } else if (moveType instanceof TableauToFoundation) {
-            return "Move "+fromParent+" from tableau to the foundation.";
+            return "Move " + fromParent + " from tableau to the foundation.";
         } else if (moveType instanceof TableauToTableau) {
-            return "Move "+fromParent+" from tableau to "+stringToCard+" in the tableau.";
+            return "Move " + fromParent + " from tableau to " + stringToCard + " in the tableau.";
         } else if (moveType instanceof FoundationToTableau) {
-            return "Move "+fromParent+" from foundation to "+stringToCard+" in the tableau.";
+            return "Move " + fromParent + " from foundation to " + stringToCard + " in the tableau.";
         }
         //TODO Flip stockpile
-
 
 
         return "";

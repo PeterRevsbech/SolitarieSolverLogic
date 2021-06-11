@@ -60,7 +60,7 @@ public class Card implements Serializable {
 
     @Override
     public String toString() {
-        if (value == 0 && suit == null){
+        if (value == 0 && suit == null) {
             return "*";
         }
 
@@ -100,44 +100,44 @@ public class Card implements Serializable {
 
 
     public static int valueFromString(String input) throws SolitarieException {
-        if (input.contains("A")){
+        if (input.contains("A")) {
             return Card.ACE;
-        } else if (input.contains("2")){
+        } else if (input.contains("2")) {
             return 2;
-        } else if (input.contains("3")){
+        } else if (input.contains("3")) {
             return 3;
-        } else if (input.contains("4")){
+        } else if (input.contains("4")) {
             return 4;
-        } else if (input.contains("5")){
+        } else if (input.contains("5")) {
             return 5;
-        } else if (input.contains("6")){
+        } else if (input.contains("6")) {
             return 6;
-        } else if (input.contains("7")){
+        } else if (input.contains("7")) {
             return 7;
-        } else if (input.contains("8")){
+        } else if (input.contains("8")) {
             return 8;
-        } else if (input.contains("9")){
+        } else if (input.contains("9")) {
             return 9;
-        } else if (input.contains("1 0")){
+        } else if (input.contains("1 0")) {
             return 10;
-        } else if (input.contains("J")){
+        } else if (input.contains("J")) {
             return Card.JACK;
-        } else if (input.contains("Q")){
+        } else if (input.contains("Q")) {
             return Card.QUEEN;
-        } else if (input.contains("K")){
+        } else if (input.contains("K")) {
             return Card.KING;
         }
         throw new SolitarieException("Unkown card string - cannot match value of card" + input);
     }
 
     public static Suit suitFromString(String input) throws SolitarieException {
-        if (input.contains("H")){
+        if (input.contains("H")) {
             return Suit.Hearts;
-        } else if (input.contains("D")){
+        } else if (input.contains("D")) {
             return Suit.Diamonds;
-        } else if (input.contains("C")){
+        } else if (input.contains("C")) {
             return Suit.Clubs;
-        } else if (input.contains("S")){
+        } else if (input.contains("S")) {
             return Suit.Spades;
         }
         throw new SolitarieException("Unkown suit string - cannot match suit of card" + input);

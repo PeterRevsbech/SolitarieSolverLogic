@@ -18,8 +18,8 @@ public interface IClient {
 
     public void startClient();
 
-    public default String formatGuiMoveMsg(ISolitaireState state, SpecificMove move, boolean unkownCard, String wonOrLost, int turnsPlayed){
-        return move.detailedToString(state) +";"+ unkownCard + ";" + wonOrLost+";"+ turnsPlayed;
+    public default String formatGuiMoveMsg(ISolitaireState state, SpecificMove move, boolean unkownCard, String wonOrLost, int turnsPlayed) {
+        return move.detailedToString(state) + ";" + unkownCard + ";" + wonOrLost + ";" + turnsPlayed;
     }
 
 }

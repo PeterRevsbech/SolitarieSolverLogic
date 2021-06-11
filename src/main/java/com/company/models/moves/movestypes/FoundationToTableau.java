@@ -65,11 +65,8 @@ public class FoundationToTableau extends MoveType {
                         specificMoveList.add(move);
                     }
                 }
-
-
             }
         }
-
         return specificMoveList;
     }
 

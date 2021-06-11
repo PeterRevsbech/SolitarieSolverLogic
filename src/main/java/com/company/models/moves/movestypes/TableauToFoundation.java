@@ -56,7 +56,6 @@ public class TableauToFoundation extends MoveType {
                 }
             }
         }
-
         return moves;
     }
 

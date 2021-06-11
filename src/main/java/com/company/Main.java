@@ -32,19 +32,19 @@ public class Main {
 
         //Init game
         ISolitaireState startState = ClosedSolitaireState.newGameFromInput(input.split(" "));
-        solitaire.initClosedGame(startState,-1,100);
+        solitaire.initClosedGame(startState, -1, 100);
 
         //While game is not over
-        while (!solitaire.isGameWon() && !solitaire.isGameLost()){
+        while (!solitaire.isGameWon() && !solitaire.isGameLost()) {
 
             //When New Game is pressed, we need to read new input to reset states. Ask Mads or Sebastian if in doubt :)
-            if (b){
+            if (b) {
                 //Read start configuration from GUI
                 input = client.readInput();
 
                 //Init game
                 startState = ClosedSolitaireState.newGameFromInput(input.split(" "));
-                solitaire.initClosedGame(startState,-1,100);
+                solitaire.initClosedGame(startState, -1, 100);
                 b = false;
             }
 
@@ -52,23 +52,23 @@ public class Main {
             //Get moveMsg
             solitaire.makeNextMove();
             SpecificMove move = solitaire.getNextMove();
-            String wonOrLost="";
-            if (solitaire.isGameWon()){
-                wonOrLost=GAME_WON;
-            } else if(solitaire.isGameLost()) {
-                wonOrLost=GAME_LOST;
+            String wonOrLost = "";
+            if (solitaire.isGameWon()) {
+                wonOrLost = GAME_WON;
+            } else if (solitaire.isGameLost()) {
+                wonOrLost = GAME_LOST;
             }
 
             ISolitaireState previousState;
             if (solitaire.getStates().size() == 1) {
                 previousState = null;
             } else {
-                previousState = solitaire.getStates().get(solitaire.getStates().size()-2);
+                previousState = solitaire.getStates().get(solitaire.getStates().size() - 2);
             }
 
             boolean unkownCard = solitaire.isUnkownCard();
             int turnsPlayed = solitaire.getTurnsPlayed();
-            String moveMsg = client.formatGuiMoveMsg(previousState,move,unkownCard, wonOrLost,turnsPlayed);
+            String moveMsg = client.formatGuiMoveMsg(previousState, move, unkownCard, wonOrLost, turnsPlayed);
 
             //Write to GUI: unknownCard;move
             client.writeOutput(moveMsg);
@@ -77,20 +77,20 @@ public class Main {
             input = client.readInput();
 
             //-----------------------Read next request from client----------------------
-            if (input.contains(END_GAME)){//If client wants to end game
+            if (input.contains(END_GAME)) {//If client wants to end game
                 //Restart everything
                 solitaire = new Solitaire();
                 //Init game
                 //startState = ClosedSolitaireState.newGameFromInput(input.split(" "));
-                b=true;
+                b = true;
                 //solitaire.initClosedGame(startState,-1,100);
                 continue;
             }
 
-            if (solitaire.isUnkownCard()){ //If we asked for unknown card - read it
+            if (solitaire.isUnkownCard()) { //If we asked for unknown card - read it
                 String cardString = extractUnknownCard(input);
             } else { //If we didn't ask for new card - assert that empty message was sent
-                if (!input.equals(Solitaire.NO_CARD)){
+                if (!input.equals(Solitaire.NO_CARD)) {
                     throw new IOException("Unexpected answer from Python-Client. Expected Empty message but recieved:" + input);
                 }
             }
@@ -100,7 +100,7 @@ public class Main {
         }
     }
 
-    static String extractUnknownCard(String msg){
+    static String extractUnknownCard(String msg) {
         return msg;
     }
 
