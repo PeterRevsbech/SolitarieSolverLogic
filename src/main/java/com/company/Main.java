@@ -17,6 +17,7 @@ public class Main {
     private static final String END_GAME = "END_GAME";
     private static final String GAME_WON = "GAME_WON";
     private static final String GAME_LOST = "GAME_LOST";
+    private static final String EXIT = "EXIT";
     private static boolean b = false;
 
 
@@ -29,6 +30,8 @@ public class Main {
 
         //Read start configuration from GUI
         String input = client.readInput();
+        if (input.contains(EXIT)){
+            System.exit(0); }
 
         //Init game
         ISolitaireState startState = ClosedSolitaireState.newGameFromInput(input.split(" "));
@@ -85,6 +88,9 @@ public class Main {
                 b = true;
                 //solitaire.initClosedGame(startState,-1,100);
                 continue;
+            }
+            if (input.contains(EXIT)) {
+                System.exit(0);
             }
 
             if (solitaire.isUnkownCard()) { //If we asked for unknown card - read it
