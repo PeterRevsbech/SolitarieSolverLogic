@@ -2,14 +2,17 @@ package com.company.utils;
 
 import com.company.logic.Solitaire;
 
+import java.util.Random;
+
 public class RandomGameTester {
     long startTime, endTime, currentGameTime, currentStartTime;
     int gamesWon, numberOfGames, totalTurnsPlayed, turnsThisGame, totalTurnsWonGames, wonGameCounter;
-    private final int DATA_SEED = -1;
-    private final double TIME_LIMIT_MILIS = 100;
-    private final int FIXED_DEPTH = -1;
-    private static final int NUMBER_OF_GAMES = 10;
-    private static final int NUMBER_OF_UPDATES = 10;
+    private static final int DATA_SEED = 1;
+    private static final double TIME_LIMIT_MILIS = 10;
+    private static final int FIXED_DEPTH = -1;
+    private static final int NUMBER_OF_GAMES = 100;
+    private static final int NUMBER_OF_UPDATES = 100;
+    private static Random numberGenerator;
 
     public static void main(String[] args) {
         RandomGameTester randomGameTester = new RandomGameTester();
@@ -18,6 +21,7 @@ public class RandomGameTester {
 
 
     public String playGames(int numberOfGames, int numberOfUpdates) {
+        numberGenerator = new Random(DATA_SEED);
         int gamesPrUpdate = numberOfGames / numberOfUpdates;
         this.gamesWon = 0;
         this.numberOfGames = numberOfGames;
@@ -27,7 +31,7 @@ public class RandomGameTester {
         for (int i = 1; i <= numberOfGames; i++) {
             currentStartTime = System.currentTimeMillis();
             solitaire = new Solitaire();
-            solitaire.initGame(true, false, DATA_SEED, (int) TIME_LIMIT_MILIS, FIXED_DEPTH);
+            solitaire.initGame(true, false, numberGenerator.nextInt(), (int) TIME_LIMIT_MILIS, FIXED_DEPTH);
             if (solitaire.playGame()) {
                 gamesWon++;
             }
