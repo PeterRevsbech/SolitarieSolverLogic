@@ -1,5 +1,6 @@
 package com.company.logic;
 
+import com.company.models.Card;
 import com.company.models.SpecificMove;
 import com.company.models.moves.MoveType;
 import com.company.models.states.ISolitaireState;
@@ -44,7 +45,12 @@ public class SolitaireSolver {
                 depth = fixedDepth;
             }
             TreeSearcher treeSearcher = new TreeSearcher(state, depth);
-            treeSearcher.buildTree(treeSearcher.getRoot(), depth);
+
+            //Find WasteStopCard - Indicates that stockmoves should not be simulated, if it is on top of waste
+            Card wasteStopCard = state.getWasteTop();
+
+            //Build tree using initial wasteStopCard and indicate that it is first-Stock-Move
+            treeSearcher.buildTree(treeSearcher.getRoot(), depth, wasteStopCard, true);
             move = treeSearcher.evaluateTree(treeSearcher.getRoot(), depth);
             depth++;
             if (fixedDepth != -1) { //If fixed depth is set - do no more iterations

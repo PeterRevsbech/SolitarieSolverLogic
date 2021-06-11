@@ -1,6 +1,8 @@
 package com.company.strategy;
 
+import com.company.models.Card;
 import com.company.models.SpecificMove;
+import com.company.models.moves.movestypes.StockMove;
 import com.company.models.states.ISolitaireState;
 
 import java.util.List;
@@ -18,7 +20,7 @@ public class TreeSearcher {
         this.startDepth = startDepth;
     }
 
-    public void buildTree(Node root, int depth) {
+    public void buildTree(Node root, int depth, Card wasteStopCard, boolean firstStockMove) {
         if (depth == 0) {
             return;
         } else if (root.isReveal()) {
@@ -43,7 +45,32 @@ public class TreeSearcher {
 
         //For each child node, call buildTree(childNode, depth-1)
         for (Node node : root.getChildren()) {
-            buildTree(node, depth - 1);
+            //Check if node is stockmove and if special stock-simulation is relevant
+            if (node.getMove().getMoveType() instanceof StockMove){
+                //If so: Check if WasteStopCard is on top ==> Don't build tree
+                //TODO Could check top of stock insted of top of waste here to save one simulated move
+                if (!firstStockMove && node.getState().getWasteTop().equals(wasteStopCard)){
+                    continue;
+                }
+
+                if (!firstStockMove){
+                    //it was a stock move, but not the first
+                    firstStockMove = false;
+                    depth++; //To balance out the coming decrease of depth
+                }
+
+            } else {
+                //If it is not a stock move ==> update wasteStopCard
+                wasteStopCard = node.getState().getWasteTop();
+                //If it is null AND we know what is in stockwaste
+                if (wasteStopCard == null && node.getState().isStockKnown()){
+                    int lastStockWasteIndex = node.getState().getKnownStockWaste().size()-1;
+                    wasteStopCard = node.getState().getKnownStockWaste().get(lastStockWasteIndex);
+                }
+                firstStockMove = true;
+            }
+
+            buildTree(node, depth-1,wasteStopCard,firstStockMove);
         }
     }
 
