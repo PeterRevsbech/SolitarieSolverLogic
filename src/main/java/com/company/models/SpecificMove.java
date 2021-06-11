@@ -90,7 +90,9 @@ public class SpecificMove {
             if (state != null && state.isStockEmpty()){ //If stock is empty (cannot be in first round)
                 return "Turn the waste pile over to renew the stock pile.";
             }
-            return "Reveal the top card from the stock and move it to the waste pile.";
+            return toCard == null ? "Reveal the top card from the stock and move it to the empty " +
+                    "field in the waste pile." : "Reveal the top card from the stock and move it " +
+                    "to " + toCard + " in the waste pile.";
 
         } else if (moveType instanceof WasteToTableau ) {
             return "Move "+fromParent+" from waste to "+stringToCard+" in the tableau.";

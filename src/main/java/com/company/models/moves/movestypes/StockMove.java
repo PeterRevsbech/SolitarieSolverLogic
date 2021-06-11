@@ -16,6 +16,7 @@ public class StockMove extends MoveType {
         } else {
             SpecificMove move = new SpecificMove();
             move.setMoveType(new StockMove());
+            move.setToCard(state.getWasteTop());
             return move;
         }
     }
