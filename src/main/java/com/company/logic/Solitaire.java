@@ -4,6 +4,7 @@ import com.company.models.Card;
 import com.company.models.SpecificMove;
 import com.company.models.exceptions.SolitarieException;
 import com.company.models.moves.*;
+import com.company.models.moves.movestypes.StockMove;
 import com.company.models.states.ClosedSolitaireState;
 import com.company.models.states.ISolitaireState;
 import com.company.models.states.OpenSolitaireState;
@@ -22,6 +23,7 @@ public class Solitaire {
     private boolean gameLost;
     private boolean printing;
     int turnsPlayed = 0;
+    private int stockMoveCounter=0;
     private final static int MAX_NUM_OF_MOVES = 250;
     SpecificMove nextMove;
 
@@ -166,7 +168,8 @@ public class Solitaire {
         //Execute move
         MoveExecuter.executeMove(state, move);
 
-        evaluateGameLost();
+        evaluateGameLost(move,state);
+
         evaluateGameWon(state);
 
         //Update turnsPlayed
@@ -177,12 +180,23 @@ public class Solitaire {
     }
 
 
-    private void evaluateGameLost() {
-        //TODO Check if no progress in a long amount of time
+    private void evaluateGameLost(SpecificMove move,ISolitaireState state) {
+
+        if(move.getMoveType() instanceof StockMove){
+            stockMoveCounter=stockMoveCounter+1;
+        }else{
+            stockMoveCounter=0;
+        }
+        boolean isStockKnown=state.isStockKnown();
+        if(stockMoveCounter>=state.getKnownStockWaste().size() && isStockKnown){
+            gameLost=true;
+        }
+        /*
         //If no NEW cards have been added to foundation...
         if (turnsPlayed > MAX_NUM_OF_MOVES) {
             gameLost = true;
         }
+       */
     }
 
     //Method that checks if the 4 tops cards in the foundation piles are kings, if so, the game is won
