@@ -1,17 +1,19 @@
 package com.company.utils;
 
 import com.company.logic.Solitaire;
+import com.company.models.states.ISolitaireState;
 
+import java.util.List;
 import java.util.Random;
 
 public class RandomGameTester {
     long startTime, endTime, currentGameTime, currentStartTime;
     int gamesWon, numberOfGames, totalTurnsPlayed, turnsThisGame, totalTurnsWonGames, wonGameCounter;
-    private static final int DATA_SEED = 1;
+    private static final int DATA_SEED = 5;
     private static final double TIME_LIMIT_MILIS = 10;
     private static final int FIXED_DEPTH = -1;
-    private static final int NUMBER_OF_GAMES = 100;
-    private static final int NUMBER_OF_UPDATES = 100;
+    private static final int NUMBER_OF_GAMES = 10;
+    private static final int NUMBER_OF_UPDATES = 10;
     private static Random numberGenerator;
 
     public static void main(String[] args) {
@@ -49,7 +51,6 @@ public class RandomGameTester {
             if (i % gamesPrUpdate == 0) {
                 System.out.println(update(i));
             }
-
         }
 
 

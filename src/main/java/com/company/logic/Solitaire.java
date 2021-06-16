@@ -8,9 +8,15 @@ import com.company.models.moves.movestypes.StockMove;
 import com.company.models.states.ClosedSolitaireState;
 import com.company.models.states.ISolitaireState;
 import com.company.models.states.OpenSolitaireState;
+import com.company.utils.PrintGameState;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Solitaire {
 
@@ -128,7 +134,38 @@ public class Solitaire {
         gameLost = false;
     }
 
+    public String randString() {
+        int leftLimit = 97; // letter 'a'
+        int rightLimit = 122; // letter 'z'
+        int targetStringLength = 10;
+        Random random = new Random();
+        StringBuilder buffer = new StringBuilder(targetStringLength);
+        for (int i = 0; i < targetStringLength; i++) {
+            int randomLimitedInt = leftLimit + (int)
+                    (random.nextFloat() * (rightLimit - leftLimit + 1));
+            buffer.append((char) randomLimitedInt);
+        }
+
+        return buffer.toString();
+    }
+    public void writeToFile() throws FileNotFoundException, UnsupportedEncodingException {
+        //File myObj = new File("/Users/madsstorgaard-nielsen/Desktop/test");
+        String randString = randString();
+        PrintWriter writer = new PrintWriter("/Users/madsstorgaard-nielsen/Desktop/test/"+randString, "UTF-8");
+        for (int i = 0; i < turnsPlayed; i++) {
+            writer.println(states.get(i));
+        }
+        writer.close();
+    }
     public boolean playGame() {
+
+        if (gameLost) { //TODO hvorfor sættes game lost adlrig????
+            try {
+                writeToFile();
+            } catch (FileNotFoundException | UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
         while (!(gameLost || gameWon)) {
             makeNextMove();
         }
@@ -220,6 +257,9 @@ public class Solitaire {
         return isWinable;
     }
 
+    PrintGameState pgs = new PrintGameState();
+
+
     public void makeNextMove() {
         // get latest state, call solver to find next move
         ISolitaireState currentState = states.get(states.size() - 1);
@@ -237,6 +277,9 @@ public class Solitaire {
         } catch (SolitarieException e) {
             e.printStackTrace();
         }
+        System.out.println(nextMove.detailedToString(currentState));
+        pgs.initClosedSolitareState(currentState);
+        pgs.printCurrentState();
     }
 
     public SolitaireSolver getSolver() {
