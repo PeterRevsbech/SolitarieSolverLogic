@@ -3,17 +3,14 @@ package com.company.logic;
 import com.company.models.SpecificMove;
 import com.company.models.moves.MoveType;
 import com.company.models.states.ISolitaireState;
-import com.company.strategy.Strategy;
+import com.company.strategy.EndGameStrategy;
 import com.company.strategy.TreeSearcher;
 
 public class SolitaireSolver {
 
     private final int fixedDepth;
     private final long timeLimitMillis;
-
-    private Strategy strategy = new Strategy();
-    private Strategy endGameStrategy = Strategy.endGameStrategy();
-
+    private EndGameStrategy endGameStrategy = new EndGameStrategy();
 
     public SolitaireSolver(int fixedDepth, long timeLimitMillis) {
         this.fixedDepth = fixedDepth;
@@ -55,13 +52,5 @@ public class SolitaireSolver {
 
         //Return move
         return move;
-    }
-
-    public Strategy getStrategy() {
-        return strategy;
-    }
-
-    public void setStrategy(Strategy strategy) {
-        this.strategy = strategy;
     }
 }
