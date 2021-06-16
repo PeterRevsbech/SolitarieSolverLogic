@@ -149,7 +149,7 @@ public class Solitaire {
         return buffer.toString();
     }
 
-    String s;
+    String s = "";
 
     public void writeToFile() throws FileNotFoundException, UnsupportedEncodingException {
         //File myObj = new File("/Users/madsstorgaard-nielsen/Desktop/test");
@@ -228,13 +228,13 @@ public class Solitaire {
             isStockKnown = true;
         }
 
-        if ((stockMoveCounter > state.getKnownStockWaste().size() + 10) && isStockKnown) {
+        if ((stockMoveCounter > state.getKnownStockWaste().size()+5) && isStockKnown) {
             gameLost = true;
-            try {
+/*            try {
                 writeToFile();
             } catch (FileNotFoundException | UnsupportedEncodingException e) {
                 e.printStackTrace();
-            }
+            }*/
             s="";
         }
 /*        //If no NEW cards have been added to foundation...
