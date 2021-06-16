@@ -153,6 +153,10 @@ public class ClosedSolitaireState implements ISolitaireState, Serializable {
         this.knownStockWaste = stockWaste;
     }
 
+    public boolean isStockKnown() {
+        return getRevealedStockWaste() >= 24;
+    }
+
     public int getRevealedStockWaste() {
         return revealedStockWaste;
     }

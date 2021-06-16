@@ -12,8 +12,8 @@ public class RandomGameTester {
     private static final int DATA_SEED = 5;
     private static final double TIME_LIMIT_MILIS = 10;
     private static final int FIXED_DEPTH = -1;
-    private static final int NUMBER_OF_GAMES = 10;
-    private static final int NUMBER_OF_UPDATES = 10;
+    private static final int NUMBER_OF_GAMES = 100;
+    private static final int NUMBER_OF_UPDATES = 100;
     private static Random numberGenerator;
 
     public static void main(String[] args) {

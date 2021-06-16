@@ -29,7 +29,7 @@ public class Solitaire {
     private boolean gameLost;
     private boolean printing;
     int turnsPlayed = 0;
-    private int stockMoveCounter=0;
+    private int stockMoveCounter = 0;
     private final static int MAX_NUM_OF_MOVES = 250;
     SpecificMove nextMove;
 
@@ -148,24 +148,21 @@ public class Solitaire {
 
         return buffer.toString();
     }
+
+    String s;
+
     public void writeToFile() throws FileNotFoundException, UnsupportedEncodingException {
         //File myObj = new File("/Users/madsstorgaard-nielsen/Desktop/test");
         String randString = randString();
-        PrintWriter writer = new PrintWriter("/Users/madsstorgaard-nielsen/Desktop/test/"+randString, "UTF-8");
-        for (int i = 0; i < turnsPlayed; i++) {
-            writer.println(states.get(i));
-        }
+
+        PrintWriter writer = new PrintWriter("/Users/madsstorgaard-nielsen/Desktop/test/" + randString, "UTF-8");
+
+        writer.println(s);
+
         writer.close();
     }
-    public boolean playGame() {
 
-        if (gameLost) { //TODO hvorfor sættes game lost adlrig????
-            try {
-                writeToFile();
-            } catch (FileNotFoundException | UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
-        }
+    public boolean playGame() {
         while (!(gameLost || gameWon)) {
             makeNextMove();
         }
@@ -205,7 +202,7 @@ public class Solitaire {
         //Execute move
         MoveExecuter.executeMove(state, move);
 
-        evaluateGameLost(move,state);
+        evaluateGameLost(move, state);
 
         evaluateGameWon(state);
 
@@ -216,24 +213,34 @@ public class Solitaire {
         return state;
     }
 
+    boolean isStockKnown;
 
-    private void evaluateGameLost(SpecificMove move,ISolitaireState state) {
+    private void evaluateGameLost(SpecificMove move, ISolitaireState state) {
 
-        if(move.getMoveType() instanceof StockMove){
-            stockMoveCounter=stockMoveCounter+1;
-        }else{
-            stockMoveCounter=0;
+        if (move.getMoveType() instanceof StockMove) {
+            stockMoveCounter++;
+        } else {
+            stockMoveCounter = 0;
         }
-        boolean isStockKnown=state.isStockKnown();
-        if(stockMoveCounter>=state.getKnownStockWaste().size() && isStockKnown){
-            gameLost=true;
+        //System.out.println(stockMoveCounter);
+
+        if (state.isStockEmpty()) {
+            isStockKnown = true;
         }
-        /*
-        //If no NEW cards have been added to foundation...
+
+        if ((stockMoveCounter > state.getKnownStockWaste().size() + 10) && isStockKnown) {
+            gameLost = true;
+            try {
+                writeToFile();
+            } catch (FileNotFoundException | UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            s="";
+        }
+/*        //If no NEW cards have been added to foundation...
         if (turnsPlayed > MAX_NUM_OF_MOVES) {
             gameLost = true;
-        }
-       */
+        }*/
     }
 
     //Method that checks if the 4 tops cards in the foundation piles are kings, if so, the game is won
@@ -277,9 +284,10 @@ public class Solitaire {
         } catch (SolitarieException e) {
             e.printStackTrace();
         }
-        System.out.println(nextMove.detailedToString(currentState));
-        pgs.initClosedSolitareState(currentState);
-        pgs.printCurrentState();
+        s += "\n"+"Tur: "+turnsPlayed+" "+nextMove.detailedToString(currentState);
+        //System.out.println(nextMove.detailedToString(currentState));
+        //pgs.initClosedSolitareState(currentState);
+        //pgs.printCurrentState();
     }
 
     public SolitaireSolver getSolver() {
