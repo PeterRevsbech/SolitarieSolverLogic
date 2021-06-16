@@ -2,17 +2,25 @@ package com.company.logic;
 
 import com.company.models.SpecificMove;
 import com.company.models.moves.MoveType;
+import com.company.models.moves.movestypes.StockMove;
+import com.company.models.moves.movestypes.TableauToFoundation;
+import com.company.models.moves.movestypes.WasteToFoundation;
 import com.company.models.states.ISolitaireState;
-import com.company.strategy.EndGameStrategy;
 import com.company.strategy.TreeSearcher;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SolitaireSolver {
 
     private final int fixedDepth;
     private final long timeLimitMillis;
-    private EndGameStrategy endGameStrategy = new EndGameStrategy();
+    private final List<MoveType> endGameStrategy = new ArrayList<>();
 
     public SolitaireSolver(int fixedDepth, long timeLimitMillis) {
+        this.endGameStrategy.add(new WasteToFoundation());
+        this.endGameStrategy.add(new TableauToFoundation());
+        this.endGameStrategy.add(new StockMove());
         this.fixedDepth = fixedDepth;
         this.timeLimitMillis = timeLimitMillis;
     }
@@ -25,7 +33,7 @@ public class SolitaireSolver {
 
         if (game.isAllCardsFaceUp(state)) {
             //find move
-            for (MoveType moveType : endGameStrategy.getPrioritizedMoveTypes()) {
+            for (MoveType moveType : endGameStrategy) {
                 move = moveType.getMove(state);
                 if (move != null) {
                     return move;
