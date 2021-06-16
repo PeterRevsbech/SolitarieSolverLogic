@@ -7,6 +7,7 @@ import com.company.models.moves.*;
 import com.company.models.states.ClosedSolitaireState;
 import com.company.models.states.ISolitaireState;
 import com.company.models.states.OpenSolitaireState;
+import com.company.utils.PrintGameState;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,7 @@ public class Solitaire {
     private boolean gameLost;
     private boolean printing;
     int turnsPlayed = 0;
-    private final static int MAX_NUM_OF_MOVES = 250;
+    private final static int MAX_NUM_OF_MOVES = 180;
     SpecificMove nextMove;
 
 
@@ -206,6 +207,9 @@ public class Solitaire {
         return isWinable;
     }
 
+    PrintGameState pgs = new PrintGameState();
+
+
     public void makeNextMove() {
         // get latest state, call solver to find next move
         ISolitaireState currentState = states.get(states.size() - 1);
@@ -223,6 +227,7 @@ public class Solitaire {
         } catch (SolitarieException e) {
             e.printStackTrace();
         }
+        System.out.println(nextMove);
     }
 
     public SolitaireSolver getSolver() {
