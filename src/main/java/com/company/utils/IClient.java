@@ -22,6 +22,8 @@ public interface IClient {
 
     String readInput();
 
+    void closeConnection();
+
     //method used to send a string to the  client
     void writeOutput(String moveMsg);
 

@@ -21,6 +21,11 @@ public class FakeClient implements IClient {
     }
 
     @Override
+    public void closeConnection() {
+
+    }
+
+    @Override
     public void writeOutput(String moveMsg) {
         System.out.println(moveMsg);
     }

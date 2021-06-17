@@ -39,8 +39,10 @@ public class Main {
 
         //Read start configuration from GUI
         String input = client.readInput();
-        if (input.contains(EXIT)){
-            System.exit(0); }
+        if (input.contains(EXIT)) {
+            client.closeConnection();
+            System.exit(0);
+        }
 
         //Init game
         ISolitaireState startState = ClosedSolitaireState.newGameFromInput(input.split(" "));
