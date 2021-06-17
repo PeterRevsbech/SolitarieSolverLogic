@@ -13,12 +13,19 @@ import com.company.models.Card;
 import com.company.models.SpecificMove;
 import com.company.models.exceptions.SolitarieException;
 import com.company.models.moves.*;
+import com.company.models.moves.movestypes.StockMove;
 import com.company.models.states.ClosedSolitaireState;
 import com.company.models.states.ISolitaireState;
 import com.company.models.states.OpenSolitaireState;
+import com.company.utils.PrintGameState;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Solitaire {
 
@@ -31,8 +38,14 @@ public class Solitaire {
     private boolean gameLost;
     private boolean printing;
     int turnsPlayed = 0;
+    private int stockMoveCounter = 0;
     private final static int MAX_NUM_OF_MOVES = 250;
     SpecificMove nextMove;
+    private int gameCounter;
+
+    public void setGameCounter(int gameCounter){
+        this.gameCounter=gameCounter;
+    }
 
 
     public void initGame(boolean isShuffled, boolean printing, int dataSeed, long timeLimitMillis, int fixedDepth) {
@@ -135,6 +148,34 @@ public class Solitaire {
         gameLost = false;
     }
 
+    public String randString() {
+        int leftLimit = 97; // letter 'a'
+        int rightLimit = 122; // letter 'z'
+        int targetStringLength = 10;
+        Random random = new Random();
+        StringBuilder buffer = new StringBuilder(targetStringLength);
+        for (int i = 0; i < targetStringLength; i++) {
+            int randomLimitedInt = leftLimit + (int)
+                    (random.nextFloat() * (rightLimit - leftLimit + 1));
+            buffer.append((char) randomLimitedInt);
+        }
+
+        return buffer.toString();
+    }
+
+    String s = "";
+
+    public void writeToFile() throws FileNotFoundException, UnsupportedEncodingException {
+        //File myObj = new File("/Users/madsstorgaard-nielsen/Desktop/test");
+        String randString = randString();
+
+        PrintWriter writer = new PrintWriter("/Users/madsstorgaard-nielsen/Desktop/test/gameNum" + gameCounter, "UTF-8");
+
+        writer.println(s);
+
+        writer.close();
+    }
+
     public boolean playGame() {
         while (!(gameLost || gameWon)) {
             makeNextMove();
@@ -175,7 +216,8 @@ public class Solitaire {
         //Execute move
         MoveExecuter.executeMove(state, move);
 
-        evaluateGameLost();
+        evaluateGameLost(move, state);
+
         evaluateGameWon(state);
 
         //Update turnsPlayed
@@ -185,11 +227,30 @@ public class Solitaire {
         return state;
     }
 
+    boolean isStockKnown;
 
-    private void evaluateGameLost() {
-        //TODO Check if no progress in a long amount of time
-        //If no NEW cards have been added to foundation...
-        if (turnsPlayed > MAX_NUM_OF_MOVES) {
+    private void evaluateGameLost(SpecificMove move, ISolitaireState state) {
+
+        if (move.getMoveType() instanceof StockMove) {
+            stockMoveCounter++;
+        } else {
+            stockMoveCounter = 0;
+        }
+        //System.out.println(stockMoveCounter);
+
+        if (state.isStockEmpty()) {
+            isStockKnown = true;
+        }
+
+        if ((stockMoveCounter > state.getKnownStockWaste().size()) && isStockKnown) {
+            gameLost = true;
+/*            try {
+                writeToFile();
+            } catch (FileNotFoundException | UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }*/
+            s = "";
+        } else if (turnsPlayed > MAX_NUM_OF_MOVES) {
             gameLost = true;
         }
     }
@@ -215,6 +276,9 @@ public class Solitaire {
         return isWinable;
     }
 
+    PrintGameState pgs = new PrintGameState();
+
+
     public void makeNextMove() {
         // get latest state, call solver to find next move
         ISolitaireState currentState = states.get(states.size() - 1);
@@ -232,6 +296,10 @@ public class Solitaire {
         } catch (SolitarieException e) {
             e.printStackTrace();
         }
+        s += "\n" + "Tur: " + turnsPlayed + " " + nextMove.detailedToString(currentState);
+        //System.out.println(nextMove.detailedToString(currentState));
+        //pgs.initClosedSolitareState(currentState);
+        //pgs.printCurrentState();
     }
 
     public SolitaireSolver getSolver() {
