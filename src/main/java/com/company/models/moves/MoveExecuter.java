@@ -156,13 +156,6 @@ public class MoveExecuter {
     public static void stockMove(ISolitaireState state) throws CardNotFoundException {
         Card topCard = null;
 
-        /* TODO find ud af om det her er nødvendigt
-        // if known stock does not contain top card
-        if (!state.getKnownStockWaste().contains(state.getWasteTop())) {
-            state.getKnownStockWaste().add(state.getWasteTop());
-        }
-         */
-
 
         if (state.getStockPile().getTopCard() == null) { // if stock is empty
             //Take all cards from waste in reverse order
