@@ -66,13 +66,22 @@ public class Client implements IClient {
     }
 
     public void startClient() {
-        try {
-            socket = new Socket(HOST, PORT); //Creates a new socket
-            System.out.println("Connection established");
-        } catch (IOException e1) {
-            e1.printStackTrace();
-            System.out.println("Error establishing connection");
-        }
+        boolean b = false;
+        do {
+            try {
+                socket = new Socket(HOST, PORT); //Creates a new socket
+                System.out.println("Connection established");
+                b = true;
+            } catch (IOException e1) {
+                //e1.printStackTrace();
+                System.out.println("Trying to establish connection");
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        } while (!b);
     }
 
     public void closeConnection() {
