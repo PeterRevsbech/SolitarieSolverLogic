@@ -27,7 +27,6 @@ public class ClosedSolitaireState implements ISolitaireState, Serializable {
     private int revealedStockWaste = 0;
 
     public static ClosedSolitaireState newGameFromInput(String[] initialCards) {
-        //TODO make method body
         //Input string is the 7 cards from left to right
 
         CardDeque cardDeque = new CardDeque();

@@ -91,7 +91,6 @@ public class SpecificMove {
     }
 
     public String detailedToString(ISolitaireState state) {
-        //TODO create this
         String stringToCard = "";
         stringToCard = toCard == null ? "empty field" : toCard.toString();
 
@@ -114,9 +113,6 @@ public class SpecificMove {
         } else if (moveType instanceof FoundationToTableau) {
             return "Move " + fromParent + " from foundation to " + stringToCard + " in the tableau.";
         }
-        //TODO Flip stockpile
-
-
         return "";
     }
 

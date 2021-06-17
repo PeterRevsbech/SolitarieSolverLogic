@@ -88,7 +88,7 @@ public class PrintGameState {
 
     private String[][] buildTableauMatrix() {
         int tabLen = tableau.getMaxTableauLength();
-        String[][] tableauMatrix = new String[tabLen][7]; //TODO har tilføjet +1 til tabLen, for at undgå mærkelig OOB error
+        String[][] tableauMatrix = new String[tabLen][7];
         for (int i = 0; i < tabLen; i++) {
             for (int j = 0; j < 7; j++) {
                 int pileLen = tableau.getPiles()[j].getCards().size();
@@ -142,7 +142,6 @@ public class PrintGameState {
         StockFoundMatrix[1][4] = "|";
 
         //Foundation heading and the 4 foundation piles
-        //TODO mangler foundation pile logik, bunken skal initialiseres som "tom", så vi undgår OOB error når spillet bygges
         StockFoundMatrix[0][6] = "  FOUNDATION";
 
         if (foundation.getPiles()[0].isEmpty()) {

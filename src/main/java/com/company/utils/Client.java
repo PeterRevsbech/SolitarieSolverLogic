@@ -74,7 +74,6 @@ public class Client implements IClient {
             System.out.println("Next move: " + moveMsg);
             sent.join();
         } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -83,7 +82,6 @@ public class Client implements IClient {
         try {
             socket = new Socket(HOST, PORT); //Creates a new socket
         } catch (IOException e1) {
-            // TODO Auto-generated catch block
             e1.printStackTrace();
         }
     }
