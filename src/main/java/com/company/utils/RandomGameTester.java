@@ -46,7 +46,10 @@ public class RandomGameTester {
             solitaire.initGame(true, false, numberGenerator.nextInt(), (int) TIME_LIMIT_MILIS, FIXED_DEPTH);
             solitaire.setGameCounter(i);
             if (solitaire.playGame()) {
+                System.out.println("WON");
                 gamesWon++;
+            } else {
+                System.out.println("LOST");
             }
             if (solitaire.isGameWon()) {
                 totalTurnsWonGames += solitaire.getTurnsPlayed();
