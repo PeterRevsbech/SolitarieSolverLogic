@@ -88,10 +88,8 @@ public class TreeSearcher {
                 node.setBranchPointsMax(Math.max(node.getBranchPointsMax(), myPoints + childMax));
             }
         }
-
         return node.getBranchPointsMax();
     }
-
 
     public Node getRoot() {
         return root;

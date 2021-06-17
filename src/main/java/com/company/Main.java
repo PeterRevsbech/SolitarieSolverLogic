@@ -60,7 +60,6 @@ public class Main {
                 b = false;
             }
 
-
             //Get moveMsg
             solitaire.makeNextMove();
             SpecificMove move = solitaire.getNextMove();
@@ -118,5 +117,4 @@ public class Main {
     static String extractUnknownCard(String msg) {
         return msg;
     }
-
 }

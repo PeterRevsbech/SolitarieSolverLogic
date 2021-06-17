@@ -29,19 +29,6 @@ public class Client implements IClient {
     private BufferedReader stdIn;
     private PrintWriter stdOut;
 
-/*    public static void main(String[] args) {
-        //For at oprette forbindelse til python laves en client, der kaldes start client.
-        //man kan derefter læse input vha. readInput og skrive til python vha writeOutput
-        Client client = new Client();
-        client.startClient();
-        System.out.println(client.readInput());
-        client.writeOutput("FRA JAVA 1");
-        System.out.println(client.readInput());
-        client.writeOutput("FRA JAVA 2");
-        System.out.println(client.readInput());
-        client.writeOutput("FRA JAVA 3");
-    }*/
-
     public String readInput() {
         String input = "null";
         try {
@@ -85,6 +72,4 @@ public class Client implements IClient {
             e1.printStackTrace();
         }
     }
-
-
 }

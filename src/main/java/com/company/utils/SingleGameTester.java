@@ -46,8 +46,6 @@ public class SingleGameTester {
 
             pgs.initOpenSolitareState(states.get(i + 1));
             pgs.printCurrentState();
-
-
         }
     }
 

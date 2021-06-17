@@ -41,7 +41,6 @@ public class Node {
                 continue;
             }
 
-
             ISolitaireState newState = state.simulateMoveWithClone(state, move);
             Node child = new Node(newState, move);
             child.setMyPoints(move.getPoints(state));

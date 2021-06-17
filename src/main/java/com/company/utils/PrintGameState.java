@@ -61,8 +61,6 @@ public class PrintGameState {
         String result = "";
         result += "STOCK: " + stockPile.toString().replace("[", "").replace("]", "") + "\n";
         result += "WASTE: " + wastePile.toString().replace("[", "").replace("]", "") + "\n";
-        //result += "\nFOUNDATION: " + foundation.toString().replace("[[", "[").replace("]]", "]") + "\n";
-        //result += "\nTABLEAU: " + tableau.toString().replace("[[", "[").replace("]]", "]") + "\n";
         result += "\n\n\n";
 
         System.out.println(result);

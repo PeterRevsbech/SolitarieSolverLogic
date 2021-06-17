@@ -79,13 +79,6 @@ public class Foundation implements Serializable {
                     throw new SolitarieException(String.format("Tried to put %s in foundation, but no other cards of same suit were present", card.toString()));
                 }
             }
-
-            /*
-            //Check if child is not there
-            if (pile.getTopCard().getValue() != card.getValue() - 1) {
-                throw new InvalidMoveException(String.format("Tried to put %s in foundation, but no other cards of same suit were present", card.toString()));
-            }
-             */
         }
         return pile;
     }
@@ -116,5 +109,4 @@ public class Foundation implements Serializable {
         }
         return clone;
     }
-
 }

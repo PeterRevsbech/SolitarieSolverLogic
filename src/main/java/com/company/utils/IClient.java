@@ -20,15 +20,14 @@ import java.net.Socket;
 
 public interface IClient {
 
-    public String readInput();
+    String readInput();
 
     //method used to send a string to the  client
-    public void writeOutput(String moveMsg);
+    void writeOutput(String moveMsg);
 
-    public void startClient();
+    void startClient();
 
-    public default String formatGuiMoveMsg(ISolitaireState state, SpecificMove move, boolean unkownCard, String wonOrLost, int turnsPlayed) {
+    default String formatGuiMoveMsg(ISolitaireState state, SpecificMove move, boolean unkownCard, String wonOrLost, int turnsPlayed) {
         return move.detailedToString(state) + ";" + unkownCard + ";" + wonOrLost + ";" + turnsPlayed;
     }
-
 }

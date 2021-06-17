@@ -43,8 +43,8 @@ public class Solitaire {
     SpecificMove nextMove;
     private int gameCounter;
 
-    public void setGameCounter(int gameCounter){
-        this.gameCounter=gameCounter;
+    public void setGameCounter(int gameCounter) {
+        this.gameCounter = gameCounter;
     }
 
 
@@ -102,43 +102,9 @@ public class Solitaire {
         }
     }
 
-    /*
-    public SpecificMove findNextMoveClosedGame(){
-        //Assumes that game state is valid (no unknown card, that should not be unknown)
-
-        //Find next move
-        // get latest state, call solver to find next move
-        ISolitaireState currentState = states.get(states.size() - 1);
-
-        nextMove = solver.bestPossibleMove(this);
-        if (nextMove == null) {
-            gameLost = true;
-        }
-
-        // call the method makeMove, add the state to list of states
-        try {
-            ISolitaireState nextState = playTurn(currentState, nextMove);
-        } catch (SolitarieException e) {
-            e.printStackTrace();
-        }
-
-
-
-
-
-
-        //If move is reveal move ==> set variable that indicates, we need to known which card it is
-        //unkownCard = true;
-
-      return null;
-    }
-
-     */
-
     public boolean isUnkownCard() {
         return unkownCard != null;
     }
-
 
     public void initClosedGame(ISolitaireState startState, int fixedDepth, long timeLimitMillis) {
         solver = new SolitaireSolver(fixedDepth, timeLimitMillis);

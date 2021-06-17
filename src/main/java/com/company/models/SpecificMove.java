@@ -115,8 +115,6 @@ public class SpecificMove {
         }
         return "";
     }
-
-
 }
 
 

@@ -30,7 +30,6 @@ public class RandomGameTester {
         System.out.println(randomGameTester.playGames(NUMBER_OF_GAMES, NUMBER_OF_UPDATES));
     }
 
-
     public String playGames(int numberOfGames, int numberOfUpdates) {
         numberGenerator = new Random(DATA_SEED);
         int gamesPrUpdate = numberOfGames / numberOfUpdates;
@@ -62,8 +61,6 @@ public class RandomGameTester {
                 System.out.println(update(i));
             }
         }
-
-
         return report();
     }
 
@@ -83,6 +80,4 @@ public class RandomGameTester {
         report += String.format("\nWins: %d, Losses: %d. Winning percentage: %.2f\n", gamesWon, i - gamesWon, (100.0 * gamesWon) / i);
         return report;
     }
-
-
 }

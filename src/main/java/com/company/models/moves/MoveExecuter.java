@@ -182,10 +182,7 @@ public class MoveExecuter {
                 //This card is unknown in a closed game untill GUI updates it
                 Solitaire.unkownCard = topCard;
             }
-
         }
-
-
     }
 
     //Makes no use of fromparent
@@ -206,7 +203,6 @@ public class MoveExecuter {
             if (move.getFromParent() != null && move.getFromParent().getValue() != Card.KING) {
                 throw new SolitarieException("Tried to move to card that is not king from waste to empty pile in tableau.");
             }
-
             tableuPile = state.getTableau().getFirstEmptyPile();
         }
 

@@ -46,21 +46,5 @@ public class PrintTester {
          */
         pgs.initOpenSolitareState(states.get(0));
         pgs.printCurrentState();
-
-/*        solitaire.makeNextMove();
-        pgs.initOpenSolitareState(states.get(1));
-        pgs.printCurrentState();
-
-        solitaire.makeNextMove();
-        pgs.initOpenSolitareState(states.get(2));
-        pgs.printCurrentState();
-
-        solitaire.makeNextMove();
-        pgs.initOpenSolitareState(states.get(3));
-        pgs.printCurrentState();
-
-        solitaire.makeNextMove();
-        pgs.initOpenSolitareState(states.get(4));
-        pgs.printCurrentState();*/
     }
 }

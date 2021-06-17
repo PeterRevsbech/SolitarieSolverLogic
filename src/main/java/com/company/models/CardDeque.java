@@ -45,7 +45,6 @@ public class CardDeque {
         return cards1;
     }
 
-
     public CardDeque(boolean isShuffled, int dataSeed) {
         for (Card.Suit suit : Card.Suit.values()) {
             for (int i = 1; i <= 13; i++) {
@@ -63,7 +62,6 @@ public class CardDeque {
         if (dataSeed != -1) {
             rand = new Random(dataSeed);
         }
-
 
         for (int i = 0; i < 1000; i++) {
             int a, b;
