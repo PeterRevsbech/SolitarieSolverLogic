@@ -208,7 +208,7 @@ public class Solitaire {
             isStockKnown = true;
         }
 
-        if ((stockMoveCounter > state.getKnownStockWaste().size()+5) && isStockKnown) {
+        if ((stockMoveCounter > state.getKnownStockWaste().size()+15) && isStockKnown) {
             gameLost = true;
 /*            try {
                 writeToFile();

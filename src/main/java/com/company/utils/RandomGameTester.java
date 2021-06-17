@@ -10,6 +10,8 @@
 package com.company.utils;
 
 import com.company.logic.Solitaire;
+import com.company.models.SpecificMove;
+import com.company.models.moves.MoveExecuter;
 import com.company.models.states.ISolitaireState;
 
 import java.util.List;
@@ -19,10 +21,10 @@ public class RandomGameTester {
     long startTime, endTime, currentGameTime, currentStartTime;
     int gamesWon, numberOfGames, totalTurnsPlayed, turnsThisGame, totalTurnsWonGames, wonGameCounter;
     private static final int DATA_SEED = 1;
-    private static final double TIME_LIMIT_MILIS = 15;
+    private static final double TIME_LIMIT_MILIS = 10;
     private static final int FIXED_DEPTH = -1;
-    private static final int NUMBER_OF_GAMES = 500;
-    private static final int NUMBER_OF_UPDATES = 500;
+    private static final int NUMBER_OF_GAMES = 100;
+    private static final int NUMBER_OF_UPDATES = 100;
     private static Random numberGenerator;
 
     public static void main(String[] args) {
@@ -57,9 +59,13 @@ public class RandomGameTester {
 
             currentGameTime = endTime - currentStartTime;
 
+            SpecificMove.printMoveAmount();
+            SpecificMove.resetMoveCounter();
+
             if (i % gamesPrUpdate == 0) {
                 System.out.println(update(i));
             }
+
         }
         return report();
     }

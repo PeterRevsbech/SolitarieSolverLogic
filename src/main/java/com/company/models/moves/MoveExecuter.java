@@ -22,21 +22,33 @@ import com.company.models.states.ISolitaireState;
 import java.util.List;
 
 public class MoveExecuter {
+
+
+
+
+
+
     public static void executeMove(ISolitaireState state, SpecificMove move) throws SolitarieException {
         //change state according to move
         MoveType moveType = move.getMoveType();
 
         if (moveType instanceof StockMove) {
+
             stockMove(state);
         } else if (moveType instanceof WasteToTableau) {
+
             wasteToTableu(state, move);
         } else if (moveType instanceof WasteToFoundation) {
+
             wasteToFoundation(state);
         } else if (moveType instanceof TableauToFoundation) {
+
             tableauToFoundation(state, move);
         } else if (moveType instanceof TableauToTableau) {
+
             tableauToTableau(state, move);
         } else if (moveType instanceof FoundationToTableau) {
+
             foundationToTableau(state, move);
         } else {
             throw new SolitarieException("Unknown move type");

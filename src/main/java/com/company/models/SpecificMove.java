@@ -90,11 +90,37 @@ public class SpecificMove {
         return "Move type: " + moveType + "\nMove executed: " + fromParent + " -> " + toCard;
     }
 
+    static int stockmoves = 0;
+    static int wastetotableaumoves = 0;
+    static int wastetofoundationmoves = 0;
+    static int tableautofoundationmoves = 0;
+    static int tableautotableaumoves = 0;
+    static int foundationtotableaumoves = 0;
+
+    public static void printMoveAmount() {
+        System.out.println("- stock moves: " + stockmoves);
+        System.out.println("- waste to tableau moves: " + wastetotableaumoves);
+        System.out.println("- waste to foundation moves: " + wastetofoundationmoves);
+        System.out.println("- tableau to foundation moves: " + tableautofoundationmoves);
+        System.out.println("- tableau to tableau moves: " + tableautotableaumoves);
+        System.out.println("- foundation to tableau moves: " + foundationtotableaumoves);
+    }
+
+    public static void resetMoveCounter() {
+        stockmoves = 0;
+        wastetotableaumoves = 0;
+        wastetofoundationmoves = 0;
+        tableautofoundationmoves = 0;
+        tableautotableaumoves = 0;
+        foundationtotableaumoves = 0;
+    }
+
     public String detailedToString(ISolitaireState state) {
         String stringToCard = "";
         stringToCard = toCard == null ? "empty field" : toCard.toString();
 
         if (moveType instanceof StockMove) {
+            stockmoves++;
             if (state != null && state.isStockEmpty()) { //If stock is empty (cannot be in first round)
                 return "Turn the waste pile over to renew the stock pile.";
             }
@@ -103,14 +129,19 @@ public class SpecificMove {
                     "to " + toCard + " in the waste pile.";
 
         } else if (moveType instanceof WasteToTableau) {
+            wastetotableaumoves++;
             return "Move " + fromParent + " from waste to " + stringToCard + " in the tableau.";
         } else if (moveType instanceof WasteToFoundation) {
+            wastetofoundationmoves++;
             return "Move " + fromParent + " from waste to the foundation.";
         } else if (moveType instanceof TableauToFoundation) {
+            tableautofoundationmoves++;
             return "Move " + fromParent + " from tableau to the foundation.";
         } else if (moveType instanceof TableauToTableau) {
+            tableautotableaumoves++;
             return "Move " + fromParent + " from tableau to " + stringToCard + " in the tableau.";
         } else if (moveType instanceof FoundationToTableau) {
+            foundationtotableaumoves++;
             return "Move " + fromParent + " from foundation to " + stringToCard + " in the tableau.";
         }
         return "";
