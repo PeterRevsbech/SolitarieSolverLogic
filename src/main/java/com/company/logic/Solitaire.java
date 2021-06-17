@@ -32,6 +32,11 @@ public class Solitaire {
     private int stockMoveCounter = 0;
     private final static int MAX_NUM_OF_MOVES = 250;
     SpecificMove nextMove;
+    private int gameCounter;
+
+    public void setGameCounter(int gameCounter){
+        this.gameCounter=gameCounter;
+    }
 
 
     public void initGame(boolean isShuffled, boolean printing, int dataSeed, long timeLimitMillis, int fixedDepth) {
@@ -155,7 +160,7 @@ public class Solitaire {
         //File myObj = new File("/Users/madsstorgaard-nielsen/Desktop/test");
         String randString = randString();
 
-        PrintWriter writer = new PrintWriter("/Users/madsstorgaard-nielsen/Desktop/test/" + randString, "UTF-8");
+        PrintWriter writer = new PrintWriter("/Users/madsstorgaard-nielsen/Desktop/test/gameNum" + gameCounter, "UTF-8");
 
         writer.println(s);
 
@@ -228,19 +233,17 @@ public class Solitaire {
             isStockKnown = true;
         }
 
-        if ((stockMoveCounter > state.getKnownStockWaste().size()+5) && isStockKnown) {
+        if ((stockMoveCounter > state.getKnownStockWaste().size()) && isStockKnown) {
             gameLost = true;
 /*            try {
                 writeToFile();
             } catch (FileNotFoundException | UnsupportedEncodingException e) {
                 e.printStackTrace();
             }*/
-            s="";
-        }
-/*        //If no NEW cards have been added to foundation...
-        if (turnsPlayed > MAX_NUM_OF_MOVES) {
+            s = "";
+        } else if (turnsPlayed > MAX_NUM_OF_MOVES) {
             gameLost = true;
-        }*/
+        }
     }
 
     //Method that checks if the 4 tops cards in the foundation piles are kings, if so, the game is won
@@ -284,7 +287,7 @@ public class Solitaire {
         } catch (SolitarieException e) {
             e.printStackTrace();
         }
-        s += "\n"+"Tur: "+turnsPlayed+" "+nextMove.detailedToString(currentState);
+        s += "\n" + "Tur: " + turnsPlayed + " " + nextMove.detailedToString(currentState);
         //System.out.println(nextMove.detailedToString(currentState));
         //pgs.initClosedSolitareState(currentState);
         //pgs.printCurrentState();

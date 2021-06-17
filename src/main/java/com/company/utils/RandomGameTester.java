@@ -9,11 +9,11 @@ import java.util.Random;
 public class RandomGameTester {
     long startTime, endTime, currentGameTime, currentStartTime;
     int gamesWon, numberOfGames, totalTurnsPlayed, turnsThisGame, totalTurnsWonGames, wonGameCounter;
-    private static final int DATA_SEED = 5;
-    private static final double TIME_LIMIT_MILIS = 10;
+    private static final int DATA_SEED = 1;
+    private static final double TIME_LIMIT_MILIS = 15;
     private static final int FIXED_DEPTH = -1;
-    private static final int NUMBER_OF_GAMES = 100;
-    private static final int NUMBER_OF_UPDATES = 100;
+    private static final int NUMBER_OF_GAMES = 500;
+    private static final int NUMBER_OF_UPDATES = 500;
     private static Random numberGenerator;
 
     public static void main(String[] args) {
@@ -34,6 +34,7 @@ public class RandomGameTester {
             currentStartTime = System.currentTimeMillis();
             solitaire = new Solitaire();
             solitaire.initGame(true, false, numberGenerator.nextInt(), (int) TIME_LIMIT_MILIS, FIXED_DEPTH);
+            solitaire.setGameCounter(i);
             if (solitaire.playGame()) {
                 gamesWon++;
             }
