@@ -31,6 +31,7 @@ public class WasteToFoundation extends MoveType {
 
         //If card matches foundation - return move
         if (state.getFoundation().cardMatchesFoundation(wasteCard)) {
+            move.setFromParent(state.getWasteTop());
             return move;
         }
 
