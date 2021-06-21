@@ -66,6 +66,9 @@ public class Main {
             solitaire.makeNextMove();
             SpecificMove move = solitaire.getNextMove();
             String wonOrLost = "";
+
+
+
             if (solitaire.isGameWon()) {
                 wonOrLost = GAME_WON;
             } else if (solitaire.isGameLost()) {

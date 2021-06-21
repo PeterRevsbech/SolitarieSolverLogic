@@ -26,6 +26,7 @@ public class RandomGameTester {
     private static final int NUMBER_OF_GAMES = 100;
     private static final int NUMBER_OF_UPDATES = 100;
     private static Random numberGenerator;
+    private SpecificMove sm;
 
     public static void main(String[] args) {
         RandomGameTester randomGameTester = new RandomGameTester();
@@ -45,6 +46,7 @@ public class RandomGameTester {
             solitaire = new Solitaire();
             solitaire.initGame(true, false, numberGenerator.nextInt(), (int) TIME_LIMIT_MILIS, FIXED_DEPTH);
             solitaire.setGameCounter(i);
+
             if (solitaire.playGame()) {
                 System.out.println("WON");
                 gamesWon++;

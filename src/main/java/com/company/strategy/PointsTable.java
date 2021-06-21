@@ -10,7 +10,7 @@
 package com.company.strategy;
 
 public class PointsTable {
-    public static final int STOCKMOVE = -10;
+    public static final int STOCKMOVE = -100;
     public static final int WASTE_TO_TABLEAU = +10;
     public static final int WASTE_TO_FOUNDATION = +150;
     public static final int TABLEAU_TO_FOUNDATION = +200;

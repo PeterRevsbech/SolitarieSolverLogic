@@ -9,6 +9,7 @@
 
 package com.company.models.moves.movestypes;
 
+import com.company.logic.SolitaireSolver;
 import com.company.models.Card;
 import com.company.models.piles.Pile;
 import com.company.models.SpecificMove;
@@ -78,6 +79,15 @@ public class TableauToTableau extends MoveType {
     public String toString() {
         return "Tableau -> Tableau";
     }
+
+    //Method that should avoid taking an ace from waste and placing it on 2 in tableau
+    //should also force aces and two's (but only those) into the foundation piles (the method could just do this if possible)
+    /*public static boolean isUselessAceToTwoMove(SpecificMove move, ISolitaireState state) {
+    }*/
+
+/*    public static boolean isUselessMoveBackAndForthMove(){
+
+    }*/
 
 
     //Tells if a move is a useless king move ==> moving a king from an empty tableau pile to another empty tableau pile

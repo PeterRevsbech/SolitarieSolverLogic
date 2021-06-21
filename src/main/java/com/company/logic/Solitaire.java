@@ -262,6 +262,7 @@ public class Solitaire {
         } catch (SolitarieException e) {
             e.printStackTrace();
         }
+
         s += "\n" + "Tur: " + turnsPlayed + " " + nextMove.detailedToString(currentState);
         //System.out.println(nextMove.detailedToString(currentState));
         //pgs.initClosedSolitareState(currentState);

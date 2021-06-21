@@ -25,6 +25,8 @@ public class SolitaireSolver {
     private final int fixedDepth;
     private final long timeLimitMillis;
     private final List<MoveType> endGameStrategy = new ArrayList<>();
+    private final List<SpecificMove> specificMoveList = new ArrayList<>();
+    ;
 
     public SolitaireSolver(int fixedDepth, long timeLimitMillis) {
         this.endGameStrategy.add(new WasteToFoundation());
@@ -32,6 +34,14 @@ public class SolitaireSolver {
         this.endGameStrategy.add(new StockMove());
         this.fixedDepth = fixedDepth;
         this.timeLimitMillis = timeLimitMillis;
+    }
+
+    public List<SpecificMove> getSpecificMoveList() {
+        return specificMoveList;
+    }
+
+    public void setSpecificMoveList(SpecificMove specificMove) {
+        specificMoveList.add(specificMove);
     }
 
     // determine best move
@@ -66,6 +76,9 @@ public class SolitaireSolver {
             }
         }
 
+        if (move != null) {
+            setSpecificMoveList(move); //TODO find en måde at tjekke om eksempelvis QH bliver rykket frem og tilbage imellem KS og KC
+        }
 
         //Return move
         return move;

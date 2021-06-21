@@ -14,20 +14,30 @@ import com.company.models.moves.movestypes.*;
 import com.company.models.states.ISolitaireState;
 import com.company.strategy.PointsTable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SpecificMove {
 
     private MoveType moveType;
     private Card fromParent;
     private Card toCard;
 
+
+
+
+
     public SpecificMove() {
+
     }
 
     public SpecificMove(MoveType moveType) {
+
         this.moveType = moveType;
     }
 
     public SpecificMove(MoveType moveType, Card fromParent, Card toCard) {
+
         this.moveType = moveType;
         this.fromParent = fromParent;
         this.toCard = toCard;
@@ -88,6 +98,13 @@ public class SpecificMove {
     @Override
     public String toString() {
         return "Move type: " + moveType + "\nMove executed: " + fromParent + " -> " + toCard;
+    }
+
+    public String toString5(){
+        String stringToCard = toCard == null ? "Empty field" : toCard.toString();
+        //String fromCard = fromParent == null ? "Stockpile" : fromParent.toString();
+
+        return fromParent + " -> " + stringToCard;
     }
 
     static int stockmoves = 0;
