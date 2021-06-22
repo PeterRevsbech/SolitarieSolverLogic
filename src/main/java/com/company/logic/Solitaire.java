@@ -153,6 +153,7 @@ public class Solitaire {
         return nextMove;
     }
 
+
     public void addNextClosedState(ClosedSolitaireState newState) {
         //Set knownStockWaste to be copy of previous states knownStockWaste
         ISolitaireState previousState = states.get(states.size() - 1);
